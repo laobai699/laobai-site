@@ -6,24 +6,38 @@
 <title>老拜小筑</title>
 
 <style>
-
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
-  font-family: "PingFang SC","Microsoft YaHei",sans-serif;
+  font-family:"PingFang SC","Microsoft YaHei",sans-serif;
   background:#0f0f0f;
   color:#fff;
+  overflow-x:hidden;
+}
+
+/* 页面淡入 */
+body{
+  animation:pageFade 1.2s ease;
+}
+
+@keyframes pageFade{
+  from{opacity:0;}
+  to{opacity:1;}
 }
 
 /* 第一屏 */
 .hero{
-  height:100vh;
+  min-height:100vh;
   background-image:url("./garden.jpg");
-  background-position:center;
+  background-position:center center;
   background-size:cover;
   background-repeat:no-repeat;
   display:flex;
@@ -31,172 +45,256 @@ body{
   justify-content:center;
   align-items:center;
   text-align:center;
-  padding:20px;
+  padding:24px;
   position:relative;
 }
 
-/* 轻微遮罩（让字更清晰） */
+/* 遮罩：上深下浅，更有层次 */
 .hero::before{
   content:"";
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,0.35);
+  background:
+    linear-gradient(to bottom,
+      rgba(0,0,0,0.38),
+      rgba(0,0,0,0.26),
+      rgba(0,0,0,0.42));
 }
 
-/* 内容浮在遮罩上 */
-.hero > *{
+/* 第一屏内容浮起来 */
+.hero-inner{
   position:relative;
+  z-index:1;
+  max-width:760px;
+  padding:20px;
 }
 
 .hero h1{
-  font-size:56px;
-  letter-spacing:6px;
-  margin-bottom:20px;
+  font-size:clamp(38px, 8vw, 66px);
+  font-weight:600;
+  letter-spacing:8px;
+  margin-bottom:16px;
+  text-shadow:0 4px 20px rgba(0,0,0,0.35);
 }
 
 .hero .en{
-  font-size:14px;
-  letter-spacing:8px;
-  margin-bottom:30px;
-  opacity:0.7;
+  font-size:12px;
+  letter-spacing:10px;
+  opacity:0.72;
+  margin-bottom:34px;
 }
 
 .hero .slogan{
-  font-size:20px;
-  line-height:2;
-  opacity:0.9;
+  font-size:clamp(17px, 3.2vw, 24px);
+  line-height:2.1;
+  opacity:0.96;
+  text-shadow:0 2px 12px rgba(0,0,0,0.35);
 }
 
-/* 向下提示 */
 .scroll{
   position:absolute;
-  bottom:30px;
+  bottom:26px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:1;
   font-size:12px;
-  opacity:0.6;
+  opacity:0.68;
+  letter-spacing:2px;
 }
 
-/* 第二屏 */
+/* 通用区块 */
 .section{
-  padding:80px 20px;
-  background:#111;
-  text-align:center;
+  padding:82px 20px;
+  background:#101010;
 }
 
+.section-title{
+  text-align:center;
+  font-size:24px;
+  letter-spacing:4px;
+  margin-bottom:18px;
+}
+
+.section-subtitle{
+  text-align:center;
+  font-size:13px;
+  opacity:0.58;
+  margin-bottom:42px;
+}
+
+/* 卡片入口 */
 .grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:30px;
-  max-width:900px;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:24px;
+  max-width:960px;
   margin:0 auto;
 }
 
 .card{
-  border:1px solid rgba(255,255,255,0.15);
-  padding:30px;
-  border-radius:10px;
-  transition:0.3s;
   text-decoration:none;
-  color:white;
+  color:#fff;
+  border:1px solid rgba(255,255,255,0.14);
+  background:rgba(255,255,255,0.03);
+  padding:30px 22px;
+  border-radius:16px;
+  transition:all 0.28s ease;
+  backdrop-filter:blur(2px);
 }
 
 .card:hover{
-  background:rgba(255,255,255,0.08);
+  transform:translateY(-4px);
+  background:rgba(255,255,255,0.06);
+  border-color:rgba(255,255,255,0.24);
 }
 
 .card h2{
-  font-size:20px;
-  margin-bottom:10px;
+  font-size:22px;
+  font-weight:600;
+  margin-bottom:12px;
+  letter-spacing:2px;
 }
 
 .card p{
   font-size:13px;
-  opacity:0.7;
+  line-height:1.8;
+  opacity:0.72;
 }
 
-/* 第三屏（你的那句） */
+/* 文案区 */
+.about-wrap{
+  background:#141414;
+  border-top:1px solid rgba(255,255,255,0.06);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+}
+
 .about{
-  max-width:700px;
+  max-width:760px;
   margin:0 auto;
-  line-height:2;
+  text-align:center;
+  line-height:2.1;
   font-size:18px;
-  opacity:0.88;
   letter-spacing:2px;
+  opacity:0.9;
+}
+
+.about-top{
+  font-size:15px;
+  opacity:0.7;
+  margin-bottom:30px;
+  letter-spacing:1px;
+}
+
+.about-poem{
+  font-size:clamp(20px, 3.8vw, 28px);
+  line-height:1.9;
+  letter-spacing:3px;
 }
 
 /* 底部 */
 .footer{
   text-align:center;
-  padding:40px 10px;
+  padding:38px 12px 46px;
+  background:#0d0d0d;
   font-size:12px;
-  opacity:0.5;
+  letter-spacing:3px;
+  opacity:0.45;
 }
 
-</style>
+/* 手机优化 */
+@media (max-width: 640px){
+  .hero h1{
+    letter-spacing:5px;
+  }
 
+  .hero .en{
+    letter-spacing:7px;
+  }
+
+  .section{
+    padding:66px 16px;
+  }
+
+  .card{
+    padding:24px 18px;
+    border-radius:14px;
+  }
+
+  .about{
+    font-size:16px;
+  }
+
+  .about-poem{
+    letter-spacing:2px;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <!-- 第一屏 -->
-<div class="hero">
+<section class="hero">
+  <div class="hero-inner">
+    <h1>老拜小筑</h1>
+    <div class="en">LAOBAI</div>
 
-  <h1>老拜小筑</h1>
-  <div class="en">LAOBAI</div>
-
-  <div class="slogan">
-    民谣慢慢唱出来<br>
-    院子慢慢长出来<br>
-    烟火慢慢盛出来
+    <div class="slogan">
+      民谣慢慢唱出来<br>
+      院子慢慢长出来<br>
+      烟火慢慢盛出来
+    </div>
   </div>
 
   <div class="scroll">↓ 向下看看</div>
+</section>
 
-</div>
-
-<!-- 第二屏 -->
-<div class="section">
+<!-- 栏目入口 -->
+<section class="section">
+  <div class="section-title">慢慢逛</div>
+  <div class="section-subtitle">从这里进入老拜的小世界</div>
 
   <div class="grid">
-
     <a class="card" href="songs.html">
       <h2>老拜有谱</h2>
-      <p>弹唱 · 歌谱 · 民谣</p>
+      <p>弹唱 · 歌谱 · 民谣<br>已经可以使用</p>
     </a>
 
     <a class="card" href="coming.html">
       <h2>老拜美食</h2>
-      <p>烤全羊 · 烟火气</p>
+      <p>烤全羊 · 烟火气<br>正在慢慢长出来</p>
     </a>
 
     <a class="card" href="coming.html">
       <h2>老拜工坊</h2>
-      <p>CNC · 激光 · 3D打印 · 凸版印刷</p>
+      <p>CNC · 激光 · 3D打印 · 凸版印刷<br>正在慢慢长出来</p>
     </a>
 
     <a class="card" href="coming.html">
       <h2>老拜小筑</h2>
-      <p>院子 · 茶屋 · 四季</p>
+      <p>院子 · 茶屋 · 鸟园 · 四季<br>正在慢慢长出来</p>
     </a>
-
   </div>
+</section>
 
-</div>
-
-<!-- 第三屏 -->
-<div class="section">
-
+<!-- 文案区 -->
+<section class="section about-wrap">
   <div class="about">
-    十年手作的小筑，慢慢长出来的院子。<br><br>
-    有琴有茶有劳作<br>
-    油盐柴米小折腾
-  </div>
+    <div class="about-top">
+      十年手作的小筑，慢慢长出来的院子。
+    </div>
 
-</div>
+    <div class="about-poem">
+      有琴有茶有劳作<br>
+      油盐柴米小折腾
+    </div>
+  </div>
+</section>
 
 <!-- 底部 -->
-<div class="footer">
+<footer class="footer">
   LAOBAI · VANCOUVER
-</div>
+</footer>
 
 </body>
 </html>
