@@ -21,7 +21,7 @@ body{
   background:#0f0f0f;
   color:#fff;
   overflow-x:hidden;
-  animation:pageFade 1.2s ease;
+  animation:pageFade 1.1s ease;
 }
 
 @keyframes pageFade{
@@ -50,9 +50,9 @@ body{
   inset:0;
   background:linear-gradient(
     to bottom,
-    rgba(0,0,0,0.40),
-    rgba(0,0,0,0.24),
-    rgba(0,0,0,0.44)
+    rgba(0,0,0,0.48),
+    rgba(0,0,0,0.28),
+    rgba(0,0,0,0.50)
   );
 }
 
@@ -65,38 +65,61 @@ body{
 
 .hero h1{
   font-size:clamp(40px, 8vw, 68px);
-  font-weight:520;
+  font-weight:500;
   letter-spacing:10px;
   margin-bottom:14px;
   text-shadow:0 4px 20px rgba(0,0,0,0.35);
+  opacity:0;
+  transform:translateY(16px);
+  animation:riseIn 0.9s ease forwards;
+  animation-delay:0.15s;
 }
 
 .hero .en{
-  font-size:12px;
+  font-size:11px;
   letter-spacing:14px;
-  opacity:0.62;
+  opacity:0;
   margin-bottom:12px;
+  text-shadow:0 2px 8px rgba(0,0,0,0.35);
+  animation:riseInSoft 0.9s ease forwards;
+  animation-delay:0.45s;
 }
 
 .hero .sub-en{
   font-size:12px;
   letter-spacing:3px;
-  opacity:0.62;
+  opacity:0;
   margin-bottom:34px;
+  text-shadow:0 2px 8px rgba(0,0,0,0.35);
+  animation:riseInSoft 0.9s ease forwards;
+  animation-delay:0.7s;
 }
 
 .hero .slogan{
-  font-size:clamp(17px, 3.2vw, 24px);
-  line-height:2.15;
-  color:rgba(255,255,255,0.92);
-  text-shadow:0 3px 16px rgba(0,0,0,0.45);
+  font-size:clamp(18px, 3.3vw, 24px);
+  line-height:2.3;
+  letter-spacing:1px;
+  color:rgba(255,255,255,0.94);
+  text-shadow:0 4px 18px rgba(0,0,0,0.45);
 }
+
+.hero .slogan .line{
+  opacity:0;
+  transform:translateY(10px);
+  animation:riseIn 0.85s ease forwards;
+}
+
+.hero .slogan .line:nth-child(1){ animation-delay:1.0s; }
+.hero .slogan .line:nth-child(2){ animation-delay:1.25s; }
+.hero .slogan .line:nth-child(3){ animation-delay:1.5s; }
 
 .hero .slogan-en{
   margin-top:18px;
   font-size:12px;
   letter-spacing:4px;
-  opacity:0.56;
+  opacity:0;
+  animation:riseInSoft 0.9s ease forwards;
+  animation-delay:1.8s;
 }
 
 .scroll{
@@ -106,8 +129,37 @@ body{
   transform:translateX(-50%);
   z-index:1;
   font-size:12px;
-  opacity:0.68;
+  opacity:0;
   letter-spacing:2px;
+  animation:fadeOnly 1.2s ease forwards;
+  animation-delay:2.2s;
+}
+
+@keyframes riseIn{
+  from{
+    opacity:0;
+    transform:translateY(14px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes riseInSoft{
+  from{
+    opacity:0;
+    transform:translateY(10px);
+  }
+  to{
+    opacity:0.78;
+    transform:translateY(0);
+  }
+}
+
+@keyframes fadeOnly{
+  from{opacity:0;}
+  to{opacity:0.68;}
 }
 
 .section{
@@ -165,14 +217,14 @@ body{
 .card .card-en{
   font-size:11px;
   letter-spacing:3px;
-  opacity:0.5;
+  opacity:0.58;
   margin-bottom:12px;
 }
 
 .card p{
   font-size:13px;
   line-height:1.8;
-  opacity:0.72;
+  opacity:0.76;
 }
 
 .about-wrap{
@@ -188,19 +240,19 @@ body{
   line-height:2.1;
   font-size:18px;
   letter-spacing:2px;
-  opacity:0.9;
+  opacity:0.92;
 }
 
 .about-top{
   font-size:15px;
-  opacity:0.7;
+  opacity:0.72;
   margin-bottom:28px;
   letter-spacing:1px;
 }
 
 .about-poem{
   font-size:clamp(20px, 3.8vw, 28px);
-  line-height:1.9;
+  line-height:1.95;
   letter-spacing:3px;
 }
 
@@ -208,7 +260,7 @@ body{
   margin-top:22px;
   font-size:12px;
   letter-spacing:3px;
-  opacity:0.48;
+  opacity:0.5;
 }
 
 .footer{
@@ -218,6 +270,18 @@ body{
   font-size:12px;
   letter-spacing:3px;
   opacity:0.45;
+}
+
+/* 滚动进入效果 */
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.show{
+  opacity:1;
+  transform:translateY(0);
 }
 
 @media (max-width: 640px){
@@ -258,9 +322,9 @@ body{
     <div class="sub-en">A handmade place in Vancouver</div>
 
     <div class="slogan">
-      民谣慢慢唱出来<br>
-      院子慢慢长出来<br>
-      烟火慢慢盛出来
+      <div class="line">民谣轻轻唱</div>
+      <div class="line">院子慢慢长</div>
+      <div class="line">烟火渐渐香</div>
     </div>
 
     <div class="slogan-en">
@@ -271,7 +335,7 @@ body{
   <div class="scroll">↓ 向下看看</div>
 </section>
 
-<section class="section">
+<section class="section reveal">
   <div class="section-title">慢慢逛</div>
   <div class="section-subtitle">Step into Laobai's small world</div>
 
@@ -280,6 +344,12 @@ body{
       <h2>老拜有谱</h2>
       <div class="card-en">SONGS</div>
       <p>弹唱 · 歌谱 · 民谣<br>已经可以使用</p>
+    </a>
+
+    <a class="card" href="coming.html">
+      <h2>老拜小筑</h2>
+      <div class="card-en">GARDEN</div>
+      <p>院子 · 茶屋 · 鸟园 · 四季<br>正在慢慢长出来</p>
     </a>
 
     <a class="card" href="coming.html">
@@ -293,16 +363,10 @@ body{
       <div class="card-en">WORKSHOP</div>
       <p>CNC · 激光 · 3D打印 · 凸版印刷<br>正在慢慢长出来</p>
     </a>
-
-    <a class="card" href="coming.html">
-      <h2>老拜小筑</h2>
-      <div class="card-en">GARDEN</div>
-      <p>院子 · 茶屋 · 鸟园 · 四季<br>正在慢慢长出来</p>
-    </a>
   </div>
 </section>
 
-<section class="section about-wrap">
+<section class="section about-wrap reveal">
   <div class="about">
     <div class="about-top">
       十年手作的小筑，慢慢长出来的院子。
@@ -319,9 +383,25 @@ body{
   </div>
 </section>
 
-<footer class="footer">
+<footer class="footer reveal">
   LAOBAI · VANCOUVER
 </footer>
+
+<script>
+const reveals = document.querySelectorAll('.reveal');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('show');
+    }
+  });
+}, {
+  threshold: 0.12
+});
+
+reveals.forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
