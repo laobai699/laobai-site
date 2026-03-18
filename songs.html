@@ -155,20 +155,24 @@ function noteIndex(note){
 }
 
 function transposeSingleChord(chord, shift){
-  const m = chord.match(/^([A-G])(#?)(.*)$/);
-  if(!m) return chord;
-  const base = m[1] + (m[2] || '');
-  const rest = m[3] || '';
-  const idx = noteIndex(base);
-  if(idx === -1) return chord;
-  let out = NOTES[(idx + shift + 12) % 12] + rest;
-  out = out.replace(/\/([A-G])(#?)/g, (all, n, sharp) => {
-    const bass = n + (sharp || '');
-    const bidx = noteIndex(bass);
-    if(bidx === -1) return all;
-    return '/' + NOTES[(bidx + shift + 12) % 12];
-  });
-  return out;
+  // 支持如 D Em G A Cmaj7 F#m G/B Bb（当前示例主要是升号体系）
+  const slashParts = chord.split('/');
+  const main = slashParts[0];
+  const bass = slashParts[1] || '';
+
+  function tx(part){
+    const m = part.match(/^([A-G])(#?)(.*)$/);
+    if(!m) return part;
+    const base = m[1] + (m[2] || '');
+    const rest = m[3] || '';
+    const idx = noteIndex(base);
+    if(idx === -1) return part;
+    return NOTES[(idx + shift + 12) % 12] + rest;
+  }
+
+  const mainOut = tx(main);
+  if(!bass) return mainOut;
+  return mainOut + '/' + tx(bass);
 }
 
 function transposeText(text, shift){
@@ -201,7 +205,7 @@ function renderSong(){
   document.getElementById('keyInfo').innerText = ` 当前调：${currentSong.currentKey}`;
   const shift = noteIndex(currentSong.currentKey) - noteIndex(currentSong.originalKey);
   const txt = transposeText(currentSong.pages[pageIndex], shift);
-  document.getElementById('content').innerText = txt;
+  document.getElementById('content').textContent = txt;
   updateKeySelect();
 }
 
