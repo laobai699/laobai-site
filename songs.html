@@ -28,7 +28,7 @@
   .letter { margin-top: 14px; font-size: 13px; opacity: .7; }
   .song { padding: 10px 2px; border-bottom: 1px solid #222; cursor: pointer; }
   .song:hover { color: #fff; }
-  .tools { display: flex; gap: 8px; flex-wrap: wrap; }.viewer { display: none; padding: 14px 14px 120px; } .viewer-top { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; } #title { font-weight: 700; } #pageInfo, #keyInfo { opacity: .8; font-size: 14px; } .page { min-height: 56vh; padding: 18px 16px; background: #0c0c0c; border: 1px solid #202020; border-radius: 12px; white-space: normal; line-height: 1.9; font-size: 19px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; } .chord { color: #ffd369; font-weight: 700; } .lyric-line { display: block; margin: 6px 0; } .page-title { font-size: 13px; opacity: .72; margin-bottom: 10px; letter-spacing: 1px; } .controls { position: fixed; left: 0; right: 0; bottom: 0; background: #0d0d0d; border-top: 1px solid #222; padding: 10px 8px env(safe-area-inset-bottom); display: none; flex-direction: column; gap: 8px; } .row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; } .small { font-size: 13px; opacity: .75; } .notice { padding: 12px; font-size: 13px; opacity: .7; } </style>
+  .tools { display: flex; gap: 8px; flex-wrap: wrap; }.viewer { display: none; padding: 14px 14px 120px; } .viewer-top { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; } #title { font-weight: 700; } #pageInfo, #keyInfo { opacity: .8; font-size: 14px; } .page { min-height: 56vh; padding: 18px 16px; background: #0c0c0c; border: 1px solid #202020; border-radius: 12px; white-space: normal; line-height: 1.9; font-size: 19px; font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace; } .chord { color: #ffd369; font-weight: 700; } .lyric { color: #f2f2f2; } .lyric-line { display: block; margin: 6px 0; } .page-title { font-size: 13px; opacity: .72; margin-bottom: 10px; letter-spacing: 1px; } .controls { position: fixed; left: 0; right: 0; bottom: 0; background: #0d0d0d; border-top: 1px solid #222; padding: 10px 8px env(safe-area-inset-bottom); display: none; flex-direction: column; gap: 8px; } .row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; } .small { font-size: 13px; opacity: .75; } .notice { padding: 12px; font-size: 13px; opacity: .7; } </style>
 
 </head>
 <body>
@@ -217,12 +217,20 @@ function openSongByVisibleIndex(idx) {
   renderSong();
 }
 
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 function formatSongHtml(text) {
   const lines = text.split('
 ');
   return lines.map(line => {
-    const html = line.replace(/([^]+)\]/g, '<span class="chord">[$1]</span>');
-    return `<div class="lyric-line">${html}</div>`;
+    const safe = escapeHtml(line);
+    const html = safe.replace(/([^]+)\]/g, '<span class="chord">[$1]</span>');
+    return `<div class="lyric-line"><span class="lyric">${html}</span></div>`;
   }).join('');
 }
 
