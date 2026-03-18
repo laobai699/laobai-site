@@ -1,86 +1,96 @@
 <!DOCTYPE html><html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>老拜有谱 2.0（原型）</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#000;color:#eee}
-#home{padding-bottom:24px}
-.header{padding:16px;font-size:22px;font-weight:700}
-.topbar{display:flex;gap:10px;align-items:center;padding:0 12px 12px}
-.search{flex:1;padding:12px;border-radius:10px;border:1px solid #333;background:#111;color:#eee}
-.btn,.viewer select{padding:10px 12px;border-radius:10px;border:1px solid #333;background:#161616;color:#eee}
-.section{padding:12px}
-.letter{margin-top:14px;font-size:13px;opacity:.7}
-.song{padding:10px 2px;border-bottom:1px solid #222;cursor:pointer}
-.song:hover{color:#fff}
-.tools{display:flex;gap:8px;flex-wrap:wrap}
-.viewer{display:none;padding:14px 14px 120px}
-.viewer-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
-#title{font-weight:700}
-#pageInfo,#keyInfo{opacity:.8;font-size:14px}
-.page{min-height:56vh;padding:16px;background:#0c0c0c;border:1px solid #202020;border-radius:12px;white-space:pre-wrap;line-height:1.8;font-size:18px}
-.controls{position:fixed;left:0;right:0;bottom:0;background:#0d0d0d;border-top:1px solid #222;padding:10px 8px env(safe-area-inset-bottom);display:flex;flex-direction:column;gap:8px}
-.row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.small{font-size:13px;opacity:.75}
-.notice{padding:12px;font-size:13px;opacity:.7}
-</style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #000;
+    color: #eee;
+  }
+  #home { padding-bottom: 24px; }
+  .header { padding: 16px; font-size: 22px; font-weight: 700; }
+  .topbar {
+    display: flex; gap: 10px; align-items: center; padding: 0 12px 12px;
+  }
+  .search {
+    flex: 1; padding: 12px; border-radius: 10px; border: 1px solid #333;
+    background: #111; color: #eee;
+  }
+  .btn, select {
+    padding: 10px 12px; border-radius: 10px; border: 1px solid #333;
+    background: #161616; color: #eee;
+  }
+  .section { padding: 12px; }
+  .letter { margin-top: 14px; font-size: 13px; opacity: .7; }
+  .song { padding: 10px 2px; border-bottom: 1px solid #222; cursor: pointer; }
+  .song:hover { color: #fff; }
+  .tools { display: flex; gap: 8px; flex-wrap: wrap; }.viewer { display: none; padding: 14px 14px 120px; } .viewer-top { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; } #title { font-weight: 700; } #pageInfo, #keyInfo { opacity: .8; font-size: 14px; } .page { min-height: 56vh; padding: 16px; background: #0c0c0c; border: 1px solid #202020; border-radius: 12px; white-space: pre-wrap; line-height: 1.8; font-size: 18px; } .controls { position: fixed; left: 0; right: 0; bottom: 0; background: #0d0d0d; border-top: 1px solid #222; padding: 10px 8px env(safe-area-inset-bottom); display: none; flex-direction: column; gap: 8px; } .row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; } .small { font-size: 13px; opacity: .75; } .notice { padding: 12px; font-size: 13px; opacity: .7; } </style>
+
 </head>
-<body><div id="home">
-  <div class="header">老拜有谱 2.0</div>
-  <div class="topbar">
-    <input id="searchInput" class="search" placeholder="搜索歌曲..." oninput="searchSong(this.value)">
-    <button class="btn" onclick="alert('添加歌曲（下一步实现）')">+ 添加歌曲</button>
-  </div>  <div class="section" id="songList"></div>  <div class="section">
-    <h3>吉他工具</h3>
-    <div class="tools">
-      <button class="btn" onclick="alert('指板音名（下一步实现）')">指板音名</button>
-      <button class="btn" onclick="alert('吉他定音（下一步实现）')">吉他定音</button>
-      <button class="btn" onclick="alert('常用和弦 / 级数表（下一步实现）')">常用和弦</button>
+<body>
+  <div id="home">
+    <div class="header">老拜有谱 2.0</div>
+    <div class="topbar">
+      <input id="searchInput" class="search" placeholder="搜索歌曲..." oninput="searchSong(this.value)" />
+      <button class="btn" onclick="alert('添加歌曲（下一步实现）')">+ 添加歌曲</button>
+    </div><div class="section" id="songList"></div>
+
+<div class="section">
+  <h3>吉他工具</h3>
+  <div class="tools">
+    <button class="btn" onclick="alert('指板音名（下一步实现）')">指板音名</button>
+    <button class="btn" onclick="alert('吉他定音（下一步实现）')">吉他定音</button>
+    <button class="btn" onclick="alert('常用和弦 / 级数表（下一步实现）')">常用和弦</button>
+  </div>
+</div>
+
+  </div>  <div id="viewer" class="viewer">
+    <div class="viewer-top">
+      <button class="btn" onclick="goHome()">返回</button>
+      <span id="title"></span>
+      <span id="pageInfo"></span>
+      <span id="keyInfo"></span>
+    </div><pre class="page" id="content"></pre>
+<div class="notice small">左右滑动可翻页</div>
+
+  </div>  <div id="controls" class="controls">
+    <div class="row">
+      <button class="btn" onclick="prevPage()">上一页</button>
+      <button class="btn" onclick="nextPage()">下一页</button>
     </div>
-  </div>
-</div><div id="viewer" class="viewer">
-  <div class="viewer-top">
-    <button class="btn" onclick="goHome()">返回</button>
-    <span id="title"></span>
-    <span id="pageInfo"></span>
-    <span id="keyInfo"></span>
-  </div>  <pre class="page" id="content"></pre>  <div class="notice small">左右滑动可翻页</div>
-</div><div id="controls" class="controls" style="display:none">
-  <div class="row">
-    <button class="btn" onclick="prevPage()">上一页</button>
-    <button class="btn" onclick="nextPage()">下一页</button>
-  </div>
-  <div class="row">
-    <label class="small">调：</label>
-    <select id="keySelect" onchange="changeKey(this.value)">
-      <option value="C">C</option>
-      <option value="C#">C#</option>
-      <option value="D">D</option>
-      <option value="D#">D#</option>
-      <option value="E">E</option>
-      <option value="F">F</option>
-      <option value="F#">F#</option>
-      <option value="G">G</option>
-      <option value="G#">G#</option>
-      <option value="A">A</option>
-      <option value="A#">A#</option>
-      <option value="B">B</option>
-    </select>
-    <button class="btn" onclick="alert('级数后面加')">级数</button>
-    <button class="btn" onclick="alert('一页模式后面加')">一页</button>
-    <button class="btn" onclick="alert('极限一页后面加')">极限</button>
-  </div>
-</div><script>
+    <div class="row">
+      <label class="small">调：</label>
+      <select id="keySelect" onchange="changeKey(this.value)">
+        <option value="C">C</option>
+        <option value="C#">C#</option>
+        <option value="D">D</option>
+        <option value="D#">D#</option>
+        <option value="E">E</option>
+        <option value="F">F</option>
+        <option value="F#">F#</option>
+        <option value="G">G</option>
+        <option value="G#">G#</option>
+        <option value="A">A</option>
+        <option value="A#">A#</option>
+        <option value="B">B</option>
+      </select>
+      <button class="btn" onclick="alert('级数后面加')">级数</button>
+      <button class="btn" onclick="alert('一页模式后面加')">一页</button>
+      <button class="btn" onclick="alert('极限一页后面加')">极限</button>
+    </div>
+  </div><script>
 const NOTES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
 
 const songs = [
   {
-    title:'成都',
-    originalKey:'D',
-    currentKey:'D',
-    pages:[
+    title: '成都',
+    originalKey: 'D',
+    currentKey: 'D',
+    pages: [
 `[D]让我掉下眼泪的
 [Em]不止昨夜的酒
 [G]余路还要走多久
@@ -92,10 +102,10 @@ const songs = [
     ]
   },
   {
-    title:'当你老了',
-    originalKey:'C',
-    currentKey:'C',
-    pages:[
+    title: '当你老了',
+    originalKey: 'C',
+    currentKey: 'C',
+    pages: [
 `[C]当你老了 头发白了
 [F]睡意昏沉
 [C]炉火旁打盹
@@ -112,25 +122,24 @@ let visibleSongs = songs.slice();
 let currentSong = null;
 let pageIndex = 0;
 let startX = 0;
-let endX = 0;
 
-function sortSongs(list){
-  return list.slice().sort((a,b)=>a.title.localeCompare(b.title,'zh-CN'));
+function sortSongs(list) {
+  return list.slice().sort((a, b) => a.title.localeCompare(b.title, 'zh-CN'));
 }
 
-function firstLetter(title){
+function firstLetter(title) {
   const ch = title.trim().charAt(0).toUpperCase();
   return /[A-Z]/.test(ch) ? ch : '#';
 }
 
-function renderList(list = songs){
+function renderList(list = songs) {
   const sorted = sortSongs(list);
   visibleSongs = sorted;
   let html = '';
   let lastLetter = '';
-  sorted.forEach((song, idx)=>{
+  sorted.forEach((song, idx) => {
     const letter = firstLetter(song.title);
-    if(letter !== lastLetter){
+    if (letter !== lastLetter) {
       html += `<div class="letter">${letter}</div>`;
       lastLetter = letter;
     }
@@ -139,9 +148,9 @@ function renderList(list = songs){
   document.getElementById('songList').innerHTML = html || '<div class="small">没有找到歌曲</div>';
 }
 
-function searchSong(q){
+function searchSong(q) {
   const keyword = q.trim().toLowerCase();
-  if(!keyword){
+  if (!keyword) {
     renderList(songs);
     return;
   }
@@ -149,88 +158,102 @@ function searchSong(q){
   renderList(filtered);
 }
 
-function noteIndex(note){
+function noteIndex(note) {
   return NOTES.indexOf(note);
 }
 
-function transposeSingleChord(chord, shift){
-  const parts = chord.split('/');
-  const main = parts[0];
-  const bass = parts[1];
-
-  function tx(part){
-    const m = part.match(/^([A-G])(#?)(.*)$/);
-    if(!m) return part;
-    const root = m[1] + (m[2] || '');
-    const suffix = m[3] || '';
-    const idx = noteIndex(root);
-    if(idx === -1) return part;
-    return NOTES[(idx + shift + 12) % 12] + suffix;
-  }
-
-  const outMain = tx(main);
-  if(!bass) return outMain;
-  return outMain + '/' + tx(bass);
+function transposeRoot(root, shift) {
+  const idx = noteIndex(root);
+  if (idx === -1) return root;
+  return NOTES[(idx + shift + 12) % 12];
 }
 
-function transposeText(text, shift){
-  return text.replace(/([^]+)\]/g, function(_, chord){
+function transposeSingleChord(chord, shift) {
+  const parts = chord.split('/');
+  const main = parts[0];
+  const bass = parts[1] || '';
+
+  const m = main.match(/^([A-G])(#?)(.*)$/);
+  if (!m) return chord;
+
+  const root = m[1] + (m[2] || '');
+  const suffix = m[3] || '';
+  let out = transposeRoot(root, shift) + suffix;
+
+  if (bass) {
+    const bm = bass.match(/^([A-G])(#?)(.*)$/);
+    if (bm) {
+      const bRoot = bm[1] + (bm[2] || '');
+      const bSuffix = bm[3] || '';
+      out += '/' + transposeRoot(bRoot, shift) + bSuffix;
+    } else {
+      out += '/' + bass;
+    }
+  }
+  return out;
+}
+
+function transposeText(text, shift) {
+  return text.replace(/([^]+)\]/g, function(match, chord) {
     return '[' + transposeSingleChord(chord, shift) + ']';
   });
 }
 
-function updateKeySelect(){
+function updateKeySelect() {
   const sel = document.getElementById('keySelect');
-  if(!sel || !currentSong) return;
+  if (!sel || !currentSong) return;
   sel.value = currentSong.currentKey;
 }
 
-function openSongByVisibleIndex(idx){
+function openSongByVisibleIndex(idx) {
   const song = visibleSongs[idx];
-  if(!song) return;
+  if (!song) return;
   currentSong = song;
-  if(!currentSong.currentKey) currentSong.currentKey = currentSong.originalKey;
   pageIndex = 0;
+  if (!currentSong.currentKey) currentSong.currentKey = currentSong.originalKey;
   document.getElementById('home').style.display = 'none';
   document.getElementById('viewer').style.display = 'block';
   document.getElementById('controls').style.display = 'flex';
   renderSong();
 }
 
-function renderSong(){
-  if(!currentSong) return;
+function renderSong() {
+  if (!currentSong) return;
   document.getElementById('title').textContent = currentSong.title;
   document.getElementById('pageInfo').textContent = ` 第${pageIndex + 1}/${currentSong.pages.length}页`;
   document.getElementById('keyInfo').textContent = ` 当前调：${currentSong.currentKey}`;
+
   const shift = noteIndex(currentSong.currentKey) - noteIndex(currentSong.originalKey);
-  const txt = transposeText(currentSong.pages[pageIndex], shift);
-  document.getElementById('content').textContent = txt;
+  const source = currentSong.pages[pageIndex];
+  const transposed = transposeText(source, shift);
+
+  document.getElementById('content').textContent = transposed;
   updateKeySelect();
 }
 
-function nextPage(){
-  if(!currentSong) return;
-  if(pageIndex < currentSong.pages.length - 1){
+function nextPage() {
+  if (!currentSong) return;
+  if (pageIndex < currentSong.pages.length - 1) {
     pageIndex++;
     renderSong();
   }
 }
 
-function prevPage(){
-  if(!currentSong) return;
-  if(pageIndex > 0){
+function prevPage() {
+  if (!currentSong) return;
+  if (pageIndex > 0) {
     pageIndex--;
     renderSong();
   }
 }
 
-function changeKey(val){
-  if(!currentSong) return;
+function changeKey(val) {
+  if (!currentSong) return;
   currentSong.currentKey = val;
   renderSong();
 }
 
-function goHome(){
+function goHome() {
   document.getElementById('viewer').style.display = 'none';
   document.getElementById('controls').style.display = 'none';
   document.getElementById('home').style.display = 'block';
@@ -238,19 +261,16 @@ function goHome(){
 }
 
 document.addEventListener('touchstart', e => {
-  if(document.getElementById('viewer').style.display !== 'block') return;
+  if (document.getElementById('viewer').style.display !== 'block') return;
   startX = e.touches[0].clientX;
 });
 
 document.addEventListener('touchend', e => {
-  if(document.getElementById('viewer').style.display !== 'block') return;
-  endX = e.changedTouches[0].clientX;
-  if(Math.abs(startX - endX) > 50){
-    if(startX > endX){
-      nextPage();
-    } else {
-      prevPage();
-    }
+  if (document.getElementById('viewer').style.display !== 'block') return;
+  const endX = e.changedTouches[0].clientX;
+  if (Math.abs(startX - endX) > 50) {
+    if (startX > endX) nextPage();
+    else prevPage();
   }
 });
 
