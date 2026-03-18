@@ -228,11 +228,15 @@ function escapeHtml(str) {
 }
 
 function formatSongHtml(text) {
-  const lines = text.split('\n');
+  const safe = text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+  const lines = safe.split('
+');
   return lines.map(line => {
-    const safe = escapeHtml(line);
-    const html = safe.replace(/([^]+)\]/g, '<span class="chord">[$1]</span>');
-    return `<div class="lyric-line"><span class="lyric">${html}</span></div>`;
+    const html = line.replace(/([^]+)\]/g, '<span class="chord">[$1]</span>');
+    return `<div class="lyric-line">${html || '&nbsp;'}</div>`;
   }).join('');
 }
 
