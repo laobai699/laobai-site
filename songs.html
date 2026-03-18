@@ -110,7 +110,6 @@ const songs = [
 
 let visibleSongs = songs.slice();
 let currentSong = null;
-let currentSongIndex = -1;
 let pageIndex = 0;
 let startX = 0;
 let endX = 0;
@@ -155,28 +154,29 @@ function noteIndex(note){
 }
 
 function transposeSingleChord(chord, shift){
-  // 支持如 D Em G A Cmaj7 F#m G/B Bb（当前示例主要是升号体系）
-  const slashParts = chord.split('/');
-  const main = slashParts[0];
-  const bass = slashParts[1] || '';
+  const parts = chord.split('/');
+  const main = parts[0];
+  const bass = parts[1];
 
   function tx(part){
     const m = part.match(/^([A-G])(#?)(.*)$/);
     if(!m) return part;
-    const base = m[1] + (m[2] || '');
-    const rest = m[3] || '';
-    const idx = noteIndex(base);
+    const root = m[1] + (m[2] || '');
+    const suffix = m[3] || '';
+    const idx = noteIndex(root);
     if(idx === -1) return part;
-    return NOTES[(idx + shift + 12) % 12] + rest;
+    return NOTES[(idx + shift + 12) % 12] + suffix;
   }
 
-  const mainOut = tx(main);
-  if(!bass) return mainOut;
-  return mainOut + '/' + tx(bass);
+  const outMain = tx(main);
+  if(!bass) return outMain;
+  return outMain + '/' + tx(bass);
 }
 
 function transposeText(text, shift){
-  return text.replace(/([^]+)\]/g, (_, chord) => '[' + transposeSingleChord(chord, shift) + ']');
+  return text.replace(/([^]+)\]/g, function(_, chord){
+    return '[' + transposeSingleChord(chord, shift) + ']';
+  });
 }
 
 function updateKeySelect(){
@@ -188,8 +188,7 @@ function updateKeySelect(){
 function openSongByVisibleIndex(idx){
   const song = visibleSongs[idx];
   if(!song) return;
-  currentSongIndex = songs.findIndex(s => s.title === song.title && s.originalKey === song.originalKey);
-  currentSong = songs[currentSongIndex];
+  currentSong = song;
   if(!currentSong.currentKey) currentSong.currentKey = currentSong.originalKey;
   pageIndex = 0;
   document.getElementById('home').style.display = 'none';
@@ -200,9 +199,9 @@ function openSongByVisibleIndex(idx){
 
 function renderSong(){
   if(!currentSong) return;
-  document.getElementById('title').innerText = currentSong.title;
-  document.getElementById('pageInfo').innerText = ` 第${pageIndex + 1}/${currentSong.pages.length}页`;
-  document.getElementById('keyInfo').innerText = ` 当前调：${currentSong.currentKey}`;
+  document.getElementById('title').textContent = currentSong.title;
+  document.getElementById('pageInfo').textContent = ` 第${pageIndex + 1}/${currentSong.pages.length}页`;
+  document.getElementById('keyInfo').textContent = ` 当前调：${currentSong.currentKey}`;
   const shift = noteIndex(currentSong.currentKey) - noteIndex(currentSong.originalKey);
   const txt = transposeText(currentSong.pages[pageIndex], shift);
   document.getElementById('content').textContent = txt;
