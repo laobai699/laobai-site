@@ -78,9 +78,9 @@
         <option value="A#">A#</option>
         <option value="B">B</option>
       </select>
-      <button class="btn" onclick="alert('级数后面加')">级数</button>
-      <button class="btn" onclick="alert('一页模式后面加')">一页</button>
-      <button class="btn" onclick="alert('极限一页后面加')">极限</button>
+      <button class="btn" onclick="toggleFullSong()">整首</button>
+      <button class="btn" onclick="toggleOnePage()">一页</button>
+      <button class="btn" onclick="toggleExtreme()">极限</button>
     </div>
   </div><script>
 const NOTES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
@@ -122,6 +122,9 @@ let visibleSongs = songs.slice();
 let currentSong = null;
 let pageIndex = 0;
 let startX = 0;
+let fullSongMode = false;
+let onePageMode = false;
+let extremeMode = false;
 
 function sortSongs(list) {
   return list.slice().sort((a, b) => a.title.localeCompare(b.title, 'zh-CN'));
@@ -235,15 +238,39 @@ function formatSongHtml(text) {
 
 function renderSong() {
   if (!currentSong) return;
+
   document.getElementById('title').textContent = currentSong.title;
-  document.getElementById('pageInfo').textContent = ` 第${pageIndex + 1}/${currentSong.pages.length}页`;
+  document.getElementById('pageInfo').textContent = fullSongMode
+    ? ` 整首模式`
+    : ` 第${pageIndex + 1}/${currentSong.pages.length}页`;
   document.getElementById('keyInfo').textContent = ` 当前调：${currentSong.currentKey}`;
 
   const shift = noteIndex(currentSong.currentKey) - noteIndex(currentSong.originalKey);
-  const source = currentSong.pages[pageIndex];
-  const transposed = transposeText(source, shift);
 
-  document.getElementById('content').innerHTML = `<div class="page-title">PAGE ${pageIndex + 1}</div>` + formatSongHtml(transposed);
+  let contentText = "";
+
+  if (fullSongMode) {
+    contentText = currentSong.pages.join('
+
+');
+  } else {
+    contentText = currentSong.pages[pageIndex];
+  }
+
+  const transposed = transposeText(contentText, shift);
+
+  document.getElementById('content').innerHTML = formatSongHtml(transposed);
+
+  // 一页 / 极限样式
+  const pageEl = document.getElementById('content');
+  if (onePageMode) {
+    pageEl.style.fontSize = extremeMode ? '14px' : '16px';
+    pageEl.style.lineHeight = extremeMode ? '1.4' : '1.6';
+  } else {
+    pageEl.style.fontSize = '19px';
+    pageEl.style.lineHeight = '1.9';
+  }
+
   updateKeySelect();
 }
 
@@ -266,6 +293,22 @@ function prevPage() {
 function changeKey(val) {
   if (!currentSong) return;
   currentSong.currentKey = val;
+  renderSong();
+}
+
+function toggleFullSong() {
+  fullSongMode = !fullSongMode;
+  renderSong();
+}
+
+function toggleOnePage() {
+  onePageMode = !onePageMode;
+  renderSong();
+}
+
+function toggleExtreme() {
+  extremeMode = !extremeMode;
+  onePageMode = true;
   renderSong();
 }
 
