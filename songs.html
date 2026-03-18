@@ -33,7 +33,13 @@ body{margin:0;font-family:system-ui;background:#000;color:#eee}
 <button onclick="prevPage()">上一页</button>
 <button onclick="nextPage()">下一页</button>
 <br>
-<button onclick="alert('变调后面加')">升/降调</button>
+<select onchange="changeKey(this.value)">
+<option value="0">原调</option>
+<option value="1">升1</option>
+<option value="2">升2</option>
+<option value="-1">降1</option>
+<option value="-2">降2</option>
+</select>
 <button onclick="alert('级数后面加')">级数</button>
 <button onclick="alert('一页模式后面加')">一页</button>
 <button onclick="alert('极限一页后面加')">极限</button>
@@ -81,6 +87,10 @@ if(pageIndex<currentSong.pages.length-1){pageIndex++;renderSong();}
 
 function prevPage(){
 if(pageIndex>0){pageIndex--;renderSong();}
+}
+
+function changeKey(val){
+alert('变调功能下一步接入，当前选择: '+val);
 }
 
 function goHome(){
