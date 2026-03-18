@@ -29,7 +29,8 @@ body{margin:0;font-family:system-ui;background:#000;color:#eee}
 <button class="btn" onclick="goHome()">返回</button>
 <span id="title"></span>
 <span id="pageInfo"></span>
-</div><div class="page" id="content"></div><div class="controls">
+<span id="keyInfo"></span>
+</div><pre class="page" id="content"></pre><div class="controls">
 <button onclick="prevPage()">上一页</button>
 <button onclick="nextPage()">下一页</button>
 <br>
@@ -52,9 +53,39 @@ body{margin:0;font-family:system-ui;background:#000;color:#eee}
 <button onclick="alert('极限一页后面加')">极限</button>
 </div>
 </div><script>
+const NOTES = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
+
 const songs=[
-{title:"成都",pages:["让我掉下眼泪的\n不止昨夜的酒","余路还要走多久\n你攥着我的手"]},
-{title:"当你老了",pages:["当你老了 头发白了","睡意昏沉 炉火旁打盹"]}
+{
+  title:"成都",
+  originalKey:"D",
+  currentKey:"D",
+  pages:[
+`[D]让我掉下眼泪的
+[Em]不止昨夜的酒
+[G]余路还要走多久
+[A]你攥着我的手`,
+`[D]让我感到为难的
+[Em]是挣扎的自由
+[G]分别总是在九月
+[A]回忆是思念的愁`
+]
+},
+{
+  title:"当你老了",
+  originalKey:"C",
+  currentKey:"C",
+  pages:[
+`[C]当你老了 头发白了
+[F]睡意昏沉
+[C]炉火旁打盹
+[G]回忆青春`,
+`[C]多少人曾爱你青春欢畅的时辰
+[F]爱慕你的美丽
+[C]假意或真心
+[G]只有一个人还爱你虔诚的灵魂`
+]
+}
 ];
 
 let currentSong=null;
@@ -75,17 +106,22 @@ renderList(filtered);
 }
 
 function openSong(i){
-currentSong=songs[i];
-pageIndex=0;
-document.getElementById('home').style.display='none';
-document.getElementById('viewer').style.display='block';
-renderSong();
+  currentSong=songs[i];
+  if(!currentSong.currentKey) currentSong.currentKey = currentSong.originalKey;
+  pageIndex=0;
+  document.getElementById('home').style.display='none';
+  document.getElementById('viewer').style.display='block';
+  renderSong();
 }
 
 function renderSong(){
-document.getElementById('title').innerText=currentSong.title;
-document.getElementById('pageInfo').innerText=` 第${pageIndex+1}/${currentSong.pages.length}页`;
-document.getElementById('content').innerText=currentSong.pages[pageIndex];
+  document.getElementById('title').innerText=currentSong.title;
+  document.getElementById('pageInfo').innerText=` 第${pageIndex+1}/${currentSong.pages.length}页`;
+  document.getElementById('keyInfo').innerText=` 当前调：${currentSong.currentKey}`;
+  const shift = noteIndex(currentSong.currentKey) - noteIndex(currentSong.originalKey);
+  const txt = transposeText(currentSong.pages[pageIndex], shift);
+  document.getElementById('content').innerText = txt;
+  updateKeySelect();
 }
 
 function nextPage(){
@@ -96,8 +132,41 @@ function prevPage(){
 if(pageIndex>0){pageIndex--;renderSong();}
 }
 
+function noteIndex(note){
+  return NOTES.indexOf(note);
+}
+
+function transposeChord(chord, shift){
+  const m = chord.match(/^([A-G])(#?)(.*)$/);
+  if(!m) return chord;
+  const base = m[1] + (m[2] || '');
+  const rest = m[3] || '';
+  const idx = noteIndex(base);
+  if(idx === -1) return chord;
+  let out = NOTES[(idx + shift + 12) % 12] + rest;
+  out = out.replace(/\/([A-G])(#?)/g, (all, n, sharp) => {
+    const bass = n + (sharp || '');
+    const bidx = noteIndex(bass);
+    if(bidx === -1) return all;
+    return '/' + NOTES[(bidx + shift + 12) % 12];
+  });
+  return out;
+}
+
+function transposeText(text, shift){
+  return text.replace(/([^]+)\]/g, (_, chord) => '[' + transposeChord(chord, shift) + ']');
+}
+
+function updateKeySelect(){
+  const sel = document.querySelector('select');
+  if(!sel || !currentSong) return;
+  sel.value = String(noteIndex(currentSong.currentKey));
+}
+
 function changeKey(val){
-alert('变调功能下一步接入，当前选择: '+val);
+  if(!currentSong) return;
+  currentSong.currentKey = NOTES[Number(val)];
+  renderSong();
 }
 
 function goHome(){
