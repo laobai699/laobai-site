@@ -136,7 +136,7 @@ function noteIndex(note){
   return NOTES.indexOf(note);
 }
 
-function transposeChord(chord, shift){
+function transposeSingleChord(chord, shift){
   const m = chord.match(/^([A-G])(#?)(.*)$/);
   if(!m) return chord;
   const base = m[1] + (m[2] || '');
@@ -153,8 +153,14 @@ function transposeChord(chord, shift){
   return out;
 }
 
+function transposeLine(line, shift){
+  return line.replace(/([^]+)\]/g, (_, chord) => '[' + transposeSingleChord(chord, shift) + ']');
+}
+
 function transposeText(text, shift){
-  return text.replace(/([^]+)\]/g, (_, chord) => '[' + transposeChord(chord, shift) + ']');
+  return text.split('
+').map(line => transposeLine(line, shift)).join('
+');
 }
 
 function updateKeySelect(){
