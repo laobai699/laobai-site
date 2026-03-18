@@ -225,8 +225,7 @@ function escapeHtml(str) {
 }
 
 function formatSongHtml(text) {
-  const lines = text.split('
-');
+  const lines = text.split('\n');
   return lines.map(line => {
     const safe = escapeHtml(line);
     const html = safe.replace(/([^]+)\]/g, '<span class="chord">[$1]</span>');
