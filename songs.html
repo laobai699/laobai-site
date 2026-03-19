@@ -4,94 +4,666 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>老拜有谱 - 单曲歌谱页原型</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      background: #f7f4ef;
+      color: #222;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    .song-page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* 顶部控制条 */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      background: #fff;
+      border: 1px solid #e6dfd3;
+      border-radius: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .top-left,
+    .top-center,
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .top-left {
+      flex: 1 1 auto;
+      overflow: hidden;
+    }
+
+    .top-center {
+      flex: 0 0 auto;
+    }
+
+    .top-right {
+      flex: 0 0 auto;
+    }
+
+    .song-title {
+      font-size: 18px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .song-artist {
+      font-size: 14px;
+      color: #666;
+      white-space: nowrap;
+    }
+
+    button {
+      border: 1px solid #d7cfbf;
+      background: #fff;
+      color: #222;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    .transpose-btn {
+      min-width: 42px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .current-key {
+      font-size: 14px;
+      font-weight: 700;
+      min-width: 86px;
+      text-align: center;
+    }
+
+    .toggle-degree-btn.active,
+    .mode-btn.active,
+    .back-btn.active {
+      background: #b45309;
+      color: #fff;
+      border-color: #b45309;
+    }
+
+    /* 歌谱主区域 */
+    .score-area {
+      background: #fff;
+      border: 1px solid #e6dfd3;
+      border-radius: 10px;
+      padding: 14px;
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .song-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 14px;
+      color: #666;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #eee5d8;
+    }
+
+    .score-content {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .section-block {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .section-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #8b6b4a;
+      letter-spacing: 0.08em;
+    }
+
+    .score-line {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: flex-start;
+      gap: 14px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .score-unit {
+      display: grid;
+      grid-template-rows: auto auto auto;
+      justify-items: start;
+      align-items: start;
+      flex: 0 0 auto;
+      min-width: max-content;
+    }
+
+    .chord-line {
+      font-size: 15px;
+      line-height: 1.1;
+      font-weight: 700;
+      color: #b45309;
+      margin-bottom: 4px;
+      white-space: nowrap;
+    }
+
+    .lyric-line {
+      font-size: 18px;
+      line-height: 1.5;
+      color: #222;
+      white-space: nowrap;
+    }
+
+    .degree-line {
+      font-size: 12px;
+      line-height: 1.2;
+      color: #888;
+      margin-top: 4px;
+      white-space: nowrap;
+    }
+
+    .degree-hidden .degree-line {
+      display: none;
+    }
+
+    /* 分页与模式控制 */
+    .page-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: #fff;
+      border: 1px solid #e6dfd3;
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .page-nav,
+    .view-modes {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .page-indicator {
+      font-size: 14px;
+      font-weight: 700;
+      color: #444;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    .status-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 13px;
+      color: #666;
+      background: #fff;
+      border: 1px solid #e6dfd3;
+      border-radius: 10px;
+      padding: 10px 12px;
+    }
+
+    /* 一页显示模式 */
+    .one-page .score-content {
+      gap: 16px;
+    }
+
+    .one-page .section-block {
+      gap: 8px;
+    }
+
+    .one-page .score-line {
+      gap: 10px;
+    }
+
+    .one-page .chord-line {
+      font-size: 14px;
+    }
+
+    .one-page .lyric-line {
+      font-size: 16px;
+      line-height: 1.35;
+    }
+
+    .one-page .degree-line {
+      font-size: 11px;
+    }
+
+    /* 极限一页模式 */
+    .extreme-page .score-content {
+      gap: 10px;
+    }
+
+    .extreme-page .section-block {
+      gap: 6px;
+    }
+
+    .extreme-page .section-label {
+      font-size: 12px;
+    }
+
+    .extreme-page .score-line {
+      gap: 8px;
+      padding-bottom: 2px;
+    }
+
+    .extreme-page .chord-line {
+      font-size: 12px;
+      margin-bottom: 2px;
+    }
+
+    .extreme-page .lyric-line {
+      font-size: 14px;
+      line-height: 1.2;
+    }
+
+    .extreme-page .degree-line {
+      font-size: 10px;
+      margin-top: 2px;
+    }
+
+    @media (max-width: 768px) {
+      .song-page {
+        padding: 8px;
+      }
+
+      .top-bar {
+        flex-wrap: wrap;
+        align-items: flex-start;
+      }
+
+      .top-left,
+      .top-center,
+      .top-right {
+        width: 100%;
+      }
+
+      .top-center,
+      .top-right {
+        justify-content: flex-start;
+      }
+
+      .score-line {
+        gap: 12px;
+      }
+
+      .chord-line {
+        font-size: 14px;
+      }
+
+      .lyric-line {
+        font-size: 17px;
+      }
+
+      .degree-line {
+        font-size: 11px;
+      }
+
+      .page-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .page-nav,
+      .view-modes {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .page-nav button,
+      .view-modes button {
+        flex: 1 1 0;
+      }
+    }
+  </style>
 </head>
 <body>
-
-  <!-- 整页容器 -->
-  <div class="song-page">
-
-    <!-- 顶部控制条：单行 -->
+  <div class="song-page" id="songPage">
+    <!-- 顶部控制条 -->
     <header class="top-bar">
       <div class="top-left">
-        <button type="button" class="back-btn">返回列表</button>
-        <span class="song-title">把酒问月</span>
-        <span class="song-artist">赵照</span>
+        <button type="button" class="back-btn" onclick="goBack()">返回列表</button>
+        <span class="song-title" id="songTitle">把酒问月</span>
+        <span class="song-artist" id="songArtist">赵照</span>
       </div>
 
       <div class="top-center">
-        <button type="button" class="transpose-btn">-</button>
-        <span class="current-key">当前调：G</span>
-        <button type="button" class="transpose-btn">+</button>
+        <button type="button" class="transpose-btn" onclick="transposeSong(-1)">-</button>
+        <span class="current-key" id="currentKey">当前调：G</span>
+        <button type="button" class="transpose-btn" onclick="transposeSong(1)">+</button>
       </div>
 
       <div class="top-right">
-        <button type="button" class="toggle-degree-btn">级数：关</button>
+        <button type="button" class="toggle-degree-btn" id="degreeBtn" onclick="toggleDegree()">
+          级数：开
+        </button>
       </div>
     </header>
 
-    <!-- 主歌谱区域：页面最大 -->
-    <main class="score-area">
-
-      <!-- 歌曲基础信息（可先简化保留） -->
+    <!-- 歌谱主显示区 -->
+    <main class="score-area" id="scoreArea">
       <section class="song-meta">
-        <div>原调：G</div>
-        <div>当前调：G</div>
+        <div id="metaOriginalKey">原调：G</div>
+        <div id="metaCurrentKey">当前调：G</div>
       </section>
 
-      <!-- 歌谱显示区 -->
-      <section class="score-content">
-
-        <!-- 段落示例 -->
-        <div class="section-block">
-          <div class="section-label">主歌</div>
-
-          <div class="score-line">
-            <div class="chord-line">G　　　　　　D　　　　　　Em　　　　　C</div>
-            <div class="lyric-line">青天有月来几时　我今停杯一问之</div>
-            <div class="degree-line">Ⅰ　　　　　　Ⅴ　　　　　　Ⅵm　　　　　Ⅳ</div>
-          </div>
-
-          <div class="score-line">
-            <div class="chord-line">G　　　　　　D　　　　　　C　　　　　　D</div>
-            <div class="lyric-line">人攀明月不可得　月行却与人相随</div>
-            <div class="degree-line">Ⅰ　　　　　　Ⅴ　　　　　　Ⅳ　　　　　　Ⅴ</div>
-          </div>
-        </div>
-
-        <div class="section-block">
-          <div class="section-label">副歌</div>
-
-          <div class="score-line">
-            <div class="chord-line">Em　　　　　Bm　　　　　C　　　　　　G</div>
-            <div class="lyric-line">今人不见古时月　今月曾经照古人</div>
-            <div class="degree-line">Ⅵm　　　　　Ⅲm　　　　　Ⅳ　　　　　　Ⅰ</div>
-          </div>
-        </div>
-
-      </section>
+      <section class="score-content" id="scoreContent"></section>
     </main>
 
     <!-- 分页与模式控制区 -->
     <section class="page-controls">
       <div class="page-nav">
-        <button type="button" class="page-btn">上一页</button>
-        <span class="page-indicator">第 1 页 / 共 3 页</span>
-        <button type="button" class="page-btn">下一页</button>
+        <button type="button" class="page-btn" onclick="prevPage()">上一页</button>
+        <span class="page-indicator" id="pageIndicator">第 1 页 / 共 1 页</span>
+        <button type="button" class="page-btn" onclick="nextPage()">下一页</button>
       </div>
 
       <div class="view-modes">
-        <button type="button" class="mode-btn">一页显示</button>
-        <button type="button" class="mode-btn active">极限一页显示</button>
+        <button type="button" class="mode-btn" id="normalModeBtn" onclick="setViewMode('normal')">分页显示</button>
+        <button type="button" class="mode-btn" id="onePageBtn" onclick="setViewMode('one')">一页显示</button>
+        <button type="button" class="mode-btn" id="extremePageBtn" onclick="setViewMode('extreme')">极限一页显示</button>
       </div>
     </section>
 
     <!-- 底部状态区 -->
     <footer class="status-bar">
-      <span class="mode-status">当前模式：极限一页显示</span>
-      <span class="degree-status">级数：关</span>
+      <span class="mode-status" id="modeStatus">当前模式：分页显示</span>
+      <span class="degree-status" id="degreeStatus">级数：开</span>
     </footer>
-
   </div>
 
+  <script>
+    const NOTE_LIST = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+
+    const FLAT_TO_SHARP = {
+      'Db': 'C#',
+      'Eb': 'D#',
+      'Gb': 'F#',
+      'Ab': 'G#',
+      'Bb': 'A#',
+      'Cb': 'B',
+      'Fb': 'E'
+    };
+
+    const songData = {
+      title: '把酒问月',
+      artist: '赵照',
+      originalKey: 'G',
+      sections: [
+        {
+          label: '主歌',
+          lines: [
+            [
+              { chord: 'G', lyric: '青天有月', degree: 'Ⅰ' },
+              { chord: 'D', lyric: '来几时', degree: 'Ⅴ' },
+              { chord: 'Em', lyric: '我今停杯', degree: 'Ⅵm' },
+              { chord: 'C', lyric: '一问之', degree: 'Ⅳ' }
+            ],
+            [
+              { chord: 'G', lyric: '人攀明月', degree: 'Ⅰ' },
+              { chord: 'D', lyric: '不可得', degree: 'Ⅴ' },
+              { chord: 'C', lyric: '月行却与', degree: 'Ⅳ' },
+              { chord: 'D', lyric: '人相随', degree: 'Ⅴ' }
+            ]
+          ]
+        },
+        {
+          label: '副歌',
+          lines: [
+            [
+              { chord: 'Em', lyric: '今人不见', degree: 'Ⅵm' },
+              { chord: 'Bm', lyric: '古时月', degree: 'Ⅲm' },
+              { chord: 'C', lyric: '今月曾经', degree: 'Ⅳ' },
+              { chord: 'G', lyric: '照古人', degree: 'Ⅰ' }
+            ]
+          ]
+        }
+      ]
+    };
+
+    let currentOffset = 0;
+    let showDegree = true;
+    let currentPage = 0;
+    let viewMode = 'normal';
+
+    function normalizeNote(note) {
+      return FLAT_TO_SHARP[note] || note;
+    }
+
+    function transposeChord(chord, offset) {
+      if (!chord) return chord;
+
+      if (chord.includes('/')) {
+        const parts = chord.split('/');
+        return parts.map(part => transposeChord(part, offset)).join('/');
+      }
+
+      const match = chord.match(/^([A-G](?:#|b)?)(.*)$/);
+      if (!match) return chord;
+
+      const root = normalizeNote(match[1]);
+      const suffix = match[2] || '';
+      const index = NOTE_LIST.indexOf(root);
+
+      if (index === -1) return chord;
+
+      let newIndex = (index + offset) % 12;
+      if (newIndex < 0) newIndex += 12;
+
+      return NOTE_LIST[newIndex] + suffix;
+    }
+
+    function getCurrentKey() {
+      const originalIndex = NOTE_LIST.indexOf(normalizeNote(songData.originalKey));
+      let newIndex = (originalIndex + currentOffset) % 12;
+      if (newIndex < 0) newIndex += 12;
+      return NOTE_LIST[newIndex];
+    }
+
+    function buildSectionBlock(section) {
+      const block = document.createElement('div');
+      block.className = 'section-block';
+
+      const label = document.createElement('div');
+      label.className = 'section-label';
+      label.textContent = section.label;
+      block.appendChild(label);
+
+      section.lines.forEach(line => {
+        const scoreLine = document.createElement('div');
+        scoreLine.className = 'score-line';
+
+        line.forEach(unit => {
+          const scoreUnit = document.createElement('div');
+          scoreUnit.className = 'score-unit';
+
+          const chordLine = document.createElement('div');
+          chordLine.className = 'chord-line';
+          chordLine.textContent = transposeChord(unit.chord, currentOffset);
+
+          const lyricLine = document.createElement('div');
+          lyricLine.className = 'lyric-line';
+          lyricLine.textContent = unit.lyric;
+
+          const degreeLine = document.createElement('div');
+          degreeLine.className = 'degree-line';
+          degreeLine.textContent = unit.degree || '';
+
+          scoreUnit.appendChild(chordLine);
+          scoreUnit.appendChild(lyricLine);
+          scoreUnit.appendChild(degreeLine);
+
+          scoreLine.appendChild(scoreUnit);
+        });
+
+        block.appendChild(scoreLine);
+      });
+
+      return block;
+    }
+
+    function renderSong() {
+      const scoreContent = document.getElementById('scoreContent');
+      const songPage = document.getElementById('songPage');
+
+      scoreContent.innerHTML = '';
+
+      if (!showDegree) {
+        songPage.classList.add('degree-hidden');
+      } else {
+        songPage.classList.remove('degree-hidden');
+      }
+
+      songData.sections.forEach((section, index) => {
+        const block = buildSectionBlock(section);
+
+        if (viewMode === 'normal') {
+          if (index === currentPage) {
+            scoreContent.appendChild(block);
+          }
+        } else {
+          scoreContent.appendChild(block);
+        }
+      });
+
+      document.getElementById('songTitle').textContent = songData.title;
+      document.getElementById('songArtist').textContent = songData.artist;
+      document.getElementById('currentKey').textContent = '当前调：' + getCurrentKey();
+      document.getElementById('metaOriginalKey').textContent = '原调：' + songData.originalKey;
+      document.getElementById('metaCurrentKey').textContent = '当前调：' + getCurrentKey();
+      document.getElementById('degreeBtn').textContent = '级数：' + (showDegree ? '开' : '关');
+      document.getElementById('degreeStatus').textContent = '级数：' + (showDegree ? '开' : '关');
+
+      updateModeUI();
+      updatePageIndicator();
+    }
+
+    function updateModeUI() {
+      const songPage = document.getElementById('songPage');
+
+      songPage.classList.remove('one-page', 'extreme-page');
+      document.getElementById('normalModeBtn').classList.remove('active');
+      document.getElementById('onePageBtn').classList.remove('active');
+      document.getElementById('extremePageBtn').classList.remove('active');
+
+      if (viewMode === 'normal') {
+        document.getElementById('normalModeBtn').classList.add('active');
+        document.getElementById('modeStatus').textContent = '当前模式：分页显示';
+      }
+
+      if (viewMode === 'one') {
+        songPage.classList.add('one-page');
+        document.getElementById('onePageBtn').classList.add('active');
+        document.getElementById('modeStatus').textContent = '当前模式：一页显示';
+      }
+
+      if (viewMode === 'extreme') {
+        songPage.classList.add('extreme-page');
+        document.getElementById('extremePageBtn').classList.add('active');
+        document.getElementById('modeStatus').textContent = '当前模式：极限一页显示';
+      }
+
+      if (showDegree) {
+        document.getElementById('degreeBtn').classList.add('active');
+      } else {
+        document.getElementById('degreeBtn').classList.remove('active');
+      }
+    }
+
+    function updatePageIndicator() {
+      const totalPages = songData.sections.length;
+
+      if (viewMode === 'normal') {
+        document.getElementById('pageIndicator').textContent = '第 ' + (currentPage + 1) + ' 页 / 共 ' + totalPages + ' 页';
+      } else {
+        document.getElementById('pageIndicator').textContent = '单页模式';
+      }
+    }
+
+    function transposeSong(step) {
+      currentOffset += step;
+      renderSong();
+    }
+
+    function toggleDegree() {
+      showDegree = !showDegree;
+      renderSong();
+    }
+
+    function prevPage() {
+      if (viewMode !== 'normal') return;
+      if (currentPage > 0) {
+        currentPage -= 1;
+        renderSong();
+      }
+    }
+
+    function nextPage() {
+      if (viewMode !== 'normal') return;
+      if (currentPage < songData.sections.length - 1) {
+        currentPage += 1;
+        renderSong();
+      }
+    }
+
+    function setViewMode(mode) {
+      viewMode = mode;
+
+      if (viewMode !== 'normal') {
+        currentPage = 0;
+      }
+
+      renderSong();
+    }
+
+    function goBack() {
+      alert('这里先预留返回歌曲列表，后面接首页用。');
+    }
+
+    renderSong();
+  </script>
 </body>
 </html>
