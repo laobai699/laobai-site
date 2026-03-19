@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>老拜有谱 - 单曲歌谱页原型</title>
+  <title>老拜有谱 - 把酒问月</title>
   <style>
     * {
       box-sizing: border-box;
@@ -107,8 +107,7 @@
     }
 
     .toggle-degree-btn.active,
-    .mode-btn.active,
-    .back-btn.active {
+    .mode-btn.active {
       background: #b45309;
       color: #fff;
       border-color: #b45309;
@@ -164,6 +163,7 @@
       overflow-y: hidden;
       padding-bottom: 4px;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
     }
 
     .score-unit {
@@ -362,7 +362,6 @@
 </head>
 <body>
   <div class="song-page" id="songPage">
-    <!-- 顶部控制条 -->
     <header class="top-bar">
       <div class="top-left">
         <button type="button" class="back-btn" onclick="goBack()">返回列表</button>
@@ -377,23 +376,20 @@
       </div>
 
       <div class="top-right">
-        <button type="button" class="toggle-degree-btn" id="degreeBtn" onclick="toggleDegree()">
-          级数：开
-        </button>
+        <button type="button" class="toggle-degree-btn" id="degreeBtn" onclick="toggleDegree()">级数：开</button>
       </div>
     </header>
 
-    <!-- 歌谱主显示区 -->
     <main class="score-area" id="scoreArea">
       <section class="song-meta">
         <div id="metaOriginalKey">原调：G</div>
+        <div>拍号：4/4</div>
         <div id="metaCurrentKey">当前调：G</div>
       </section>
 
       <section class="score-content" id="scoreContent"></section>
     </main>
 
-    <!-- 分页与模式控制区 -->
     <section class="page-controls">
       <div class="page-nav">
         <button type="button" class="page-btn" onclick="prevPage()">上一页</button>
@@ -408,7 +404,6 @@
       </div>
     </section>
 
-    <!-- 底部状态区 -->
     <footer class="status-bar">
       <span class="mode-status" id="modeStatus">当前模式：分页显示</span>
       <span class="degree-status" id="degreeStatus">级数：开</span>
@@ -432,21 +427,34 @@
       title: '把酒问月',
       artist: '赵照',
       originalKey: 'G',
+      timeSignature: '4/4',
       sections: [
         {
           label: '主歌',
           lines: [
             [
-              { chord: 'G', lyric: '青天有月', degree: 'Ⅰ' },
-              { chord: 'D', lyric: '来几时', degree: 'Ⅴ' },
-              { chord: 'Em', lyric: '我今停杯', degree: 'Ⅵm' },
-              { chord: 'C', lyric: '一问之', degree: 'Ⅳ' }
+              { chord: 'G',  lyric: '青天有月', degree: 'Ⅰ' },
+              { chord: 'Em', lyric: '来几时', degree: 'Ⅵm' },
+              { chord: 'Am', lyric: '我今停杯一问之', degree: 'Ⅱm' },
+              { chord: 'D',  lyric: '。', degree: 'Ⅴ' },
+              { chord: 'G',  lyric: '人攀明月', degree: 'Ⅰ' },
+              { chord: 'Em', lyric: '不可得', degree: 'Ⅵm' },
+              { chord: 'Am', lyric: '月行却与', degree: 'Ⅱm' }
             ],
             [
-              { chord: 'G', lyric: '人攀明月', degree: 'Ⅰ' },
-              { chord: 'D', lyric: '不可得', degree: 'Ⅴ' },
-              { chord: 'C', lyric: '月行却与', degree: 'Ⅳ' },
-              { chord: 'D', lyric: '人相随', degree: 'Ⅴ' }
+              { chord: 'D',  lyric: '人相随', degree: 'Ⅴ' },
+              { chord: 'G',  lyric: '。', degree: 'Ⅰ' },
+              { chord: 'G',  lyric: '皎如飞镜临丹阙', degree: 'Ⅰ' },
+              { chord: 'Em', lyric: '绿烟灭尽清辉发', degree: 'Ⅵm' },
+              { chord: 'Am', lyric: '但见宵从海上', degree: 'Ⅱm' }
+            ],
+            [
+              { chord: 'D',  lyric: '来', degree: 'Ⅴ' },
+              { chord: 'G',  lyric: '宁知晓向云间没', degree: 'Ⅰ' },
+              { chord: 'Am', lyric: '白兔捣药秋复春', degree: 'Ⅱm' },
+              { chord: 'D',  lyric: '嫦娥孤栖与谁邻', degree: 'Ⅴ' },
+              { chord: 'G',  lyric: '今', degree: 'Ⅰ' },
+              { chord: 'Em', lyric: '人不见古时月', degree: 'Ⅵm' }
             ]
           ]
         },
@@ -454,10 +462,28 @@
           label: '副歌',
           lines: [
             [
-              { chord: 'Em', lyric: '今人不见', degree: 'Ⅵm' },
-              { chord: 'Bm', lyric: '古时月', degree: 'Ⅲm' },
-              { chord: 'C', lyric: '今月曾经', degree: 'Ⅳ' },
-              { chord: 'G', lyric: '照古人', degree: 'Ⅰ' }
+              { chord: 'Am', lyric: '今月曾经照古人', degree: 'Ⅱm' },
+              { chord: 'D',  lyric: '。', degree: 'Ⅴ' },
+              { chord: 'Am', lyric: '古人今人若流水', degree: 'Ⅱm' },
+              { chord: 'D',  lyric: '共看明月皆', degree: 'Ⅴ' },
+              { chord: 'G',  lyric: '如此', degree: 'Ⅰ' }
+            ],
+            [
+              { chord: 'Em', lyric: '唯愿当歌对酒时', degree: 'Ⅵm' },
+              { chord: 'Am', lyric: '月光长照金樽里', degree: 'Ⅱm' },
+              { chord: 'D',  lyric: '。', degree: 'Ⅴ' },
+              { chord: 'Am', lyric: '唯愿当歌对酒时', degree: 'Ⅱm' },
+              { chord: 'D',  lyric: '月光长照金樽里', degree: 'Ⅴ' }
+            ],
+            [
+              { chord: 'Am', lyric: '啦啦啦啦里', degree: 'Ⅱm' },
+              { chord: 'D',  lyric: '啦啦啦里', degree: 'Ⅴ' },
+              { chord: 'G',  lyric: '。', degree: 'Ⅰ' },
+              { chord: 'Am', lyric: '啦啦啦里', degree: 'Ⅱm' },
+              { chord: 'D',  lyric: '啦啦啦', degree: 'Ⅴ' }
+            ],
+            [
+              { chord: 'G',  lyric: '啦里', degree: 'Ⅰ' }
             ]
           ]
         }
@@ -535,7 +561,6 @@
           scoreUnit.appendChild(chordLine);
           scoreUnit.appendChild(lyricLine);
           scoreUnit.appendChild(degreeLine);
-
           scoreLine.appendChild(scoreUnit);
         });
 
@@ -651,11 +676,9 @@
 
     function setViewMode(mode) {
       viewMode = mode;
-
       if (viewMode !== 'normal') {
         currentPage = 0;
       }
-
       renderSong();
     }
 
