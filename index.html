@@ -10,6 +10,24 @@
     box-sizing:border-box;
 }
 
+:root{
+    --bg:#111111;
+    --bg-soft:#141210;
+    --bg-about:#151311;
+    --bg-footer:#0f0e0d;
+
+    --text-main:#f5f1eb;
+    --text-soft:#ddd5cc;
+
+    --line-soft:rgba(214,185,145,0.16);
+    --line-hover:rgba(214,185,145,0.30);
+
+    --card-bg:rgba(255,245,232,0.030);
+    --card-bg-hover:rgba(255,245,232,0.052);
+
+    --warm:rgba(205,160,106,0.16);
+}
+
 html{
     scroll-behavior:smooth;
 }
@@ -17,14 +35,17 @@ html{
 body{
     margin:0;
     font-family:"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif;
-    color:white;
-    background:#111;
+    color:var(--text-main);
+    background:var(--bg);
 }
 
 /* ===== 第一屏 ===== */
 .hero{
-    height:100vh;
-    background:url('garden.jpg') no-repeat center center/cover;
+    min-height:100vh;
+    min-height:100svh;
+    background:
+        linear-gradient(to bottom, rgba(0,0,0,0.20), rgba(0,0,0,0.38)),
+        url('garden.jpg') no-repeat center 42% / cover;
     display:flex;
     align-items:center;
     justify-content:center;
@@ -36,49 +57,50 @@ body{
     content:"";
     position:absolute;
     inset:0;
-    background:rgba(0,0,0,0.30);
+    background:
+        radial-gradient(circle at center 38%, rgba(255,210,150,0.05), rgba(0,0,0,0) 38%);
+    pointer-events:none;
 }
 
 .hero-inner{
     position:relative;
     z-index:2;
     width:100%;
-    max-width:900px;
-    padding:20px;
+    max-width:720px;
+    padding:20px 24px 20px;
     padding-top:8vh;
     text-align:center;
-    transform:translateY(-16vh);
+    transform:translateY(-11vh);
 }
 
-/* 主标题 */
 h1{
     margin:0 0 12px 0;
     font-size:48px;
     font-weight:700;
     letter-spacing:4px;
-    text-shadow:0 2px 12px rgba(0,0,0,0.25);
+    color:var(--text-main);
+    text-shadow:0 2px 12px rgba(0,0,0,0.28);
 }
 
-/* LAOBAI */
 .en{
     font-size:14px;
     letter-spacing:6px;
-    opacity:0.82;
+    opacity:0.84;
     margin-bottom:12px;
-    text-shadow:0 2px 10px rgba(0,0,0,0.22);
-}
-
-/* 英文说明 */
-.sub-en{
-    font-size:13px;
-    letter-spacing:1px;
-    opacity:0.90;
-    margin-bottom:42px;
-    text-transform:uppercase;
+    color:var(--text-soft);
     text-shadow:0 2px 10px rgba(0,0,0,0.24);
 }
 
-/* 中文三行 */
+.sub-en{
+    font-size:13px;
+    letter-spacing:1px;
+    opacity:0.92;
+    margin-bottom:42px;
+    text-transform:uppercase;
+    color:var(--text-soft);
+    text-shadow:0 2px 10px rgba(0,0,0,0.24);
+}
+
 .slogan{
     font-size:20px;
     line-height:1.2;
@@ -91,38 +113,34 @@ h1{
     letter-spacing:2px;
 }
 
-/* 底部英文 */
 .slogan-en{
     position:absolute;
     left:0;
     right:0;
     bottom:145px;
     z-index:2;
-
     text-align:center;
     font-size:10px;
     letter-spacing:2px;
     line-height:1.2;
     opacity:0.78;
     white-space:nowrap;
-
+    color:var(--text-soft);
     text-shadow:0 2px 10px rgba(0,0,0,0.22);
 }
 
-/* 向下提示 */
 .scroll-tip{
     position:absolute;
     left:50%;
     bottom:115px;
     transform:translateX(-50%);
     z-index:2;
-
     font-size:15px;
     letter-spacing:2px;
     opacity:1;
+    color:var(--text-main);
     text-shadow:0 2px 12px rgba(0,0,0,0.35);
-
-    animation:fadeTip 1.5s ease forwards, bounce 1.8s infinite 1.5s;
+    animation:fadeTip 1.5s ease forwards, floatUp 1.8s infinite 1.5s;
 }
 
 @keyframes fadeTip{
@@ -130,47 +148,43 @@ h1{
     to{opacity:1;}
 }
 
-@keyframes bounce{
+@keyframes floatUp{
     0%,100%{ transform:translateX(-50%) translateY(0); }
-    50%{ transform:translateX(-50%) translateY(6px); }
+    50%{ transform:translateX(-50%) translateY(-6px); }
 }
 
-/* ===== 首屏出现动画 ===== */
+/* ===== 首屏出现动画（无模糊） ===== */
 .fade{
     opacity:0;
     transform:translateY(14px);
-    filter:blur(4px);
-    animation:softReveal 2s ease forwards;
+    animation:softReveal 1.8s ease forwards;
 }
 
 .fade:nth-of-type(1){ animation-delay:0.12s; }
 .fade:nth-of-type(2){ animation-delay:0.95s; }
 .fade:nth-of-type(3){ animation-delay:1.9s; }
 .fade:nth-of-type(4){ animation-delay:3.1s; }
-.fade:nth-of-type(5){ animation-delay:4.6s; }
+.fade:nth-of-type(5){ animation-delay:4.4s; }
 
 @keyframes softReveal{
     0%{
         opacity:0;
         transform:translateY(14px);
-        filter:blur(6px);
     }
     60%{
         opacity:0.65;
         transform:translateY(4px);
-        filter:blur(2px);
     }
     100%{
         opacity:1;
         transform:translateY(0);
-        filter:blur(0);
     }
 }
 
 /* ===== 第二屏 ===== */
 .section{
     padding:72px 18px;
-    background:#101010;
+    background:var(--bg-soft);
 }
 
 .section-title{
@@ -178,46 +192,50 @@ h1{
     font-size:24px;
     letter-spacing:4px;
     margin-bottom:12px;
-    color:#f4f4f4;
+    color:var(--text-main);
 }
 
 .section-subtitle{
     text-align:center;
     font-size:13px;
-    opacity:0.60;
+    opacity:0.72;
     margin-bottom:42px;
     letter-spacing:1px;
-    color:#ddd;
+    color:var(--text-soft);
 }
 
 /* 老拜建站入口 */
 .building-entry{
     max-width:1000px;
-    margin:0 auto 22px;
+    margin:0 auto 26px;
     text-align:center;
 }
 
 .building-link{
     display:inline-block;
-    padding:10px 18px;
-    border:1px solid rgba(255,255,255,0.20);
-    border-radius:999px;
+    min-width:340px;
+    padding:15px 28px;
+    border:1px solid rgba(214,185,145,0.22);
+    border-radius:18px;
     text-decoration:none;
-    color:#fff;
-    font-size:12px;
+    color:var(--text-main);
+    font-size:14px;
     letter-spacing:2px;
-    opacity:0.82;
-    background:rgba(255,255,255,0.05);
+    opacity:0.96;
+    background:rgba(255,246,235,0.045);
     backdrop-filter:blur(2px);
-    transition:all 0.25s ease;
+    box-shadow:0 7px 18px rgba(0,0,0,0.10);
+    transition:all 0.28s ease;
 }
 
 .building-link:hover{
     opacity:1;
-    background:rgba(255,255,255,0.10);
-    border-color:rgba(255,255,255,0.32);
+    background:rgba(255,246,235,0.07);
+    border-color:rgba(214,185,145,0.34);
+    transform:translateY(-2px);
 }
 
+/* 卡片区 */
 .grid{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -228,61 +246,100 @@ h1{
 
 .card{
     display:block;
+    position:relative;
+    overflow:hidden;
     text-decoration:none;
-    color:#fff;
-    border:1px solid rgba(255,255,255,0.14);
-    background:rgba(255,255,255,0.03);
+    color:var(--text-main);
+    border:1px solid var(--line-soft);
+    background:var(--card-bg);
     border-radius:16px;
-    padding:26px 20px;
-    transition:all 0.28s ease;
+    padding:26px 20px 30px;
+    min-height:182px;
+    transition:all 0.32s ease;
     backdrop-filter:blur(2px);
 }
 
 .card:hover{
     transform:translateY(-4px);
-    background:rgba(255,255,255,0.06);
-    border-color:rgba(255,255,255,0.22);
+    background:var(--card-bg-hover);
+    border-color:var(--line-hover);
+    box-shadow:0 10px 30px rgba(0,0,0,0.18);
 }
 
 .card h2{
     margin:0 0 8px 0;
     font-size:22px;
     letter-spacing:2px;
+    color:var(--text-main);
 }
 
 .card-en{
     font-size:11px;
     letter-spacing:3px;
-    opacity:0.55;
+    opacity:0.62;
     margin-bottom:12px;
+    color:var(--text-soft);
 }
 
 .card p{
     margin:0;
     font-size:13px;
     line-height:1.8;
-    opacity:0.76;
+    opacity:0.82;
+    color:var(--text-soft);
+    padding-right:34px;
+}
+
+.card.food-card,
+.card.workshop-card{
+    border-color:rgba(205,160,106,0.18);
+}
+
+.card.food-card:hover,
+.card.workshop-card:hover{
+    border-color:rgba(205,160,106,0.34);
+    box-shadow:0 12px 34px rgba(0,0,0,0.22);
+}
+
+/* 右下角小图标：彩色、轻点缀、不像按钮 */
+.card-icon{
+    position:absolute;
+    right:14px;
+    bottom:10px;
+    font-size:16px;
+    line-height:1;
+    opacity:0.92;
+    pointer-events:none;
+    user-select:none;
+    transition:transform 0.28s ease, opacity 0.28s ease;
+    filter:saturate(0.95);
+}
+
+.card:hover .card-icon{
+    transform:translateY(-1px);
+    opacity:1;
 }
 
 /* 文案区 */
 .about-wrap{
-    background:#151515;
-    border-top:1px solid rgba(255,255,255,0.06);
-    border-bottom:1px solid rgba(255,255,255,0.06);
+    background:var(--bg-about);
+    border-top:1px solid rgba(214,185,145,0.10);
+    border-bottom:1px solid rgba(214,185,145,0.10);
 }
 
 .about{
     max-width:760px;
     margin:0 auto;
     text-align:center;
-    color:#f2f2f2;
+    color:var(--text-main);
 }
 
 .about-top{
     font-size:15px;
-    opacity:0.72;
+    opacity:0.76;
     margin-bottom:26px;
     letter-spacing:1px;
+    color:var(--text-soft);
 }
 
 .about-poem{
@@ -295,20 +352,20 @@ h1{
     margin-top:20px;
     font-size:12px;
     letter-spacing:3px;
-    opacity:0.5;
+    opacity:0.54;
+    color:var(--text-soft);
 }
 
-/* 页脚 */
 .footer{
     text-align:center;
     padding:34px 12px 42px;
-    background:#0d0d0d;
+    background:var(--bg-footer);
     font-size:12px;
     letter-spacing:3px;
-    opacity:0.45;
+    opacity:0.50;
+    color:var(--text-soft);
 }
 
-/* 第二屏滚动淡入 */
 .reveal{
     opacity:0;
     transform:translateY(26px);
@@ -320,9 +377,26 @@ h1{
     transform:translateY(0);
 }
 
-/* 手机优化 */
-@media (max-width:640px){
+/* 平板 */
+@media (max-width:1024px){
+    .hero{
+        background-position:center 40%;
+    }
+
     .hero-inner{
+        max-width:680px;
+        transform:translateY(-13vh);
+    }
+}
+
+/* 手机竖屏 */
+@media (max-width:640px){
+    .hero{
+        background-position:center center;
+    }
+
+    .hero-inner{
+        max-width:100%;
         transform:translateY(-16vh);
         padding:18px;
         padding-top:7vh;
@@ -368,6 +442,101 @@ h1{
         font-size:20px;
         letter-spacing:2px;
     }
+
+    .building-link{
+        min-width:0;
+        width:100%;
+        max-width:420px;
+        padding:15px 22px;
+    }
+}
+
+/* 横屏且高度较低：只修第一屏 */
+@media (orientation:landscape) and (max-height:600px){
+    .hero{
+        min-height:100vh;
+        min-height:100svh;
+        background-position:center 44%;
+    }
+
+    .hero-inner{
+        max-width:760px;
+        transform:translateY(-1.5vh);
+        padding-top:4vh;
+    }
+
+    h1{
+        font-size:38px;
+        margin-bottom:8px;
+    }
+
+    .en{
+        font-size:12px;
+        margin-bottom:8px;
+        letter-spacing:5px;
+    }
+
+    .sub-en{
+        font-size:11px;
+        margin-bottom:20px;
+    }
+
+    .slogan{
+        font-size:17px;
+        margin-bottom:20px;
+    }
+
+    .slogan .line{
+        margin:10px 0;
+    }
+
+    .slogan-en{
+        bottom:52px;
+        font-size:8px;
+        letter-spacing:1.4px;
+        opacity:0.68;
+    }
+
+    .scroll-tip{
+        bottom:22px;
+        font-size:13px;
+    }
+}
+
+@media (orientation:landscape) and (max-height:500px){
+    .hero-inner{
+        transform:translateY(1vh);
+        padding-top:3vh;
+    }
+
+    h1{
+        font-size:32px;
+        letter-spacing:2px;
+    }
+
+    .sub-en{
+        margin-bottom:14px;
+    }
+
+    .slogan{
+        font-size:15px;
+        margin-bottom:14px;
+    }
+
+    .slogan .line{
+        margin:7px 0;
+    }
+
+    .slogan-en{
+        bottom:44px;
+        font-size:7px;
+        letter-spacing:1.1px;
+    }
+
+    .scroll-tip{
+        bottom:14px;
+        font-size:12px;
+    }
 }
 </style>
 </head>
@@ -393,7 +562,7 @@ h1{
         MUSIC · GARDEN · FIRE · LIFE
     </div>
 
-    <div class="scroll-tip">↓ 继续往下</div>
+    <div class="scroll-tip">↑ 继续往上</div>
 </section>
 
 <section class="section reveal">
@@ -409,24 +578,28 @@ h1{
             <h2>老拜有谱</h2>
             <div class="card-en">SONGS</div>
             <p>弹唱 · 歌谱 · 民谣<br>已经可以使用</p>
+            <span class="card-icon" aria-hidden="true">🎸</span>
+        </a>
+
+        <a class="card food-card" href="food.html">
+            <h2>老拜美食</h2>
+            <div class="card-en">BAI CATERING</div>
+            <p>烤全羊 · 烟火气<br>正在慢慢长出来</p>
+            <span class="card-icon" aria-hidden="true">🍽️</span>
         </a>
 
         <a class="card" href="coming.html">
             <h2>老拜小筑</h2>
             <div class="card-en">GARDEN</div>
             <p>院子 · 茶屋 · 鸟园 · 四季<br>正在慢慢长出来</p>
+            <span class="card-icon" aria-hidden="true">🏠</span>
         </a>
 
-        <a class="card" href="coming.html">
-            <h2>老拜美食</h2>
-            <div class="card-en">BAI CATERING</div>
-            <p>烤全羊 · 烟火气<br>正在慢慢长出来</p>
-        </a>
-
-        <a class="card" href="coming.html">
+        <a class="card workshop-card" href="coming.html">
             <h2>老拜工坊</h2>
             <div class="card-en">WORKSHOP</div>
             <p>CNC · 激光 · 3D打印 · 凸版印刷<br>正在慢慢长出来</p>
+            <span class="card-icon" aria-hidden="true">🪛</span>
         </a>
     </div>
 </section>
@@ -434,7 +607,7 @@ h1{
 <section class="section about-wrap reveal">
     <div class="about">
         <div class="about-top">
-            十年手作的小筑，慢慢生长的院子。
+            十年手作的小筑，慢慢长出的院子。
         </div>
 
         <div class="about-poem">

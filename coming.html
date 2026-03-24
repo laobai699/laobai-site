@@ -3,44 +3,156 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>慢慢长出来</title>
+<title>老拜小筑｜慢慢长出来</title>
 
 <style>
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
-  height:100vh;
+  min-height:100vh;
   display:flex;
   justify-content:center;
   align-items:center;
-  background:#0f0f0f;
-  color:#fff;
-  font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(255,210,150,0.04), transparent 35%),
+    linear-gradient(to bottom, #111111, #0d0d0d);
+  color:#f5f1eb;
+  font-family:"PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif;
   text-align:center;
+  overflow:hidden;
 }
 
 .box{
-  max-width:500px;
-  padding:20px;
+  position:relative;
+  width:min(92%, 560px);
+  padding:34px 24px 90px;
+  z-index:2;
 }
 
 h1{
-  font-size:28px;
-  margin-bottom:20px;
+  font-size:30px;
+  margin:0 0 22px;
   letter-spacing:4px;
+  font-weight:600;
 }
 
 p{
+  margin:0 0 18px;
   line-height:2;
-  opacity:0.8;
+  opacity:0.84;
+  font-size:16px;
 }
 
 .small{
-  margin-top:40px;
+  margin-top:36px;
   font-size:12px;
-  opacity:0.5;
+  letter-spacing:2px;
+  opacity:0.48;
+}
+
+/* 小草装饰 */
+.grass{
+  position:absolute;
+  left:50%;
+  bottom:18px;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+  align-items:flex-end;
+  opacity:0.85;
+}
+
+.blade{
+  width:2px;
+  border-radius:2px;
+  background:linear-gradient(to top, #4e7c45, #8fbc73);
+  transform-origin:bottom center;
+  box-shadow:0 0 8px rgba(143,188,115,0.08);
+}
+
+.blade:nth-child(1){ height:20px; transform:rotate(-18deg); }
+.blade:nth-child(2){ height:28px; transform:rotate(-8deg); }
+.blade:nth-child(3){ height:16px; transform:rotate(-20deg); }
+.blade:nth-child(4){ height:34px; transform:rotate(-4deg); }
+.blade:nth-child(5){ height:24px; transform:rotate(6deg); }
+.blade:nth-child(6){ height:38px; transform:rotate(10deg); }
+.blade:nth-child(7){ height:18px; transform:rotate(18deg); }
+.blade:nth-child(8){ height:30px; transform:rotate(8deg); }
+.blade:nth-child(9){ height:22px; transform:rotate(20deg); }
+
+/* 两侧一点点小芽 */
+.sprout{
+  position:absolute;
+  bottom:26px;
+  font-size:18px;
+  opacity:0.72;
+}
+
+.sprout.left{
+  left:26px;
+}
+
+.sprout.right{
+  right:26px;
+}
+
+/* 轻微呼吸感 */
+.box,
+.grass,
+.sprout{
+  animation:softFloat 5s ease-in-out infinite;
+}
+
+@keyframes softFloat{
+  0%,100%{ transform:translateY(0); }
+  50%{ transform:translateY(-2px); }
+}
+
+.grass{
+  animation-name:grassFloat;
+}
+
+@keyframes grassFloat{
+  0%,100%{ transform:translateX(-50%) translateY(0); }
+  50%{ transform:translateX(-50%) translateY(-2px); }
+}
+
+@media (max-width:640px){
+  .box{
+    padding:30px 20px 86px;
+  }
+
+  h1{
+    font-size:26px;
+    letter-spacing:3px;
+  }
+
+  p{
+    font-size:15px;
+    line-height:1.9;
+  }
+
+  .small{
+    font-size:11px;
+  }
+
+  .sprout{
+    font-size:16px;
+    bottom:24px;
+  }
+
+  .sprout.left{
+    left:18px;
+  }
+
+  .sprout.right{
+    right:18px;
+  }
 }
 </style>
-
 </head>
 
 <body>
@@ -55,13 +167,29 @@ p{
   </p>
 
   <p>
-    有琴，有茶，有劳作。<br>
+    有琴有茶，有劳作。<br>
     油盐柴米，小折腾。
   </p>
 
   <div class="small">
     LAOBAI · Vancouver
   </div>
+
+  <div class="sprout left">🌱</div>
+
+  <div class="grass" aria-hidden="true">
+    <span class="blade"></span>
+    <span class="blade"></span>
+    <span class="blade"></span>
+    <span class="blade"></span>
+    <span class="blade"></span>
+    <span class="blade"></span>
+    <span class="blade"></span>
+    <span class="blade"></span>
+    <span class="blade"></span>
+  </div>
+
+  <div class="sprout right">🌱</div>
 
 </div>
 

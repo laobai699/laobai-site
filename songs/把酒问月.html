@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>把酒问月 - 老拜有谱</title>
+    <style>
+        :root { 
+            --page-bg: #111111;
+            --module-bg: #141210;
+            --content-bg: #151311;
+            --border-color: #2a2826;
+            --text-main: #f5f1eb;
+            --text-sub: #ddd5cc;
+            --text-dim: #99938d;
+            --accent-color: #c87e4f; 
+            --hover-bg: #1a1816;
+        }
+
+        body { 
+            font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; 
+            background: var(--page-bg); 
+            margin: 0; padding: 0; 
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* 1. 导航栏：加固遮挡逻辑 */
+        .navbar { 
+            background: var(--module-bg) !important; /* 确保完全不透明 */
+            padding: 0 16px; height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; 
+            z-index: 1002; /* 最高层级 */
+            border-bottom: 1px solid var(--border-color);
+        }
+        .btn-nav { 
+            flex-shrink: 0; background: transparent; border: 1px solid var(--border-color); 
+            color: var(--text-main); padding: 6px 14px; border-radius: 25px; 
+            font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none;
+        }
+        .nav-title { 
+            font-weight: 600; font-size: 22px; letter-spacing: 2px;
+            flex: 1; text-align: center;
+        }
+
+        /* 2. 工具栏：紧随其后，同样加固 */
+        .controls-wrapper {
+            background: var(--module-bg) !important; 
+            border-bottom: 1px solid var(--border-color);
+            display: flex; overflow-x: auto; white-space: nowrap;
+            padding: 8px 12px;
+            gap: 10px; 
+            position: sticky; top: 64px; /* 紧贴导航栏下方 */
+            z-index: 1001; /* 次高层级 */
+            -webkit-overflow-scrolling: touch;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        .controls-wrapper::-webkit-scrollbar { display: none; }
+        
+        select, .btn-tool { 
+            flex-shrink: 0; width: auto; min-width: 80px;
+            padding: 7px 12px; border-radius: 10px; border: 1px solid var(--border-color); 
+            background: var(--content-bg); font-size: 13px; color: var(--text-sub); 
+            cursor: pointer; outline: none;
+        }
+        .btn-tool.active { background: var(--accent-color) !important; color: white !important; border-color: var(--accent-color); }
+
+        /* 3. 容器 */
+        #mainContainer { 
+            max-width: 550px; 
+            margin: 15px auto;
+            background: var(--content-bg); 
+            padding: 24px 20px; 
+            border-radius: 16px; 
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+            box-sizing: border-box;
+            position: relative;
+            z-index: 1; /* 保证在工具栏下方滚动 */
+        }
+
+        /* 4. 底部切换按钮样式 */
+        .song-footer-nav {
+            display: flex; justify-content: space-between;
+            margin-top: 40px; padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+        .footer-btn {
+            text-decoration: none; color: var(--text-sub);
+            font-size: 14px; border: 1px solid var(--border-color);
+            padding: 10px 18px; border-radius: 12px;
+            background: var(--module-bg);
+            transition: 0.3s;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+
+        .line { display: flex; flex-wrap: wrap; margin-bottom: 20px; line-height: 1.2; }
+        .word-group { display: inline-flex; flex-direction: column; align-items: center; min-width: 1.1em; margin-right: 1px; }
+        .chord-box { color: var(--accent-color); font-weight: bold; font-size: 13px; height: 1.5em; font-family: Arial, sans-serif; }
+        .lyric-box { font-size: 17px; color: var(--text-main); font-weight: 500; letter-spacing: 0.5px; }
+
+        .song-title-area { text-align: center; margin-bottom: 25px; }
+    </style>
+</head>
+<body id="bodyTag">
+
+    <div class="navbar">
+        <button class="btn-nav" onclick="window.location.href='../songs.html'">⬅ 目录</button>
+        <div class="nav-title">老拜有谱</div>
+        <div style="width: 70px; flex-shrink: 0;"></div> 
+    </div>
+
+    <div class="controls-wrapper">
+        <select id="keySelect" onchange="updateView()">
+            <option value="0">C 调</option>
+            <option value="1">C#/Db</option><option value="2">D</option>
+            <option value="3">D#/Eb</option><option value="4">E</option>
+            <option value="5">F</option><option value="6">F#/Gb</option>
+            <option value="7">G</option><option value="8">G#/Ab</option>
+            <option value="9">A</option><option value="10">A#/Bb</option>
+            <option value="11">B</option>
+        </select>
+        <button id="degreeBtn" class="btn-tool" onclick="toggleDegree()">级数模式</button>
+        <button id="fullPageBtn" class="btn-tool" onclick="toggleFullPage()">一页显示</button>
+        <button class="btn-tool" style="background:#222; color:white; border-color:#444;" onclick="startScroll()">自动滚动</button>
+    </div>
+
+    <div id="mainContainer">
+        <div class="song-title-area">
+            <div style="font-size: 20px; font-weight: 500; letter-spacing: 1.5px;">把酒问月</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">赵照 · 民谣精选</div>
+        </div>
+
+        <div id="tabContent"></div>
+
+        <div class="song-footer-nav">
+            <a href="#" class="footer-btn"><span>⇠</span> 上一首</a> <a href="米店.html" class="footer-btn">下一首 <span>⇢</span></a> </div>
+    </div>
+
+<script>
+    // 屏幕长亮功能
+    let wakeLock = null;
+    const requestWakeLock = async () => {
+        try {
+            if ('wakeLock' in navigator) { wakeLock = await navigator.wakeLock.request('screen'); }
+        } catch (err) {}
+    };
+    document.addEventListener('visibilitychange', () => {
+        if (wakeLock !== null && document.visibilityState === 'visible') requestWakeLock();
+    });
+    requestWakeLock();
+
+    // RawData 逻辑
+    const rawData = [
+        { content: [["Am", "(间)"], ["F", "(奏)"], ["C", ""], ["G", ""]] },
+        { content: [["C","青"], ["","天"], ["","有"], ["","月"], ["Am","来"], ["","几"], ["","时"], [" "," "], ["","我"], ["","今"], ["Dm","停"], ["","杯"], ["","一"], ["","问"], ["G","之"]] },
+        { content: [["C","人"], ["","攀"], ["","明"], ["","月"], ["Am","不"], ["","可"], ["","得"], [" "," "], ["","月"], ["","行"], ["Dm","却"], ["","与"], ["G","人"], ["","相"], ["C","随"]] },
+        { content: [["C","皎"], ["","如"], ["","飞"], ["","镜"], ["Am","临"], ["","丹"], ["","阙"], [" "," "], ["","绿"], ["","烟"], ["Dm","灭"], ["","尽"], ["","清"], ["","辉"], ["G","发"]] },
+        { content: [["C","但"], ["","见"], ["","宵"], ["","从"], ["Am","海"], ["","上"], ["","来"], [" "," "], ["","宁"], ["","知"], ["Dm","晓"], ["","向"], ["G","云"], ["","间"], ["C","没"]] },
+        { content: [["","白"], ["","兔"], ["Dm","捣"], ["","药"], ["","秋"], ["","复"], ["G","春"], [" "," "], ["","米"], ["","娥"], ["C","孤"], ["","栖"], ["","与"], ["","谁"], ["Am","邻"]] },
+        { content: [["","今"], ["","人"], ["Dm","不"], ["","见"], ["","古"], ["","时"], ["G","月"], [" "," "], ["","今"], ["","月"], ["Dm","曾"], ["","经"], ["G","照"], ["","古"], ["C","人"]] },
+        { content: [["","古"], ["","人"], ["Dm","今"], ["","人"], ["","若"], ["","流"], ["G","水"], [" "," "], ["","共"], ["","看"], ["C","明"], ["","月"], ["","皆"], ["","如"], ["Am","此"]] },
+        { content: [["","唯"], ["","愿"], ["Dm","当"], ["","歌"], ["","对"], ["","酒"], ["G","时"], [" "," "], ["","月"], ["","光"], ["Dm","长"], ["","照"], ["G","金"], ["","樽"], ["C","里"]] },
+        { content: [["","啦"],["","啦"],["","啦"],["","啦"],["Dm","啦"],["","里"],[" "," "],["","啦"],["","啦"],["","啦"],["C","里"]] },
+        { content: [["","啦"],["","啦"],["","啦"],["Dm","里"],[" "," "],["","啦"],["","啦"],["","啦"],["","啦"],["C","里"]] }
+    ];
+
+    const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const degrees = ['1', '1#', '2', '2#', '3', '4', '4#', '5', '5#', '6', '6#', '7'];
+    let isDegreeMode = false;
+
+    function processChord(chord, steps) {
+        if (!chord) return "";
+        return chord.replace(/[A-G]#?/g, (match) => {
+            let i = notes.indexOf(match);
+            return isDegreeMode ? degrees[(i - steps + 12) % 12] : notes[(i + steps + 12) % 12];
+        });
+    }
+
+    function updateView() {
+        const steps = parseInt(document.getElementById('keySelect').value);
+        const container = document.getElementById('tabContent');
+        container.innerHTML = '';
+        rawData.forEach(line => {
+            const lineEl = document.createElement('div');
+            lineEl.className = 'line';
+            line.content.forEach(item => {
+                const group = document.createElement('div');
+                group.className = 'word-group';
+                group.innerHTML = `<div class="chord-box">${processChord(item[0], steps)}</div><div class="lyric-box">${item[1]}</div>`;
+                lineEl.appendChild(group);
+            });
+            container.appendChild(lineEl);
+        });
+    }
+
+    function toggleDegree() { isDegreeMode = !isDegreeMode; document.getElementById('degreeBtn').classList.toggle('active'); updateView(); }
+    function toggleFullPage() { document.getElementById('bodyTag').classList.toggle('full-mode'); document.getElementById('fullPageBtn').classList.toggle('active'); }
+    
+    let scrollJob;
+    function startScroll() {
+        if (scrollJob) { clearInterval(scrollJob); scrollJob = null; }
+        else { scrollJob = setInterval(() => window.scrollBy(0, 1), 60); }
+    }
+
+    updateView();
+</script>
+</body>
+</html>

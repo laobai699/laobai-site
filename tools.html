@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实用工具 - 老拜有谱</title>
+    <style>
+        :root { 
+            --page-bg: #111111;
+            --module-bg: #141210;
+            --content-bg: #151311;
+            --border-color: #2a2826;
+            --text-main: #f5f1eb;
+            --text-sub: #99938d;
+            --accent-color: #c87e4f;
+            --hover-bg: #1a1816;
+        }
+
+        body { font-family: "Helvetica Neue", "PingFang SC", sans-serif; background: var(--page-bg); color: var(--text-main); margin: 0; }
+
+        /* 导航栏 */
+        .navbar { 
+            background: var(--module-bg); height: 64px; display: flex; 
+            align-items: center; justify-content: space-between; padding: 0 20px;
+            border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100;
+        }
+        .nav-title { font-size: 22px; font-weight: 600; letter-spacing: 2px; }
+        .btn-back { text-decoration: none; color: var(--text-main); font-size: 14px; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 20px; }
+
+        /* 选项卡 */
+        .tabs { display: flex; background: var(--module-bg); padding: 10px; gap: 10px; border-bottom: 1px solid var(--border-color); overflow-x: auto; }
+        .tab-btn { background: var(--content-bg); border: 1px solid var(--border-color); color: var(--text-sub); padding: 10px 20px; border-radius: 12px; cursor: pointer; font-size: 14px; white-space: nowrap; transition: 0.3s; }
+        .tab-btn.active { background: var(--accent-color); color: white; border-color: var(--accent-color); }
+
+        .tab-content { display: none; padding: 20px; max-width: 600px; margin: 0 auto; }
+        .tab-content.active { display: block; }
+
+        /* 🎸 定音器样式 */
+        .tuner-container { background: var(--content-bg); border-radius: 16px; border: 1px solid var(--border-color); padding: 30px 20px; text-align: center; }
+        .tuner-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 20px; }
+        .string-btn { 
+            background: var(--module-bg); border: 1px solid var(--border-color); 
+            padding: 25px 10px; border-radius: 50%; width: 80px; height: 80px;
+            margin: 0 auto; display: flex; flex-direction: column; justify-content: center;
+            cursor: pointer; transition: 0.3s;
+        }
+        .string-btn.playing { border-color: var(--accent-color); box-shadow: 0 0 15px rgba(200, 126, 79, 0.3); }
+        .string-name { font-size: 24px; font-weight: bold; color: var(--text-main); }
+        .string-num { font-size: 11px; color: var(--accent-color); margin-top: 4px; }
+        .btn-stop-all { margin-top: 30px; background: transparent; border: 1px solid #444; color: var(--text-sub); padding: 8px 20px; border-radius: 20px; cursor: pointer; font-size: 13px; }
+
+        /* ⏱️ 节拍器样式 (保持不变) */
+        .metronome-box { text-align: center; padding: 40px 20px; background: var(--content-bg); border-radius: 16px; border: 1px solid var(--border-color); }
+        #bpmDisplay { font-size: 64px; font-weight: bold; color: var(--accent-color); margin: 10px 0; }
+        input[type=range] { width: 100%; margin: 20px 0; accent-color: var(--accent-color); }
+        .btn-play { background: var(--accent-color); color: white; border: none; padding: 15px 40px; border-radius: 30px; font-size: 18px; cursor: pointer; }
+
+        /* 🎵 指板图 (保持不变) */
+        .fret-table { border-collapse: collapse; color: var(--text-sub); font-size: 12px; width: 100%; text-align: center; background: var(--content-bg); border: 1px solid var(--border-color); border-radius: 12px; }
+        .fret-table td { border: 1px solid #222; height: 35px; min-width: 40px; }
+        .string-num-col { color: var(--accent-color); font-weight: bold; width: 30px; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="songs.html" class="btn-back">⬅ 目录</a>
+        <div class="nav-title">实用工具</div>
+        <div style="width: 50px;"></div>
+    </div>
+
+    <div class="tabs">
+        <div class="tab-btn active" onclick="openTab(event, 'tuner')">🎸 吉他定音</div>
+        <div class="tab-btn" onclick="openTab(event, 'metronome')">⏱️ 节拍器</div>
+        <div class="tab-btn" onclick="openTab(event, 'fretboard')">🎵 指板音名</div>
+    </div>
+
+    <div id="tuner" class="tab-content active">
+        <div class="tuner-container">
+            <div style="color: var(--text-sub); font-size: 14px; margin-bottom: 20px;">点击弦号播放标准参考音</div>
+            <div class="tuner-grid">
+                <div class="string-btn" onclick="toggleString(329.63, '1E', this)"><span class="string-name">E</span><span class="string-num">1 弦</span></div>
+                <div class="string-btn" onclick="toggleString(246.94, '2B', this)"><span class="string-name">B</span><span class="string-num">2 弦</span></div>
+                <div class="string-btn" onclick="toggleString(196.00, '3G', this)"><span class="string-name">G</span><span class="string-num">3 弦</span></div>
+                <div class="string-btn" onclick="toggleString(146.83, '4D', this)"><span class="string-name">D</span><span class="string-num">4 弦</span></div>
+                <div class="string-btn" onclick="toggleString(110.00, '5A', this)"><span class="string-name">A</span><span class="string-num">5 弦</span></div>
+                <div class="string-btn" onclick="toggleString(82.41, '6E', this)"><span class="string-name">E</span><span class="string-num">6 弦</span></div>
+            </div>
+            <button class="btn-stop-all" onclick="stopAllStrings()">停止所有声音</button>
+        </div>
+    </div>
+
+    <div id="metronome" class="tab-content">
+        <div class="metronome-box">
+            <div id="bpmDisplay">120</div>
+            <input type="range" id="bpmSlider" min="40" max="240" value="120" oninput="updateBPM(this.value)">
+            <button id="playBtn" class="btn-play" onclick="toggleMetronome()">开始节拍</button>
+        </div>
+    </div>
+
+    <div id="fretboard" class="tab-content">
+        <div style="overflow-x: auto;">
+            <table class="fret-table">
+                <tr><td>品:</td><td>0</td><td>1</td><td>3</td><td>5</td><td>7</td><td>9</td><td>12</td></tr>
+                <tr><td class="string-num-col">1</td><td>E</td><td>F</td><td>G</td><td>A</td><td>B</td><td>C#</td><td>E</td></tr>
+                <tr><td class="string-num-col">2</td><td>B</td><td>C</td><td>D</td><td>E</td><td>F#</td><td>G#</td><td>B</td></tr>
+                <tr><td class="string-num-col">3</td><td>G</td><td>G#</td><td>A</td><td>B</td><td>D</td><td>E</td><td>G</td></tr>
+                <tr><td class="string-num-col">4</td><td>D</td><td>D#</td><td>F</td><td>G</td><td>A</td><td>B</td><td>D</td></tr>
+                <tr><td class="string-num-col">5</td><td>A</td><td>A#</td><td>C</td><td>D</td><td>E</td><td>F#</td><td>A</td></tr>
+                <tr><td class="string-num-col">6</td><td>E</td><td>F</td><td>G</td><td>A</td><td>B</td><td>C#</td><td>E</td></tr>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        let audioCtx = null;
+        const activeOscillators = {};
+
+        // 初始化 AudioContext
+        function initAudio() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        // 1. 定音器逻辑
+        function toggleString(freq, id, btn) {
+            initAudio();
+            if (activeOscillators[id]) {
+                stopString(id);
+                btn.classList.remove('playing');
+            } else {
+                stopAllStrings(); // 每次只响一根弦更清晰
+                const osc = audioCtx.createOscillator();
+                const gainNode = audioCtx.createGain();
+                
+                osc.type = 'sine'; // 纯净的正弦波，最适合校准
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                
+                gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+                gainNode.gain.linearRampToValueAtTime(0.5, audioCtx.currentTime + 0.1); // 柔和渐入
+                
+                osc.connect(gainNode);
+                gainNode.connect(audioCtx.destination);
+                
+                osc.start();
+                activeOscillators[id] = { osc, gainNode };
+                btn.classList.add('playing');
+            }
+        }
+
+        function stopString(id) {
+            if (activeOscillators[id]) {
+                const { osc, gainNode } = activeOscillators[id];
+                gainNode.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 0.1); // 柔和渐出
+                setTimeout(() => osc.stop(), 100);
+                delete activeOscillators[id];
+            }
+        }
+
+        function stopAllStrings() {
+            Object.keys(activeOscillators).forEach(id => stopString(id));
+            document.querySelectorAll('.string-btn').forEach(b => b.classList.remove('playing'));
+        }
+
+        // 2. 选项卡逻辑
+        function openTab(evt, tabName) {
+            stopAllStrings(); // 切换时停止声音
+            const contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) contents[i].className = contents[i].className.replace(" active", "");
+            const buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) buttons[i].className = buttons[i].className.replace(" active", "");
+            document.getElementById(tabName).className += " active";
+            evt.currentTarget.className += " active";
+        }
+
+        // 3. 节拍器逻辑 (保持简洁)
+        let isPlaying = false;
+        let nextTickTime = 0;
+        let timerID = null;
+        let bpm = 120;
+        function updateBPM(val) { bpm = val; document.getElementById('bpmDisplay').innerText = val; }
+        function playClick() {
+            const osc = audioCtx.createOscillator();
+            const envelope = audioCtx.createGain();
+            osc.frequency.value = 880; 
+            envelope.gain.exponentialRampToValueAtTime(1, audioCtx.currentTime);
+            envelope.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+            osc.connect(envelope); envelope.connect(audioCtx.destination);
+            osc.start(); osc.stop(audioCtx.currentTime + 0.1);
+        }
+        function scheduler() {
+            while (nextTickTime < audioCtx.currentTime + 0.1) {
+                playClick();
+                nextTickTime += 60.0 / bpm;
+            }
+            timerID = setTimeout(scheduler, 50);
+        }
+        function toggleMetronome() {
+            initAudio();
+            isPlaying = !isPlaying;
+            if (isPlaying) { nextTickTime = audioCtx.currentTime; scheduler(); document.getElementById('playBtn').innerText = "停止节拍"; }
+            else { clearTimeout(timerID); document.getElementById('playBtn').innerText = "开始节拍"; }
+        }
+    </script>
+</body>
+</html>
