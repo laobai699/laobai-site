@@ -25,6 +25,26 @@ body{
   overflow:hidden;
 }
 
+/* 保持与之前页面统一的返回按钮样式 */
+.back-btn{
+  position:absolute;
+  top:18px;
+  left:16px;
+  z-index:20;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(0,0,0,.28);
+  color:rgba(255,255,255,.86);
+  font-size:13px;
+  letter-spacing:1px;
+  backdrop-filter:blur(8px);
+  text-decoration:none;
+}
+
 .box{
   position:relative;
   width:min(92%, 560px);
@@ -156,6 +176,9 @@ p{
 </head>
 
 <body>
+
+<!-- 新增的返回上一页按钮 -->
+<a class="back-btn" href="javascript:history.back()">← 返回上一页</a>
 
 <div class="box">
 
