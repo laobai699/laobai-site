@@ -401,6 +401,26 @@ h1{
     }
 }
 
+/* ===== 重点新增：电脑/大屏幕端限制首屏宽度，并强制文字大小与手机端一致 ===== */
+@media (min-width: 768px) {
+    .hero {
+        max-width: 480px;
+        margin: 0 auto;
+        border-left: 1px solid rgba(255,255,255,0.05);
+        border-right: 1px solid rgba(255,255,255,0.05);
+        box-shadow: 0 0 30px rgba(0,0,0,0.6);
+    }
+    
+    /* 强制第一屏的所有文字缩小到手机版的尺寸，保持完美比例 */
+    .hero h1 { font-size: 40px; letter-spacing: 3px; }
+    .hero .en { font-size: 13px; letter-spacing: 5px; }
+    .hero .sub-en { font-size: 12px; margin-bottom: 34px; }
+    .hero .slogan { font-size: 18px; margin-bottom: 64px; }
+    .hero .slogan .line { margin: 16px 0; letter-spacing: 1px; }
+    .hero .slogan-en { bottom: 182px; font-size: 12px; letter-spacing: 1.5px; padding: 0 24px; }
+    .hero .scroll-tip { bottom: 118px; font-size: 15px; }
+}
+
 /* 手机竖屏 */
 @media (max-width:640px){
     .hero{
