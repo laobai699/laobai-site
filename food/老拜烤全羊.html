@@ -25,9 +25,14 @@ body{
 }
 a{color:inherit;text-decoration:none;}
 img{display:block;max-width:100%;}
+
+/* 重点：给整个页面加上相对定位，并居中 */
 .page{
   min-height:100vh;
+  position: relative;
+  margin: 0 auto;
 }
+
 .back-btn{
   position:absolute;
   top:18px;
@@ -55,8 +60,9 @@ img{display:block;max-width:100%;}
   justify-content:flex-end; 
   position:relative; 
 }
+/* 重点：把 92vw 改成 92%，让它相对于手机壳宽度而不是电脑屏幕宽度 */
 .hero-inner{
-  width:min(900px, 92vw);
+  width:92%; 
   margin:0 auto;
   padding:0 0 120px 0; 
 }
@@ -108,12 +114,12 @@ img{display:block;max-width:100%;}
   40% {transform:translate(-50%, -10px);}
   60% {transform:translate(-50%, -5px);}
 }
+/* 重点：把 92vw 改成 92% */
 .main{
-  width:min(900px, 92vw);
+  width:92%;
   margin:0 auto;
   padding:38px 0 78px;
 }
-/* 修改重点：大模块间距从 48px 缩小到 32px */
 .block{
   margin:0 0 32px;
 }
@@ -138,7 +144,7 @@ img{display:block;max-width:100%;}
   box-shadow:0 10px 26px rgba(0,0,0,.18);
   text-align:center;
   max-width:700px;
-  margin:0 auto 32px auto; /* 同步缩小间距 */
+  margin:0 auto 32px auto;
 }
 .intro-box p{
   margin:0 0 8px;
@@ -169,7 +175,6 @@ img{display:block;max-width:100%;}
   letter-spacing:1px;
   text-align:center; 
 }
-/* 修改重点：成对图片间距从 24px 缩小到 20px */
 .two-col{
   display:grid;
   grid-template-columns:1fr;
@@ -221,10 +226,16 @@ img{display:block;max-width:100%;}
   font-size:13px;
   letter-spacing:1px;
 }
-@media (min-width:760px){
-  .hero h1{font-size:44px;}
-  .main{padding-top:44px;}
-  .two-col{grid-template-columns:1fr 1fr; gap:20px;}
+
+/* 重点新增：在电脑端全局套上手机壳，并去掉了双列显示的代码 */
+@media (min-width: 768px) {
+  .page {
+    max-width: 480px; 
+    border-left: 1px solid rgba(255,255,255,0.06);
+    border-right: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 0 40px rgba(0,0,0,0.6);
+    background-color: var(--bg);
+  }
 }
 </style>
 </head>
