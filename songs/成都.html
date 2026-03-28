@@ -94,8 +94,8 @@
     <div class="controls-wrapper">
 
         <!-- 变调 -->
-        <select id="keySelect" onchange="updateView()">
-            <option value="0">C 调 (原)</option><option value="1">C#/Db</option><option value="2">D</option>
+        <select id="keySelect" onchange="saveKey(); updateView()">
+            <option value="0">C 调</option><option value="1">C#/Db</option><option value="2">D 调 ★原调</option>
             <option value="3">D#/Eb</option><option value="4">E</option><option value="5">F</option>
             <option value="6">F#/Gb</option><option value="7">G</option><option value="8">G#/Ab</option>
             <option value="9">A</option><option value="10">A#/Bb</option><option value="11">B</option>
@@ -143,7 +143,7 @@
 
         <div class="song-footer-nav">
             <a href="那些花儿.html" class="footer-btn"><span>⇠</span> 那些花儿</a>
-            <a href="把酒问月.html" class="footer-btn">把酒问月 <span>⇢</span></a>
+            <a href="儿时.html" class="footer-btn">儿时 <span>⇢</span></a>
         </div>
     </div>
 
@@ -264,6 +264,14 @@
     }
 
     function toggleDegree() { isDegreeMode = !isDegreeMode; document.getElementById('degreeBtn').classList.toggle('active'); updateView(); }
+
+    // --- 调号记忆 ---
+    const SONG_KEY = 'key_成都';
+    function saveKey() {
+        localStorage.setItem(SONG_KEY, document.getElementById('keySelect').value);
+    }
+    const savedKey = localStorage.getItem(SONG_KEY);
+    if (savedKey !== null) document.getElementById('keySelect').value = savedKey;
 
     updateView();
 </script>

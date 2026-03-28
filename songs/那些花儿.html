@@ -51,13 +51,13 @@
 
     <div class="controls-wrapper">
         <!-- 变调（E调原调） -->
-        <select id="keySelect" onchange="updateView()">
+        <select id="keySelect" onchange="saveKey(); updateView()">
             <option value="0">E 调 (原)</option>
             <option value="1">F</option>
             <option value="2">F#/Gb</option>
             <option value="3">G</option>
             <option value="4">G#/Ab</option>
-            <option value="5">A</option>
+            <option value="5">F 调 ★原调</option>
             <option value="6">A#/Bb</option>
             <option value="7">B</option>
             <option value="8">C</option>
@@ -225,6 +225,11 @@
     }
 
     function toggleDegree() { isDegreeMode = !isDegreeMode; document.getElementById('degreeBtn').classList.toggle('active'); updateView(); }
+
+    const SONG_KEY = 'key_那些花儿';
+    function saveKey() { localStorage.setItem(SONG_KEY, document.getElementById('keySelect').value); }
+    const savedKey = localStorage.getItem(SONG_KEY);
+    if (savedKey !== null) document.getElementById('keySelect').value = savedKey;
 
     updateView();
 </script>

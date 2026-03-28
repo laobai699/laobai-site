@@ -79,12 +79,18 @@
         .song-artist { color: var(--text-sub); font-size: 13px; opacity: 0.9; }
 
         .growing-item {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
             background: var(--content-bg);
-            color: var(--text-dim); 
-            justify-content: center; font-size: 14px; cursor: default;
-            margin-top: 30px; 
+            border-top: 1px solid var(--border-color);
+            color: var(--text-dim);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
             letter-spacing: 2px;
-            pointer-events: none;
+            padding: 16px 24px;
+            z-index: 100;
         }
     </style>
 </head>
@@ -120,17 +126,14 @@
         <a href="songs/成都.html" class="song-item">
             <span class="song-name">成都</span><span class="song-artist">赵雷</span>
         </a>
-        <a href="songs/儿时.html" class="song-item">
-            <span class="song-name">儿时</span><span class="song-artist">刘昊霖</span>
-        </a>
 
         <div class="song-item" style="opacity: 0.45; border: 1px solid var(--border-color);"><span class="song-name">当你老了</span><span class="song-artist">赵照</span></div>
         <div class="song-item" style="opacity: 0.45; border: 1px solid var(--border-color);"><span class="song-name">回家吃饭</span><span class="song-artist">赵照</span></div>
         <div class="song-item" style="opacity: 0.45; border: 1px solid var(--border-color);"><span class="song-name">南方姑娘</span><span class="song-artist">赵雷</span></div>
-        
-        <div class="song-item growing-item">
-            <span>🌱 🌱 🌱 正在慢慢生长 ... 🌱 🌱 🌱</span>
-        </div>
+    </div>
+
+    <div class="growing-item">
+        🌱 🌱 🌱 正在慢慢生长 ... 🌱 🌱 🌱
     </div>
 
     <script>

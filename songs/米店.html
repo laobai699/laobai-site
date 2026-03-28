@@ -51,12 +51,12 @@
 
     <div class="controls-wrapper">
         <!-- 变调 -->
-        <select id="keySelect" onchange="updateView()">
+        <select id="keySelect" onchange="saveKey(); updateView()">
             <option value="0">C 调</option>
             <option value="1">C#/Db</option><option value="2">D</option>
             <option value="3">D#/Eb</option><option value="4">E</option>
             <option value="5">F</option><option value="6">F#/Gb</option>
-            <option value="7">G</option><option value="8">G#/Ab</option>
+            <option value="7">G 调 ★原调</option><option value="8">G#/Ab</option>
             <option value="9">A</option><option value="10">A#/Bb</option>
             <option value="11">B</option>
         </select>
@@ -221,6 +221,11 @@
     }
 
     function toggleDegree() { isDegreeMode = !isDegreeMode; document.getElementById('degreeBtn').classList.toggle('active'); updateView(); }
+
+    const SONG_KEY = 'key_米店';
+    function saveKey() { localStorage.setItem(SONG_KEY, document.getElementById('keySelect').value); }
+    const savedKey = localStorage.getItem(SONG_KEY);
+    if (savedKey !== null) document.getElementById('keySelect').value = savedKey;
 
     updateView();
 </script>
