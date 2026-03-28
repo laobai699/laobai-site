@@ -12,55 +12,41 @@
             --border-color: #2a2826;
             --text-main: #f5f1eb;
             --text-sub: #ddd5cc;
-            --text-dim: #99938d; /* 进一步微调亮度，确保极度清晰 */
+            --text-dim: #99938d;
             --hover-bg: #1a1816;
         }
 
         body { 
             font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; 
-            background: var(--page-bg); 
-            margin: 0; padding: 0; 
-            color: var(--text-main);
+            background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main);
             -webkit-font-smoothing: antialiased;
         }
 
-        /* 1. 导航栏：大图标、大文字 */
         .navbar { 
             background: var(--module-bg); color: var(--text-main); 
-            padding: 0 24px; height: 72px; /* 高度稍微增加以适配大按钮 */
+            padding: 0 24px; height: 72px;
             display: flex; justify-content: space-between; align-items: center;
             position: sticky; top: 0; z-index: 100;
             border-bottom: 1px solid var(--border-color);
         }
-        .btn-home { 
-            text-decoration: none; color: var(--text-main); /* 文字改亮 */
-            font-size: 16px; /* 放大文字 */
-            font-weight: 500;
-            border: 1px solid var(--border-color); padding: 8px 18px; border-radius: 25px;
-            display: flex; align-items: center; gap: 8px;
+        .btn-home, .dropbtn { 
+            text-decoration: none; color: var(--text-main);
+            font-size: 14px; font-weight: 500;
+            font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+            border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px;
+            display: flex; align-items: center;
+            background: transparent; cursor: pointer;
             transition: all 0.3s;
+            box-sizing: border-box;
         }
-        .btn-home span { font-size: 18px; } /* 放大图标 */
-        .btn-home:hover { background: var(--hover-bg); border-color: #44403c; }
+        .btn-home:hover, .dropbtn:hover { background: var(--hover-bg); border-color: #44403c; }
 
         .nav-title { 
-            font-size: 26px; /* 进一步放大品牌名 */
-            font-weight: 600; letter-spacing: 4px; 
+            font-size: 26px; font-weight: 600; letter-spacing: 4px; 
             text-align: center;
         }
 
-        /* 工具按钮：大图标、大文字 */
         .dropdown { position: relative; display: inline-block; }
-        .dropbtn { 
-            background: transparent; border: 1px solid var(--border-color); color: var(--text-main); 
-            padding: 8px 18px; border-radius: 25px; cursor: pointer;
-            display: flex; align-items: center; gap: 8px; 
-            font-size: 16px; /* 放大文字 */
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        .dropbtn span:first-child { font-size: 18px; } /* 放大 🛠️ 图标 */
-        .dropbtn:hover { border-color: #44403c; background: var(--hover-bg); }
 
         .dropdown-content {
             display: none; position: absolute; right: 0; top: 125%;
@@ -72,7 +58,6 @@
         .dropdown-content a { color: var(--text-sub); padding: 14px 20px; text-decoration: none; display: block; font-size: 15px; }
         .dropdown-content a:hover { background: var(--hover-bg); color: var(--text-main); }
 
-        /* 2. 搜索框：亮度增强 */
         .search-container { padding: 35px 20px 20px 20px; max-width: 550px; margin: 0 auto; }
         #searchInput {
             width: 100%; padding: 14px 22px; border-radius: 12px;
@@ -82,7 +67,6 @@
         }
         #searchInput::placeholder { color: var(--text-dim); } 
 
-        /* 3. 歌单列表：紧凑布局保持不变 */
         .song-list { max-width: 550px; margin: 0 auto; padding: 0 20px 80px 20px; }
         .song-item {
             background: var(--content-bg); margin-bottom: 10px; padding: 16px 24px;
@@ -94,24 +78,23 @@
         .song-name { font-weight: 500; font-size: 17px; }
         .song-artist { color: var(--text-sub); font-size: 13px; opacity: 0.9; }
 
-        /* 4. 底部状态：亮度与生机增强 */
         .growing-item {
+            background: var(--content-bg);
             color: var(--text-dim); 
             justify-content: center; font-size: 14px; cursor: default;
             margin-top: 30px; 
             letter-spacing: 2px;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
 
     <div class="navbar">
-        <a href="index.html" class="btn-home"><span>🏠</span> 首页</a>
+        <a href="index.html" class="btn-home">返回首页</a>
         <div class="nav-title">老拜有谱</div>
         <div class="dropdown">
-            <button class="dropbtn" id="dropbtn">
-                <span>🛠️</span> <span>工具</span>
-            </button>
+            <button class="dropbtn" id="dropbtn">实用工具</button>
             <div class="dropdown-content" id="dropdownMenu">
                 <a href="tools.html">📖 常用和弦表</a>
                 <a href="tools.html">🎵 指板音名表</a>
@@ -137,10 +120,13 @@
         <a href="songs/成都.html" class="song-item">
             <span class="song-name">成都</span><span class="song-artist">赵雷</span>
         </a>
+        <a href="songs/儿时.html" class="song-item">
+            <span class="song-name">儿时</span><span class="song-artist">刘昊霖</span>
+        </a>
 
-        <div class="song-item" style="opacity: 0.6;"><span class="song-name">当你老了</span><span class="song-artist">赵照</span></div>
-        <div class="song-item" style="opacity: 0.6;"><span class="song-name">回家吃饭</span><span class="song-artist">赵照</span></div>
-        <div class="song-item" style="opacity: 0.6;"><span class="song-name">南方姑娘</span><span class="song-artist">赵雷</span></div>
+        <div class="song-item" style="opacity: 0.45; border: 1px solid var(--border-color);"><span class="song-name">当你老了</span><span class="song-artist">赵照</span></div>
+        <div class="song-item" style="opacity: 0.45; border: 1px solid var(--border-color);"><span class="song-name">回家吃饭</span><span class="song-artist">赵照</span></div>
+        <div class="song-item" style="opacity: 0.45; border: 1px solid var(--border-color);"><span class="song-name">南方姑娘</span><span class="song-artist">赵雷</span></div>
         
         <div class="song-item growing-item">
             <span>🌱 🌱 🌱 正在慢慢生长 ... 🌱 🌱 🌱</span>

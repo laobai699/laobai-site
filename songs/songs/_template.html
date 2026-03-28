@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>米店 - 老拜有谱</title>
+    <!-- ① 修改标题：把"歌名"替换为实际歌名 -->
+    <title>歌名 - 老拜有谱</title>
     <style>
         :root {
             --page-bg: #111111;
@@ -50,15 +51,12 @@
     </div>
 
     <div class="controls-wrapper">
-        <!-- 变调 -->
+        <!-- 变调：② 若原调不是C，把 value="0" 对应的option改为原调，并相应调整其他选项 -->
         <select id="keySelect" onchange="updateView()">
-            <option value="0">C 调</option>
-            <option value="1">C#/Db</option><option value="2">D</option>
-            <option value="3">D#/Eb</option><option value="4">E</option>
-            <option value="5">F</option><option value="6">F#/Gb</option>
-            <option value="7">G</option><option value="8">G#/Ab</option>
-            <option value="9">A</option><option value="10">A#/Bb</option>
-            <option value="11">B</option>
+            <option value="0">C 调 (原)</option><option value="1">C#/Db</option><option value="2">D</option>
+            <option value="3">D#/Eb</option><option value="4">E</option><option value="5">F</option>
+            <option value="6">F#/Gb</option><option value="7">G</option><option value="8">G#/Ab</option>
+            <option value="9">A</option><option value="10">A#/Bb</option><option value="11">B</option>
         </select>
         <!-- 级数模式 -->
         <button id="degreeBtn" class="btn-tool" onclick="toggleDegree()">级数</button>
@@ -93,15 +91,18 @@
 
     <div id="mainContainer">
         <div class="song-title-area">
-            <div style="font-size: 20px; font-weight: 500; letter-spacing: 1.5px;">米店</div>
-            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">张玮玮 · 民谣精选</div>
+            <!-- ③ 修改歌名和歌手名 -->
+            <div style="font-size: 20px; font-weight: 500; letter-spacing: 1.5px;">歌名</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">歌手名 · 民谣精选</div>
         </div>
 
         <div id="tabContent"></div>
 
         <div class="song-footer-nav">
-            <a href="把酒问月.html" class="footer-btn"><span>⇠</span> 把酒问月</a>
-            <a href="那些花儿.html" class="footer-btn">那些花儿 <span>⇢</span></a>
+            <!-- ④ 修改上一首：href 改为实际文件名，文字改为实际歌名 -->
+            <a href="#" class="footer-btn"><span>⇠</span> 上一首</a>
+            <!-- ⑤ 修改下一首：href 改为实际文件名，文字改为实际歌名 -->
+            <a href="#" class="footer-btn">下一首 <span>⇢</span></a>
         </div>
     </div>
 
@@ -176,19 +177,12 @@
         }
     }
 
+    // ⑥ 填写曲谱数据
+    //    每行是一个对象，content 是该行所有字的 [和弦, 歌词] 数组
+    //    和弦为空字符串表示该字无和弦；空格行用 [" ", " "] 分隔段落
+    //    示例：{ content: [["C","青"], ["","天"], ["Am","有"], [" "," "], ["G","月"]] }
     const rawData = [
-        { tag: "第一段", content: [["C","三"], ["","月的"], ["","烟雨"], ["","飘"], ["Em","摇"], ["","的南"], ["","方"]] },
-        { tag: "", content: [["","你坐"], ["Am","在"], ["","你空"], ["","空的"], ["Em","米店"]] },
-        { tag: "", content: [["","你"], ["F","一"], ["","手拿"], ["","着苹"], ["","果"], [" "," "], ["","一手"], ["Em","拿"], ["","着"], ["Am","命运"]] },
-        { tag: "", content: [["","在"], ["Dm","寻"], ["","找你"], ["","自己"], ["","的"], ["G","香"]] },
-        { tag: "第二段", content: [["C","窗"], ["","外的人"], ["","们匆"], ["Em","匆"], ["","忙忙"]] },
-        { tag: "", content: [["","把眼"], ["Am","光"], ["","丢在"], ["","潮湿"], ["","的路"], ["Em","上"]] },
-        { tag: "", content: [["F","你"], ["","的舞"], ["","步划"], ["","过"], ["Em","空"], ["","空的"], ["Am","房间"]] },
-        { tag: "", content: [["Dm","时"], ["","光就"], ["","变成"], ["","了"], ["G","烟"]] },
-        { tag: "副歌", content: [["","爱人"], ["C","你"], ["","可感"], ["","到明"], ["","天已"], ["Em","经"], ["","来临"]] },
-        { tag: "", content: [["","码头"], ["Am","上"], ["","停着"], ["","我们"], ["","的"], ["Em","船"]] },
-        { tag: "", content: [["F","我"], ["","会洗"], ["","干净"], ["","头发"], ["Em","爬"], ["","上"], ["Am","桅杆"]] },
-        { tag: "", content: [["","撑起"], ["Dm","我"], ["","们葡"], ["","萄枝"], ["","嫩叶"], ["","般的"], ["G","家"]] }
+        // 在此处添加曲谱数据
     ];
 
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];

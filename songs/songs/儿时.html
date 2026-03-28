@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>成都 - 老拜有谱</title>
+    <title>儿时 - 老拜有谱</title>
     <style>
         :root { 
             --page-bg: #111111;
@@ -17,13 +17,11 @@
             --hover-bg: #1a1816;
             --lyric-size: 17px;
         }
-
         body { 
             font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; 
             background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main);
             -webkit-font-smoothing: antialiased;
         }
-        
         .navbar { 
             background: var(--module-bg) !important; padding: 0 16px; height: 64px;
             display: flex; align-items: center; justify-content: space-between;
@@ -35,7 +33,6 @@
             padding: 6px 14px; border-radius: 25px; font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none;
         }
         .nav-title { font-weight: 600; font-size: 22px; letter-spacing: 2px; flex: 1; text-align: center; }
-
         .controls-wrapper {
             background: var(--module-bg) !important; border-bottom: 1px solid var(--border-color);
             display: flex; overflow-x: auto; white-space: nowrap;
@@ -44,17 +41,12 @@
             align-items: center;
         }
         .controls-wrapper::-webkit-scrollbar { display: none; }
-        
         select, .btn-tool { 
             flex-shrink: 0; padding: 7px 12px; border-radius: 10px; border: 1px solid var(--border-color); 
             background: var(--content-bg); font-size: 13px; color: var(--text-sub); outline: none; cursor: pointer;
         }
         .btn-tool.active { background: var(--accent-color) !important; color: white !important; border-color: var(--accent-color); }
-
-        /* 分隔线 */
         .ctrl-divider { flex-shrink: 0; width: 1px; height: 28px; background: var(--border-color); margin: 0 2px; }
-
-        /* 带标签的控件组 */
         .ctrl-group { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
         .ctrl-label { font-size: 11px; color: var(--text-dim); white-space: nowrap; }
         .ctrl-num { 
@@ -62,22 +54,16 @@
             color: var(--accent-color); border-radius: 8px; padding: 5px 4px; 
             font-size: 12px; text-align: center; outline: none;
         }
-        /* 滚动速度滑块 */
-        .ctrl-slider {
-            width: 64px; accent-color: var(--accent-color); cursor: pointer;
-        }
-
+        .ctrl-slider { width: 64px; accent-color: var(--accent-color); cursor: pointer; }
         #mainContainer { 
             max-width: 550px; margin: 15px auto; background: var(--content-bg); 
             padding: 24px 20px; border-radius: 16px; border: 1px solid var(--border-color);
             box-shadow: 0 4px 20px rgba(0,0,0,0.4); position: relative; z-index: 1;
         }
-
         .line { display: flex; flex-wrap: wrap; margin-bottom: 20px; line-height: 1.2; }
         .word-group { display: inline-flex; flex-direction: column; align-items: center; min-width: 1.1em; margin-right: 1px; }
         .chord-box { color: var(--accent-color); font-weight: bold; font-size: 13px; height: 1.5em; font-family: Arial, sans-serif; }
         .lyric-box { font-size: var(--lyric-size); color: var(--text-main); font-weight: 500; letter-spacing: 0.5px; }
-
         .song-footer-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); }
         .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
         .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
@@ -88,25 +74,20 @@
     <div class="navbar">
         <button class="btn-nav" onclick="window.location.href='../songs.html'">返回目录</button>
         <div class="nav-title">老拜有谱</div>
-        <div style="width: 70px; flex-shrink: 0;"></div> 
+        <div style="width: 70px; flex-shrink: 0;"></div>
     </div>
 
     <div class="controls-wrapper">
-
-        <!-- 变调 -->
         <select id="keySelect" onchange="updateView()">
             <option value="0">C 调 (原)</option><option value="1">C#/Db</option><option value="2">D</option>
             <option value="3">D#/Eb</option><option value="4">E</option><option value="5">F</option>
             <option value="6">F#/Gb</option><option value="7">G</option><option value="8">G#/Ab</option>
             <option value="9">A</option><option value="10">A#/Bb</option><option value="11">B</option>
         </select>
-
-        <!-- 级数模式 -->
         <button id="degreeBtn" class="btn-tool" onclick="toggleDegree()">级数</button>
 
         <div class="ctrl-divider"></div>
 
-        <!-- 字体缩放 -->
         <div class="ctrl-group">
             <span class="ctrl-label">字号</span>
             <button class="btn-tool" onclick="changeFontSize(-1)" style="padding: 7px 10px;">A-</button>
@@ -115,7 +96,6 @@
 
         <div class="ctrl-divider"></div>
 
-        <!-- 自动滚动 + 速度 -->
         <div class="ctrl-group">
             <button id="scrollBtn" class="btn-tool" onclick="toggleScroll()">滚动</button>
             <span class="ctrl-label">速度</span>
@@ -124,25 +104,23 @@
 
         <div class="ctrl-divider"></div>
 
-        <!-- 节拍器 + BPM -->
         <div class="ctrl-group">
             <button id="metroBtn" class="btn-tool" onclick="toggleMetronome()">节拍</button>
             <input type="number" id="bpmInput" class="ctrl-num" value="80" min="40" max="240">
             <span class="ctrl-label">BPM</span>
         </div>
-
     </div>
 
     <div id="mainContainer">
         <div style="text-align: center; margin-bottom: 25px;">
-            <div style="font-size: 20px; font-weight: 500; letter-spacing: 1.5px;">成都</div>
-            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">赵雷 · 民谣经典</div>
+            <div style="font-size: 20px; font-weight: 500; letter-spacing: 1.5px;">儿时</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">刘昊霖 · 民谣精选</div>
         </div>
 
         <div id="tabContent"></div>
 
         <div class="song-footer-nav">
-            <a href="那些花儿.html" class="footer-btn"><span>⇠</span> 那些花儿</a>
+            <a href="成都.html" class="footer-btn"><span>⇠</span> 成都</a>
             <a href="把酒问月.html" class="footer-btn">把酒问月 <span>⇢</span></a>
         </div>
     </div>
@@ -184,7 +162,6 @@
     let isMetroPlaying = false;
     let nextTickTime = 0;
     let metroTimerID = null;
-
     function playMetroTick() {
         const osc = audioCtx.createOscillator();
         const env = audioCtx.createGain();
@@ -194,7 +171,6 @@
         osc.connect(env); env.connect(audioCtx.destination);
         osc.start(); osc.stop(audioCtx.currentTime + 0.05);
     }
-
     function metroScheduler() {
         const bpm = Math.max(40, Math.min(240, parseInt(document.getElementById('bpmInput').value) || 80));
         while (nextTickTime < audioCtx.currentTime + 0.1) {
@@ -203,7 +179,6 @@
         }
         metroTimerID = setTimeout(metroScheduler, 50);
     }
-
     function toggleMetronome() {
         if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         isMetroPlaying = !isMetroPlaying;
@@ -219,20 +194,28 @@
     }
 
     // --- 歌谱数据 ---
-    const baseKey = 'C'; 
+    const baseKey = 'C';
     const rawData = [
-        { content: [["", "让"], ["C", "我"], [" ", " "], ["", "掉"], ["", "下"], ["Em", "眼"], ["", "泪"], ["", "的"], [" ", " "], ["", "不"], ["F", "止"], [" ", " "], ["", "昨"], ["", "夜"], ["", "的"], ["G", "酒"]] },
-        { content: [["", "让"], ["C", "我"], [" ", " "], ["", "依"], ["", "依"], ["Em", "不"], ["", "舍"], ["", "的"], [" ", " "], ["", "不"], ["F", "只"], [" ", " "], ["", "你"], ["", "的"], ["", "温"], ["G", "柔"]] },
-        { content: [["", "余"], ["Em", "路"], [" ", " "], ["", "还"], ["", "要"], ["Am", "走"], ["", "多"], ["", "久"], [" ", " "], ["", "你"], ["F", "攥"], ["", "着"], ["G", "我"], ["", "的"], ["C", "手"]] },
-        { content: [["", "让"], ["Em", "我"], [" ", " "], ["", "感"], ["", "到"], ["F", "为"], ["", "难"], ["", "的"], [" ", " "], ["", "是"], ["G", "挣"], ["", "扎"], ["", "的"], ["", "自"], ["C", "由"]] },
-        { content: [["", "分"], ["C", "别"], [" ", " "], ["", "总"], ["", "是"], ["Em", "在"], ["", "九"], ["", "月"], [" ", " "], ["", "回"], ["F", "忆"], ["", "是"], ["", "思"], ["", "念"], ["", "的"], ["G", "愁"]] },
-        { content: [["", "深"], ["C", "秋"], [" ", " "], ["", "嫩"], ["", "绿"], ["Em", "的"], ["", "垂"], ["", "柳"], [" ", " "], ["", "亲"], ["F", "吻"], ["", "着"], ["", "我"], ["", "额"], ["G", "头"]] },
-        { content: [["", "在"], ["Em", "那"], ["", "座"], ["", "阴"], ["", "雨"], ["", "的"], ["Am", "小"], ["", "城"], ["", "里"], [" ", " "], ["", "我"], ["F", "从"], ["", "未"], ["G", "忘"], ["", "记"], ["C", "你"]] },
-        { content: [["", "成"], ["Em", "都"], [" ", " "], ["", "带"], ["", "不"], ["F", "走"], ["", "的"], [" ", " "], ["G", "只"], ["", "有"], ["C", "你"]] },
-        { content: [["", "和"], ["C", "我"], ["", "在"], ["", "成"], ["", "都"], ["", "的"], ["Am", "街"], ["", "头"], ["", "走"], ["", "一"], ["F", "走"], [" ", " "], ["", "喔"], ["", "…"], ["G", "喔"], ["C", ""]] },
-        { content: [["", "直"], ["C", "到"], ["", "所"], ["", "有"], ["", "的"], ["Am", "灯"], ["", "都"], ["", "熄"], ["", "灭"], ["", "了"], ["", "也"], ["", "不"], ["F", "停"], ["", "留"], ["G", ""]] },
-        { content: [["", "你"], ["", "会"], ["F", "挽"], ["", "着"], ["", "我"], ["", "得"], ["", "衣"], ["C", "袖"], [" ", " "], ["", "我"], ["", "会"], ["F", "把"], ["", "手"], ["", "揣"], ["", "进"], ["", "裤"], ["C", "兜"]] },
-        { content: [["", "走"], ["Dm", "到"], ["", "玉"], ["", "林"], ["", "路"], ["", "的"], ["Dm", "尽"], ["", "头"], [" ", " "], ["", "坐"], ["Dm", "在"], ["", "小"], ["", "酒"], ["", "馆"], ["", "的"], ["", "门"], ["G", "口"]] }
+        { content: [["","铁"],["","道"],["","旁"],["","赤"],["","脚"],["","追"],["","晚"],["C","霞"],[" "," "],["","玻"],["","璃"],["","珠"],["","铁"],["","盒"],["","英"],["","雄"],["Am","卡"]] },
+        { content: [["","玩"],["","皮"],["","筋"],["","迷"],["","藏"],["","石"],["","桥"],["Dm","下"],[" "," "],["","姥"],["","姥"],["","又"],["","纳"],["","鞋"],["","坐"],["","院"],["G","坝"]] },
+        { content: [["","铁"],["","门"],["","前"],["","篮"],["","框"],["","银"],["","杏"],["C","花"],[" "," "],["","茅"],["","草"],["","屋"],["","可"],["","有"],["","住"],["","人"],["Am","家"]] },
+        { content: [["","放"],["","学"],["","路"],["","打"],["","闹"],["","嘻"],["","嘻"],["Dm","哈"],[" "," "],["","田"],["","埂"],["","间"],["","流"],["","水"],["","哗"],["","啦"],["G","啦"]] },
+        { content: [["","我"],["","们"],["","就"],["","一"],["","天"],["","天"],["","长"],["C","大"],[" "," "],["","甜"],["","梦"],["","中"],["","大"],["","白"],["","兔"],["","黏"],["Am","牙"]] },
+        { content: [["","也"],["","幻"],["","想"],["","神"],["","仙"],["","科"],["","学"],["Dm","家"],[" "," "],["","白"],["","墙"],["","上"],["","泥"],["","渍"],["","简"],["","笔"],["G","画"]] },
+        { content: [["","我"],["","们"],["","就"],["","一"],["","天"],["","天"],["","长"],["C","大"],[" "," "],["","四"],["","季"],["","过"],["","老"],["","梧"],["","桐"],["","发"],["Am","芽"]] },
+        { content: [["","沙"],["","堆"],["","里"],["","有"],["","宝"],["","藏"],["","和"],["Dm","塔"],[" "," "],["G",""],[" "," "],["","长"],["","板"],["","凳"],["","搭"],["","起"],["","一"],["","个"],["C","家"]] },
+        { content: [["","日"],["","子"],["","总"],["","慢"],["","得"],["","不"],["","像"],["C","话"],[" "," "],["","叶"],["","落"],["","满"],["","池"],["","塘"],["","搬"],["","新"],["Am","家"]] },
+        { content: [["","二"],["","十"],["","寸"],["","彩"],["","电"],["","皮"],["","沙"],["Dm","发"],[" "," "],["","五"],["","点"],["","半"],["","大"],["","风"],["","车"],["","动"],["G","画"]] },
+        { content: [["","晚"],["","饭"],["","后"],["","纳"],["","凉"],["","星"],["","夜"],["C","下"],[" "," "],["","萤"],["","火"],["","虫"],["","微"],["","风"],["","弯"],["","月"],["Am","牙"]] },
+        { content: [["","大"],["","人"],["","聊"],["","听"],["","不"],["","懂"],["","的"],["Dm","话"],[" "," "],["","鬼"],["","怪"],["","都"],["","躲"],["","在"],["","床"],["","底"],["G","下"]] },
+        { content: [["","我"],["","们"],["","就"],["","一"],["","天"],["","天"],["","长"],["C","大"],[" "," "],["","记"],["","忆"],["","里"],["","有"],["","雨"],["","不"],["","停"],["Am","下"]] },
+        { content: [["","蝉"],["","鸣"],["","中"],["","闷"],["","完"],["","了"],["","暑"],["Dm","假"],[" "," "],["","新"],["","学"],["","年"],["","又"],["","该"],["","剪"],["","头"],["G","发"]] },
+        { content: [["","我"],["","们"],["","就"],["","一"],["","天"],["","天"],["","长"],["C","大"],[" "," "],["","也"],["","开"],["","始"],["","憧"],["","憬"],["","和"],["","变"],["Am","化"]] },
+        { content: [["","曾"],["","以"],["","为"],["","自"],["","己"],["","多"],["","伟"],["Dm","大"],[" "," "],["G",""],[" "," "],["","写"],["","了"],["","诗"],["","不"],["","敢"],["","递"],["","给"],["C","她"]] },
+        { content: [["","我"],["","们"],["","就"],["","一"],["","天"],["","天"],["","长"],["C","大"],[" "," "],["","听"],["","磁"],["","带"],["","偶"],["","遇"],["","榕"],["","树"],["Am","下"]] },
+        { content: [["","白"],["","衬"],["","衫"],["","黄"],["","昏"],["","木"],["","吉"],["Dm","他"],[" "," "],["","年"],["","少"],["","不"],["","经"],["","事"],["","的"],["","脸"],["G","颊"]] },
+        { content: [["","我"],["","们"],["","就"],["","一"],["","天"],["","天"],["","长"],["C","大"],[" "," "],["","听"],["","磁"],["","带"],["","偶"],["","遇"],["","榕"],["","树"],["Am","下"]] },
+        { content: [["","白"],["","衬"],["","衫"],["","黄"],["","昏"],["","木"],["","吉"],["Dm","他"],[" "," "],["G","小"],["","小"],["","诗"],["","不"],["","敢"],["","递"],["","给"],["C","她"]] }
     ];
 
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
