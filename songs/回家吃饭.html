@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>成都 - 老拜有谱</title>
+    <title>回家吃饭 - 老拜有谱</title>
     <style>
         :root { 
             --page-bg: #111111;
@@ -18,13 +18,11 @@
             --lyric-size: 17px;
             --chord-size: 13px;
         }
-
         body { 
             font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; 
             background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main);
             -webkit-font-smoothing: antialiased;
         }
-        
         .navbar { 
             background: var(--module-bg) !important; padding: 0 16px; height: 64px;
             display: flex; align-items: center; justify-content: space-between;
@@ -36,7 +34,6 @@
             padding: 6px 14px; border-radius: 25px; font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none;
         }
         .nav-title { font-weight: 600; font-size: 22px; letter-spacing: 2px; flex: 1; text-align: center; }
-
         .controls-wrapper {
             background: var(--module-bg) !important; border-bottom: 1px solid var(--border-color);
             display: flex; overflow-x: auto; white-space: nowrap;
@@ -45,17 +42,12 @@
             align-items: center;
         }
         .controls-wrapper::-webkit-scrollbar { display: none; }
-        
         select, .btn-tool { 
             flex-shrink: 0; padding: 7px 12px; border-radius: 10px; border: 1px solid var(--border-color); 
             background: var(--content-bg); font-size: 13px; color: var(--text-sub); outline: none; cursor: pointer;
         }
         .btn-tool.active { background: var(--accent-color) !important; color: white !important; border-color: var(--accent-color); }
-
-        /* 分隔线 */
         .ctrl-divider { flex-shrink: 0; width: 1px; height: 28px; background: var(--border-color); margin: 0 2px; }
-
-        /* 带标签的控件组 */
         .ctrl-group { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
         .ctrl-label { font-size: 11px; color: var(--text-dim); white-space: nowrap; }
         .ctrl-num { 
@@ -63,22 +55,21 @@
             color: var(--accent-color); border-radius: 8px; padding: 5px 4px; 
             font-size: 12px; text-align: center; outline: none;
         }
-        /* 滚动速度滑块 */
-        .ctrl-slider {
-            width: 64px; accent-color: var(--accent-color); cursor: pointer;
-        }
-
+        .ctrl-slider { width: 64px; accent-color: var(--accent-color); cursor: pointer; }
         #mainContainer { 
             max-width: 550px; margin: 15px auto; background: var(--content-bg); 
             padding: 24px 20px; border-radius: 16px; border: 1px solid var(--border-color);
             box-shadow: 0 4px 20px rgba(0,0,0,0.4); position: relative; z-index: 1;
         }
-
         .line { display: flex; flex-wrap: wrap; margin-bottom: 20px; line-height: 1.2; }
         .word-group { display: inline-flex; flex-direction: column; align-items: center; min-width: 1.1em; margin-right: 1px; }
         .chord-box { color: var(--accent-color); font-weight: bold; font-size: var(--chord-size); height: 1.5em; font-family: Arial, sans-serif; }
         .lyric-box { font-size: var(--lyric-size); color: var(--text-main); font-weight: 500; letter-spacing: 0.5px; }
-
+        .section-label {
+            font-size: 12px; color: var(--text-dim); letter-spacing: 2px;
+            margin: 8px 0 16px; padding-bottom: 6px;
+            border-bottom: 1px solid var(--border-color);
+        }
         .song-footer-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); }
         .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
         .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
@@ -89,25 +80,20 @@
     <div class="navbar">
         <button class="btn-nav" onclick="window.location.href='../songs.html'">返回目录</button>
         <div class="nav-title">老拜有谱</div>
-        <div style="width: 70px; flex-shrink: 0;"></div> 
+        <div style="width: 70px; flex-shrink: 0;"></div>
     </div>
 
     <div class="controls-wrapper">
-
-        <!-- 变调 -->
         <select id="keySelect" onchange="saveKey(); updateView()">
             <option value="0">C 调</option><option value="1">C#/Db</option><option value="2">D 调 ★原调</option>
             <option value="3">D#/Eb</option><option value="4">E</option><option value="5">F</option>
             <option value="6">F#/Gb</option><option value="7">G</option><option value="8">G#/Ab</option>
             <option value="9">A</option><option value="10">A#/Bb</option><option value="11">B</option>
         </select>
-
-        <!-- 级数模式 -->
         <button id="degreeBtn" class="btn-tool" onclick="toggleDegree()">级数</button>
 
         <div class="ctrl-divider"></div>
 
-        <!-- 字体缩放 -->
         <div class="ctrl-group">
             <span class="ctrl-label">字号</span>
             <button class="btn-tool" onclick="changeFontSize(-1)" style="padding: 7px 10px;">A-</button>
@@ -116,7 +102,6 @@
 
         <div class="ctrl-divider"></div>
 
-        <!-- 自动滚动 + 速度 -->
         <div class="ctrl-group">
             <button id="scrollBtn" class="btn-tool" onclick="toggleScroll()">滚动</button>
             <span class="ctrl-label">速度</span>
@@ -125,31 +110,28 @@
 
         <div class="ctrl-divider"></div>
 
-        <!-- 节拍器 + BPM -->
         <div class="ctrl-group">
             <button id="metroBtn" class="btn-tool" onclick="toggleMetronome()">节拍</button>
             <input type="number" id="bpmInput" class="ctrl-num" value="80" min="40" max="240">
             <span class="ctrl-label">BPM</span>
         </div>
-
     </div>
 
     <div id="mainContainer">
         <div style="text-align: center; margin-bottom: 25px;">
-            <div style="font-size: 20px; font-weight: 500; letter-spacing: 1.5px;">成都</div>
-            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">赵雷 · 民谣经典</div>
+            <div style="font-size: 20px; font-weight: 500; letter-spacing: 1.5px;">回家吃饭</div>
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 4px;">赵照 · 民谣精选</div>
         </div>
 
         <div id="tabContent"></div>
 
         <div class="song-footer-nav">
-            <a href="那些花儿.html" class="footer-btn"><span>⇠</span> 那些花儿</a>
-            <a href="儿时.html" class="footer-btn">儿时 <span>⇢</span></a>
+            <a href="借我.html" class="footer-btn"><span>⇠</span> 借我</a>
+            <a href="当你老了.html" class="footer-btn">当你老了 <span>⇢</span></a>
         </div>
     </div>
 
 <script>
-    // --- 屏幕长亮 ---
     let wakeLock = null;
     const requestWakeLock = async () => {
         try { if ('wakeLock' in navigator) wakeLock = await navigator.wakeLock.request('screen'); } catch (err) {}
@@ -157,7 +139,6 @@
     document.addEventListener('visibilitychange', () => { if (wakeLock !== null && document.visibilityState === 'visible') requestWakeLock(); });
     requestWakeLock();
 
-    // --- 字体缩放 ---
     let lyricSize = 17;
     function changeFontSize(delta) {
         lyricSize = Math.min(28, Math.max(12, lyricSize + delta));
@@ -166,7 +147,6 @@
         document.documentElement.style.setProperty('--chord-size', chordSize + 'px');
     }
 
-    // --- 自动滚动 ---
     let scrollJob = null;
     function toggleScroll() {
         const btn = document.getElementById('scrollBtn');
@@ -182,60 +162,59 @@
         }
     }
 
-    // --- 节拍器 ---
-    let audioCtx = null;
-    let isMetroPlaying = false;
-    let nextTickTime = 0;
-    let metroTimerID = null;
-
+    let audioCtx = null, isMetroPlaying = false, nextTickTime = 0, metroTimerID = null;
     function playMetroTick() {
-        const osc = audioCtx.createOscillator();
-        const env = audioCtx.createGain();
+        const osc = audioCtx.createOscillator(), env = audioCtx.createGain();
         osc.frequency.value = 1000;
         env.gain.setValueAtTime(1, audioCtx.currentTime);
         env.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.05);
         osc.connect(env); env.connect(audioCtx.destination);
         osc.start(); osc.stop(audioCtx.currentTime + 0.05);
     }
-
     function metroScheduler() {
         const bpm = Math.max(40, Math.min(240, parseInt(document.getElementById('bpmInput').value) || 80));
-        while (nextTickTime < audioCtx.currentTime + 0.1) {
-            playMetroTick();
-            nextTickTime += 60.0 / bpm;
-        }
+        while (nextTickTime < audioCtx.currentTime + 0.1) { playMetroTick(); nextTickTime += 60.0 / bpm; }
         metroTimerID = setTimeout(metroScheduler, 50);
     }
-
     function toggleMetronome() {
         if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         isMetroPlaying = !isMetroPlaying;
         const btn = document.getElementById('metroBtn');
-        if (isMetroPlaying) {
-            nextTickTime = audioCtx.currentTime;
-            metroScheduler();
-            btn.classList.add('active'); btn.innerText = '停止';
-        } else {
-            clearTimeout(metroTimerID);
-            btn.classList.remove('active'); btn.innerText = '节拍';
-        }
+        if (isMetroPlaying) { nextTickTime = audioCtx.currentTime; metroScheduler(); btn.classList.add('active'); btn.innerText = '停止'; }
+        else { clearTimeout(metroTimerID); btn.classList.remove('active'); btn.innerText = '节拍'; }
     }
 
-    // --- 歌谱数据 ---
-    const baseKey = 'C'; 
+    const baseKey = 'C';
     const rawData = [
-        { content: [["", "让"], ["C", "我"], [" ", " "], ["", "掉"], ["", "下"], ["Em", "眼"], ["", "泪"], ["", "的"], [" ", " "], ["", "不"], ["F", "止"], [" ", " "], ["", "昨"], ["", "夜"], ["", "的"], ["G", "酒"]] },
-        { content: [["", "让"], ["C", "我"], [" ", " "], ["", "依"], ["", "依"], ["Em", "不"], ["", "舍"], ["", "的"], [" ", " "], ["", "不"], ["F", "只"], [" ", " "], ["", "你"], ["", "的"], ["", "温"], ["G", "柔"]] },
-        { content: [["", "余"], ["Em", "路"], [" ", " "], ["", "还"], ["", "要"], ["Am", "走"], ["", "多"], ["", "久"], [" ", " "], ["", "你"], ["F", "攥"], ["", "着"], ["G", "我"], ["", "的"], ["C", "手"]] },
-        { content: [["", "让"], ["Em", "我"], [" ", " "], ["", "感"], ["", "到"], ["F", "为"], ["", "难"], ["", "的"], [" ", " "], ["", "是"], ["G", "挣"], ["", "扎"], ["", "的"], ["", "自"], ["C", "由"]] },
-        { content: [["", "分"], ["C", "别"], [" ", " "], ["", "总"], ["", "是"], ["Em", "在"], ["", "九"], ["", "月"], [" ", " "], ["", "回"], ["F", "忆"], ["", "是"], ["", "思"], ["", "念"], ["", "的"], ["G", "愁"]] },
-        { content: [["", "深"], ["C", "秋"], [" ", " "], ["", "嫩"], ["", "绿"], ["Em", "的"], ["", "垂"], ["", "柳"], [" ", " "], ["", "亲"], ["F", "吻"], ["", "着"], ["", "我"], ["", "额"], ["G", "头"]] },
-        { content: [["", "在"], ["Em", "那"], ["", "座"], ["", "阴"], ["", "雨"], ["", "的"], ["Am", "小"], ["", "城"], ["", "里"], [" ", " "], ["", "我"], ["F", "从"], ["", "未"], ["G", "忘"], ["", "记"], ["C", "你"]] },
-        { content: [["", "成"], ["Em", "都"], [" ", " "], ["", "带"], ["", "不"], ["F", "走"], ["", "的"], [" ", " "], ["G", "只"], ["", "有"], ["C", "你"]] },
-        { content: [["", "和"], ["C", "我"], ["", "在"], ["", "成"], ["", "都"], ["", "的"], ["Am", "街"], ["", "头"], ["", "走"], ["", "一"], ["F", "走"], [" ", " "], ["", "喔"], ["", "…"], ["G", "喔"], ["C", ""]] },
-        { content: [["", "直"], ["C", "到"], ["", "所"], ["", "有"], ["", "的"], ["Am", "灯"], ["", "都"], ["", "熄"], ["", "灭"], ["", "了"], ["", "也"], ["", "不"], ["F", "停"], ["", "留"], ["G", ""]] },
-        { content: [["", "你"], ["", "会"], ["F", "挽"], ["", "着"], ["", "我"], ["", "得"], ["", "衣"], ["C", "袖"], [" ", " "], ["", "我"], ["", "会"], ["F", "把"], ["", "手"], ["", "揣"], ["", "进"], ["", "裤"], ["C", "兜"]] },
-        { content: [["", "走"], ["Dm", "到"], ["", "玉"], ["", "林"], ["", "路"], ["", "的"], ["Dm", "尽"], ["", "头"], [" ", " "], ["", "坐"], ["Dm", "在"], ["", "小"], ["", "酒"], ["", "馆"], ["", "的"], ["", "门"], ["G", "口"]] }
+        { label: '主歌' },
+        { content: [["","你"],["","还"],["Cadd9","记"],["","得"],["","吗"],[" "," "],["","年"],["","少"],["","的"],["Am","时"],["","候"]] },
+        { content: [["","妈"],["","妈"],["Dm","站"],["","在"],["","家"],["","门"],["G","口"],["","的"],["","呼"],["Cadd9","唤"]] },
+        { content: [["","这"],["","一"],["Cadd9","声"],["","呼"],["","唤"],[" "," "],["","妈"],["","妈"],["","的"],["Am","笑"],["","脸"]] },
+        { content: [["","我"],["","们"],["F","就"],["","会"],["","像"],["","小"],["G","鸟"],["","归"],["","巢"],["","一"],["Cadd9","般"]] },
+
+        { label: '副歌 A' },
+        { content: [["","回"],["","家"],["","吃"],["Em","饭"],[" "," "],["","回"],["","家"],["","吃"],["Am","饭"]] },
+        { content: [["","无"],["","论"],["F","碗"],["","里"],["","盛"],["","的"],["","是"],["G","什"],["","么"],["","都"],["","无"],["","比"],["","的"],["Cadd9","香"],["","甜"]] },
+        { content: [["","回"],["","家"],["","吃"],["Em","饭"],[" "," "],["","回"],["","家"],["","吃"],["Am","饭"]] },
+        { content: [["","那"],["","种"],["F","滋"],["","味"],["","至"],["","今"],["G","常"],["","常"],["","在"],["","舌"],["Cadd9","间"]] },
+        { content: [["","我"],["","们"],["Cadd9","已"],["","长"],["","大"],[" "," "],["","尝"],["","尽"],["","了"],["Am","心"],["","酸"]] },
+        { content: [["","回"],["","家"],["Dm","成"],["","为"],["","妈"],["","妈"],["G","遥"],["","远"],["","的"],["","呼"],["Cadd9","唤"]] },
+        { content: [["","这"],["","一"],["Cadd9","声"],["","呼"],["","唤"],[" "," "],["","妈"],["","妈"],["","的"],["Am","笑"],["","脸"]] },
+        { content: [["","家"],["","里"],["F","才"],["","有"],["G","最"],["","初"],["","最"],["","真"],["","的"],["","温"],["Cadd9","暖"]] },
+
+        { label: '副歌 B' },
+        { content: [["","回"],["","家"],["","吃"],["Em","饭"],[" "," "],["","回"],["","家"],["","吃"],["Am","饭"]] },
+        { content: [["","无"],["","论"],["F","碗"],["","里"],["","盛"],["","的"],["","是"],["G","什"],["","么"],["","都"],["","无"],["","比"],["","的"],["Cadd9","香"],["","甜"]] },
+        { content: [["","回"],["","家"],["","吃"],["Em","饭"],[" "," "],["","回"],["","家"],["","吃"],["Am","饭"]] },
+        { content: [["","那"],["","种"],["F","滋"],["","味"],["","至"],["","今"],["G","常"],["","常"],["","在"],["","舌"],["Cadd9","间"]] },
+        { content: [["","回"],["","家"],["","吃"],["Em","饭"],[" "," "],["","回"],["","家"],["","吃"],["Am","饭"]] },
+        { content: [["","无"],["","论"],["F","碗"],["","里"],["","盛"],["","的"],["","是"],["G","什"],["","么"],["","都"],["","无"],["","比"],["","的"],["Cadd9","香"],["","甜"]] },
+        { content: [["","回"],["","家"],["","吃"],["Em","饭"],[" "," "],["","回"],["","家"],["","吃"],["Am","饭"]] },
+        { content: [["","那"],["","种"],["F","滋"],["","味"],["","至"],["","今"],["G","常"],["","常"],["","在"],["","舌"],["Cadd9","间"]] },
+        { content: [["","回"],["","家"],["","吃"],["Em","饭"],[" "," "],["","回"],["","家"],["","吃"],["Am","饭"]] },
+        { content: [["","无"],["","论"],["F","碗"],["","里"],["","盛"],["","的"],["","是"],["G","什"],["","么"],["","都"],["","无"],["","比"],["","的"],["Cadd9","香"],["","甜"]] },
+        { content: [["","回"],["","家"],["","吃"],["Em","饭"],[" "," "],["","回"],["","家"],["","吃"],["Am","饭"]] },
+        { content: [["","那"],["","声"],["F","呼"],["","唤"],["","至"],["","今"],["G","常"],["","常"],["","在"],["","耳"],["Cadd9","边"]] },
     ];
 
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
@@ -254,12 +233,22 @@
 
     function updateView() {
         const target = parseInt(document.getElementById('keySelect').value);
-        const container = document.getElementById('tabContent'); container.innerHTML = '';
-        rawData.forEach(line => {
-            const lineEl = document.createElement('div'); lineEl.className = 'line';
-            line.content.forEach(item => {
-                const group = document.createElement('div'); group.className = 'word-group';
-                group.innerHTML = `<div class="chord-box">${processChord(item[0], target)}</div><div class="lyric-box">${item[1]}</div>`;
+        const container = document.getElementById('tabContent');
+        container.innerHTML = '';
+        rawData.forEach(item => {
+            if (item.label) {
+                const el = document.createElement('div');
+                el.className = 'section-label';
+                el.textContent = item.label;
+                container.appendChild(el);
+                return;
+            }
+            const lineEl = document.createElement('div');
+            lineEl.className = 'line';
+            item.content.forEach(([chord, lyric]) => {
+                const group = document.createElement('div');
+                group.className = 'word-group';
+                group.innerHTML = `<div class="chord-box">${processChord(chord, target)}</div><div class="lyric-box">${lyric}</div>`;
                 lineEl.appendChild(group);
             });
             container.appendChild(lineEl);
@@ -268,11 +257,8 @@
 
     function toggleDegree() { isDegreeMode = !isDegreeMode; document.getElementById('degreeBtn').classList.toggle('active'); updateView(); }
 
-    // --- 调号记忆 ---
-    const SONG_KEY = 'key_成都';
-    function saveKey() {
-        localStorage.setItem(SONG_KEY, document.getElementById('keySelect').value);
-    }
+    const SONG_KEY = 'key_回家吃饭';
+    function saveKey() { localStorage.setItem(SONG_KEY, document.getElementById('keySelect').value); }
     const savedKey = localStorage.getItem(SONG_KEY);
     if (savedKey !== null) document.getElementById('keySelect').value = savedKey;
 

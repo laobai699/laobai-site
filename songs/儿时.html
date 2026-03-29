@@ -16,6 +16,7 @@
             --accent-color: #c87e4f;
             --hover-bg: #1a1816;
             --lyric-size: 17px;
+            --chord-size: 13px;
         }
         body { 
             font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; 
@@ -62,7 +63,7 @@
         }
         .line { display: flex; flex-wrap: wrap; margin-bottom: 20px; line-height: 1.2; }
         .word-group { display: inline-flex; flex-direction: column; align-items: center; min-width: 1.1em; margin-right: 1px; }
-        .chord-box { color: var(--accent-color); font-weight: bold; font-size: 13px; height: 1.5em; font-family: Arial, sans-serif; }
+        .chord-box { color: var(--accent-color); font-weight: bold; font-size: var(--chord-size); height: 1.5em; font-family: Arial, sans-serif; }
         .lyric-box { font-size: var(--lyric-size); color: var(--text-main); font-weight: 500; letter-spacing: 0.5px; }
         .song-footer-nav { display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); }
         .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
@@ -121,7 +122,7 @@
 
         <div class="song-footer-nav">
             <a href="成都.html" class="footer-btn"><span>⇠</span> 成都</a>
-            <a href="把酒问月.html" class="footer-btn">把酒问月 <span>⇢</span></a>
+            <a href="无尽光芒.html" class="footer-btn">无尽光芒 <span>⇢</span></a>
         </div>
     </div>
 
@@ -138,7 +139,9 @@
     let lyricSize = 17;
     function changeFontSize(delta) {
         lyricSize = Math.min(28, Math.max(12, lyricSize + delta));
+        const chordSize = Math.round(lyricSize * 0.76);
         document.documentElement.style.setProperty('--lyric-size', lyricSize + 'px');
+        document.documentElement.style.setProperty('--chord-size', chordSize + 'px');
     }
 
     // --- 自动滚动 ---
@@ -215,7 +218,7 @@
         { content: [["","我"],["","们"],["","就"],["","一"],["","天"],["","天"],["","长"],["C","大"],[" "," "],["","听"],["","磁"],["","带"],["","偶"],["","遇"],["","榕"],["","树"],["Am","下"]] },
         { content: [["","白"],["","衬"],["","衫"],["","黄"],["","昏"],["","木"],["","吉"],["Dm","他"],[" "," "],["","年"],["","少"],["","不"],["","经"],["","事"],["","的"],["","脸"],["G","颊"]] },
         { content: [["","我"],["","们"],["","就"],["","一"],["","天"],["","天"],["","长"],["C","大"],[" "," "],["","听"],["","磁"],["","带"],["","偶"],["","遇"],["","榕"],["","树"],["Am","下"]] },
-        { content: [["","白"],["","衬"],["","衫"],["","黄"],["","昏"],["","木"],["","吉"],["Dm","他"],[" "," "],["","小"],["","小"],["","诗"],["","不"],["","敢"],["","递"],["","给"],["C","她"]] }
+        { content: [["","白"],["","衬"],["","衫"],["","黄"],["","昏"],["","木"],["","吉"],["Dm","他"],[" "," "],["D","小"],["","小"],["","诗"],["","不"],["","敢"],["","递"],["","给"],["C","她"]] }
     ];
 
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
