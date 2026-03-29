@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板 - 老拜有谱</title>
+    <style>
+        :root { 
+            --page-bg: #111111;
+            --module-bg: #141210;
+            --content-bg: #151311;
+            --border-color: #2a2826;
+            --text-main: #f5f1eb;
+            --text-sub: #ddd5cc;
+            --text-dim: #99938d;
+            --accent-color: #c87e4f;
+            --hover-bg: #1a1816;
+        }
+
+        body { 
+            font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; 
+            background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .navbar { 
+            background: var(--module-bg); padding: 0 16px; height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .btn-nav { 
+            background: transparent; border: 1px solid var(--border-color); color: var(--text-main);
+            padding: 6px 14px; border-radius: 25px; font-size: 14px; font-weight: 500;
+            cursor: pointer; text-decoration: none;
+        }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 22px; letter-spacing: 2px; flex: 1; text-align: center; }
+
+        .main { max-width: 650px; margin: 0 auto; padding: 30px 20px 60px; }
+
+        /* 说明卡片 */
+        .intro-card {
+            background: var(--content-bg); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 24px 26px; margin-bottom: 30px;
+        }
+        .intro-title {
+            font-size: 18px; font-weight: 500; letter-spacing: 1px;
+            color: var(--accent-color); margin-bottom: 16px;
+        }
+        .intro-body {
+            font-size: 15px; color: var(--text-sub); line-height: 2;
+        }
+        .intro-body p { margin: 0 0 10px; }
+        .intro-body p:last-child { margin-bottom: 0; }
+
+        /* 格式示例框 */
+        .format-box {
+            background: #0d0c0b; border: 1px solid var(--border-color);
+            border-radius: 10px; padding: 14px 18px; margin: 14px 0;
+            font-family: "Courier New", monospace; font-size: 13px;
+            color: var(--accent-color); line-height: 1.9;
+        }
+
+        /* GitHub 注册按钮 */
+        .github-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: #24292e; color: #fff;
+            border: 1px solid #444; border-radius: 25px;
+            padding: 8px 20px; font-size: 14px; font-weight: 500;
+            text-decoration: none; margin-top: 8px;
+            transition: 0.3s;
+        }
+        .github-btn:hover { background: #333; border-color: #666; }
+
+        /* 留言区标题 */
+        .section-title {
+            font-size: 15px; color: var(--text-dim); letter-spacing: 2px;
+            margin-bottom: 16px; padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Giscus 容器 */
+        .giscus-wrap {
+            background: var(--content-bg); border: 1px solid var(--border-color);
+            border-radius: 16px; padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="songs.html" class="btn-nav">返回曲谱</a>
+        <div class="nav-title">留言板</div>
+        <div style="width: 80px; flex-shrink: 0;"></div>
+    </div>
+
+    <div class="main">
+
+        <div class="intro-card">
+            <div class="intro-title">🎸 欢迎来到老拜的留言板</div>
+            <div class="intro-body">
+                <p>这里是喜欢民谣弹唱的朋友们聚聚的地方。</p>
+                <p>如果你也有喜欢的歌，欢迎把歌词和弦留在这里，格式如下：</p>
+
+                <div class="format-box">
+                    歌名：儿时<br>
+                    歌手：刘昊霖<br>
+                    <br>
+                    [C]铁道旁赤脚追晚[Am]霞<br>
+                    [Dm]玻璃珠铁盒英雄[G]卡<br>
+                    ……
+                </div>
+
+                <p>老拜看到后会整理成正式的曲谱页面，慢慢丰富这里的曲库 🌱</p>
+                <p>留言需要一个免费的 GitHub 账号，注册很简单，点下面的链接：</p>
+                <a class="github-btn" href="https://github.com/signup" target="_blank">
+                    &#xe000; 注册 GitHub 账号（免费）
+                </a>
+                <p style="margin-top: 14px; font-size: 13px; color: var(--text-dim);">
+                    注册后回到这里，点击留言区的「使用 GitHub 登录」即可留言。
+                </p>
+            </div>
+        </div>
+
+        <div class="section-title">💬 留言区</div>
+
+        <div class="giscus-wrap">
+            <script src="https://giscus.app/client.js"
+                    data-repo="laobai699/laobai-site"
+                    data-repo-id="R_kgDORpKSuA"
+                    data-category="General"
+                    data-category-id="DIC_kwDORpKSuM4C5gpR"
+                    data-mapping="pathname"
+                    data-strict="0"
+                    data-reactions-enabled="1"
+                    data-emit-metadata="0"
+                    data-input-position="bottom"
+                    data-theme="dark"
+                    data-lang="zh-CN"
+                    crossorigin="anonymous"
+                    async>
+            </script>
+        </div>
+
+    </div>
+
+</body>
+</html>
