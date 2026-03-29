@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>指板音名图 - 老拜有谱</title>
+    <style>
+        :root {
+            --page-bg: #111111;
+            --module-bg: #141210;
+            --content-bg: #151311;
+            --border-color: #2a2826;
+            --text-main: #f5f1eb;
+            --text-dim: #99938d;
+            --hover-bg: #1a1816;
+        }
+        body {
+            font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+            background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+        .navbar {
+            background: var(--module-bg); padding: 0 16px; height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .btn-nav {
+            background: transparent; border: 1px solid var(--border-color); color: var(--text-main);
+            padding: 6px 14px; border-radius: 25px; font-size: 14px; font-weight: 500;
+            cursor: pointer; text-decoration: none;
+        }
+        .nav-title { font-weight: 600; font-size: 22px; letter-spacing: 2px; flex: 1; text-align: center; }
+
+        .main { padding: 20px 16px 60px; }
+        .tip { font-size: 13px; color: var(--text-dim); text-align: center; margin-bottom: 16px; }
+
+        .img-wrap {
+            display: flex; justify-content: center;
+            overflow: auto;
+        }
+        .img-wrap img {
+            max-width: 100%;
+            border-radius: 12px;
+            touch-action: pinch-zoom;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="songs.html" class="btn-nav">返回曲谱</a>
+        <div class="nav-title">指板音名图</div>
+        <div style="width: 80px;"></div>
+    </div>
+
+    <div class="main">
+        <div class="tip">双指捏合可放大查看细节</div>
+        <div class="img-wrap">
+            <img src="tools/fingerboard.jpg" alt="吉他指板音名图">
+        </div>
+    </div>
+</body>
+</html>
