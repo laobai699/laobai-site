@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>这是我的小房子 - 与AI共建</title>
+    <style>
+        :root { 
+            --page-bg: #111111;
+            --module-bg: #141210;
+            --content-bg: #151311;
+            --border-color: #2a2826;
+            --text-main: #f5f1eb;
+            --text-sub: #ddd5cc;
+            --text-dim: #99938d;
+            --accent-color: #c87e4f;
+            --hover-bg: #1a1816;
+        }
+        body { 
+            font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; 
+            background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+        .navbar { 
+            background: var(--module-bg); padding: 0 16px; height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .btn-nav { 
+            text-decoration: none; color: var(--text-main);
+            font-size: 14px; font-weight: 500;
+            border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px;
+            background: transparent; cursor: pointer; transition: all 0.3s;
+        }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 18px; letter-spacing: 2px; flex: 1; text-align: center; color: var(--text-dim); }
+
+        .article { max-width: 580px; margin: 0 auto; padding: 36px 24px 80px; }
+        .article-num { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 12px; }
+        .article-title { font-size: 22px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
+        .article-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color); }
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2; }
+        .article-body p { margin: 0 0 22px; }
+        .article-body p:last-child { margin-bottom: 0; }
+        .article-body h3 { font-size: 15px; font-weight: 500; color: var(--accent-color); margin: 32px 0 12px; letter-spacing: 1px; }
+        .article-body blockquote { border-left: 2px solid var(--accent-color); margin: 28px 0; padding: 4px 0 4px 18px; color: var(--text-main); font-size: 15px; line-height: 2; }
+        .article-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+        .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+        .footer-btn.disabled { opacity: 0.3; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="../building.html" class="btn-nav">返回目录</a>
+        <div class="nav-title">与AI共建</div>
+        <div style="width: 80px;"></div>
+    </div>
+
+    <div class="article">
+        <div class="article-num">NO. 01</div>
+        <div class="article-title">这是我的小房子</div>
+        <div class="article-sub">站在刚建好的门口，说几句心里话</div>
+
+        <div class="article-body">
+
+            <p>这个网站，是我花了两周时间建起来的房子。</p>
+
+            <p>说"建起来"，其实有点夸张——骨架立起来了，很多屋子还空着，屋门上写着"此屋正在装修"。但它确实已经站在那里了，有地址，有名字，能打开，能逛。</p>
+
+            <p>对我来说，这两周是从网站知识零起步到有点感觉的过程。对我而言也是AI时代已经来临的一个小小见证——一个完全不懂代码的人，靠着几个AI，把这件事做了。</p>
+
+            <h3>最喜欢的地方：老拜有谱</h3>
+
+            <p>整个网站里，最让我喜欢的是老拜有谱这个板块。有调音器，有歌谱，有留言板，可以和喜欢弹唱的朋友互动。这里是我将来最常用的地方，也是目前功能最完整的一块。</p>
+
+            <p>顺带一提，那个调音器是专门做的，用麦克风实时检测音高。第一次在手机上试它，拨了一下琴弦，页面上跳出了正确的音名——那一刻确实挺高兴的。</p>
+
+            <h3>最让我期待的地方：与AI共建</h3>
+
+            <p>也就是你现在所在的这个板块。</p>
+
+            <p>建站过程中对AI有了很多的了解和思考，有杞人忧天的担忧和豁然开朗的释怀。这些东西值得慢慢整理，不着急，一篇一篇来。</p>
+
+            <h3>最让我沉醉的地方：老拜美食</h3>
+
+            <p>在整理美食板块的时候，随着小小封面的诞生，时光或是跨越或是倒流，如梦境一般。后面也会有专门的一篇来分享这个故事。</p>
+
+            <blockquote>
+                有琴有茶有劳作<br>
+                油盐柴米小折腾
+            </blockquote>
+
+            <h3>慢慢生长</h3>
+
+            <p>网站很多地方现在只是骨架。就像一个有很多屋子的房子，有的屋子装好了，有的还空着，有的甚至门都没装。</p>
+
+            <p>我不想太着急去完成它。</p>
+
+            <p>让它慢慢生长，才是它本来该有的样子。</p>
+
+        </div>
+
+        <div class="article-footer">
+            <a href="#" class="footer-btn disabled"><span>⇠</span> 上一篇</a>
+            <a href="02.html" class="footer-btn">下一篇 <span>⇢</span></a>
+        </div>
+    </div>
+
+</body>
+</html>
