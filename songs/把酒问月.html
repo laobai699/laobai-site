@@ -47,7 +47,7 @@
     <div class="navbar">
         <button class="btn-nav" onclick="window.location.href='../songs.html'">返回目录</button>
         <div class="nav-title">老拜有谱</div>
-        <div style="width: 70px; flex-shrink: 0;"></div>
+        <a href="把酒问月创作背景.html" class="btn-nav">创作背景</a>
     </div>
 
     <div class="controls-wrapper">
@@ -79,7 +79,7 @@
         <div class="ctrl-group">
             <button id="scrollBtn" class="btn-tool" onclick="toggleScroll()">滚动</button>
             <span class="ctrl-label">速度</span>
-            <input type="range" id="scrollSpeed" class="ctrl-slider" min="1" max="10" value="3">
+            <input type="range" id="scrollSpeed" class="ctrl-slider" min="1" max="10" value="5">
         </div>
 
         <div class="ctrl-divider"></div>
@@ -135,7 +135,7 @@
             btn.classList.add('active'); btn.innerText = '停止';
             scrollJob = setInterval(() => {
                 const speed = parseInt(document.getElementById('scrollSpeed').value);
-                window.scrollBy(0, speed * 0.4);
+                window.scrollBy(0, speed * 0.15);
             }, 30);
         }
     }
@@ -193,16 +193,26 @@
         { content: [["","啦"],["","啦"],["","啦"],["Dm","里"],[" "," "],["","啦"],["","啦"],["","啦"],["","啦"],["C","里"]] }
     ];
 
+    const baseKey = 'C';
     const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     const degrees = ['1', '1#', '2', '2#', '3', '4', '4#', '5', '5#', '6', '6#', '7'];
     let isDegreeMode = false;
 
-    function processChord(chord, steps) {
+    function processChord(chord, targetKeyIndex) {
         if (!chord) return "";
-        return chord.replace(/[A-G]#?/g, (match) => {
-            let i = notes.indexOf(match);
-            return isDegreeMode ? degrees[(i - steps + 12) % 12] : notes[(i + steps + 12) % 12];
-        });
+        const baseKeyIndex = notes.indexOf(baseKey);
+        if (isDegreeMode) {
+            return chord.replace(/[A-G]#?/g, (match) => {
+                let i = notes.indexOf(match);
+                return degrees[(i - baseKeyIndex + 12) % 12];
+            });
+        } else {
+            const offset = (targetKeyIndex - baseKeyIndex + 12) % 12;
+            return chord.replace(/[A-G]#?/g, (match) => {
+                let i = notes.indexOf(match);
+                return notes[(i + offset) % 12];
+            });
+        }
     }
 
     function updateView() {

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>把酒问月 · 创作背景 - 老拜有谱</title>
+    <style>
+        :root { 
+            --page-bg: #111111;
+            --module-bg: #141210;
+            --content-bg: #151311;
+            --border-color: #2a2826;
+            --text-main: #f5f1eb;
+            --text-sub: #ddd5cc;
+            --text-dim: #99938d;
+            --accent-color: #c87e4f;
+            --hover-bg: #1a1816;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 20px; letter-spacing: 2px; flex: 1; text-align: center; }
+
+        .main { max-width: 580px; margin: 0 auto; padding: 32px 20px 80px; }
+
+        /* 顶部标题区 */
+        .hero { text-align: center; margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border-color); }
+        .hero-title { font-size: 26px; font-weight: 500; letter-spacing: 3px; margin-bottom: 6px; }
+        .hero-author { font-size: 13px; color: var(--text-dim); letter-spacing: 2px; margin-bottom: 16px; }
+        .hero-tag {
+            display: inline-block; font-size: 12px; color: var(--accent-color);
+            border: 1px solid var(--accent-color); border-radius: 20px;
+            padding: 3px 14px; letter-spacing: 1px;
+        }
+
+        /* 信息卡片 */
+        .card {
+            background: var(--content-bg); border: 1px solid var(--border-color);
+            border-radius: 14px; padding: 20px 24px; margin-bottom: 16px;
+        }
+        .card-title {
+            font-size: 13px; color: var(--accent-color); letter-spacing: 2px;
+            margin-bottom: 14px; padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .card-body { font-size: 15px; color: var(--text-sub); line-height: 1.9; }
+        .card-body p { margin: 0 0 10px; }
+        .card-body p:last-child { margin-bottom: 0; }
+
+        /* 数字高亮 */
+        .num { color: var(--text-main); font-weight: 500; }
+
+        /* 要点列表 */
+        .point-list { list-style: none; padding: 0; margin: 0; }
+        .point-list li {
+            padding: 10px 0; border-bottom: 1px solid var(--border-color);
+            font-size: 15px; color: var(--text-sub); line-height: 1.8;
+            display: flex; gap: 12px;
+        }
+        .point-list li:last-child { border-bottom: none; padding-bottom: 0; }
+        .point-num { color: var(--accent-color); font-weight: 500; flex-shrink: 0; font-size: 13px; margin-top: 2px; }
+
+        /* 译文 */
+        .verse-block {
+            background: var(--content-bg); border: 1px solid var(--border-color);
+            border-radius: 14px; padding: 20px 24px; margin-bottom: 16px;
+        }
+        .verse-title { font-size: 13px; color: var(--accent-color); letter-spacing: 2px; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
+        .verse-line {
+            font-size: 15px; color: var(--text-sub); line-height: 1.5;
+            padding: 10px 0; border-bottom: 1px solid var(--border-color);
+            display: flex; gap: 16px; align-items: flex-start;
+        }
+        .verse-line:last-child { border-bottom: none; padding-bottom: 0; }
+        .verse-original { color: var(--text-main); font-size: 15px; flex-shrink: 0; width: 140px; letter-spacing: 1px; }
+        .verse-translation { color: var(--text-dim); font-size: 13px; line-height: 1.7; }
+
+        /* 返回歌谱按钮 */
+        .back-btn {
+            display: block; text-align: center; margin-top: 40px;
+            text-decoration: none; color: var(--text-sub); font-size: 14px;
+            border: 1px solid var(--border-color); padding: 14px;
+            border-radius: 14px; background: var(--content-bg);
+            transition: 0.3s; letter-spacing: 1px;
+        }
+        .back-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="把酒问月.html" class="btn-nav">返回歌谱</a>
+        <div class="nav-title">创作背景</div>
+        <div style="width: 80px;"></div>
+    </div>
+
+    <div class="main">
+
+        <div class="hero">
+            <div class="hero-title">把酒问月</div>
+            <div class="hero-author">李白 · 唐</div>
+            <div class="hero-tag">距今约 1280 年</div>
+        </div>
+
+        <!-- 创作时间 -->
+        <div class="card">
+            <div class="card-title">创作时间</div>
+            <div class="card-body">
+                <p>一般认为作于唐玄宗天宝二年（<span class="num">743</span> 年）或天宝三载（<span class="num">744</span> 年），李白时年约 <span class="num">44</span> 岁。距今约1280年。</p>
+                <p>彼时他刚被赐金放还、离开长安，政治理想破灭，开始漫游江南。</p>
+            </div>
+        </div>
+
+        <!-- 直接触发 -->
+        <div class="card">
+            <div class="card-title">直接触发</div>
+            <div class="card-body">
+                <p>诗题下李白自注："故人贾淳令予问之"。友人贾淳请他以"问月"为题作诗，李白借题发挥，把个人情绪与宇宙思考一并写进去。</p>
+            </div>
+        </div>
+
+        <!-- 深层心境 -->
+        <div class="card">
+            <div class="card-title">深层心境</div>
+            <ul class="point-list">
+                <li>
+                    <span class="point-num">失意</span>
+                    供奉翰林仅约两年，因傲岸得罪权贵，被玄宗"赐金放还"，政治生涯就此终结。从豪情万丈跌入理想幻灭的孤独。
+                </li>
+                <li>
+                    <span class="point-num">哲思</span>
+                    月亮永恒，人生短暂。"今人不见古时月，今月曾经照古人"，从个人失意上升到对时间、宇宙、生命的追问。
+                </li>
+                <li>
+                    <span class="point-num">旷达</span>
+                    结尾"唯愿当歌对酒时，月光长照金樽里"，是看透无常后的洒脱，珍惜当下。
+                </li>
+            </ul>
+        </div>
+
+        <!-- 创作场景 -->
+        <div class="card">
+            <div class="card-title">创作场景</div>
+            <div class="card-body">
+                <p>某个秋夜，明月当空。李白举杯独酌，望月发问，一气呵成。把酒、月、人、宇宙融为一体。感谢赵照赋予此诗新的生命。</p>
+            </div>
+        </div>
+
+        <!-- 白话译文 -->
+        <div class="verse-block">
+            <div class="verse-title">白话译文</div>
+            <div class="verse-line">
+                <div class="verse-original">青天有月来几时，我今停杯一问之</div>
+                <div class="verse-translation">青天上的明月究竟何时出现？我此刻停下酒杯，向它发问。</div>
+            </div>
+            <div class="verse-line">
+                <div class="verse-original">人攀明月不可得，月行却与人相随</div>
+                <div class="verse-translation">人们想攀登明月，却永远无法做到；可月亮行走时，却始终与人紧紧相随。</div>
+            </div>
+            <div class="verse-line">
+                <div class="verse-original">皎如飞镜临丹阙，绿烟灭尽清辉发</div>
+                <div class="verse-translation">月亮皎洁如飞悬的明镜，照临朱红宫阙；云雾散尽，清冷的光辉尽情挥洒。</div>
+            </div>
+            <div class="verse-line">
+                <div class="verse-original">但见宵从海上来，宁知晓向云间没</div>
+                <div class="verse-translation">只见它每晚从海上升起，谁又知道它清晨在云间隐没？</div>
+            </div>
+            <div class="verse-line">
+                <div class="verse-original">白兔捣药秋复春，嫦娥孤栖与谁邻</div>
+                <div class="verse-translation">月宫里的白兔年复一年捣着仙药；嫦娥孤独居住，又有谁与她相伴？</div>
+            </div>
+            <div class="verse-line">
+                <div class="verse-original">今人不见古时月，今月曾经照古人</div>
+                <div class="verse-translation">现在的人见不到古时的月亮；可如今的月亮，曾经照耀过古时候的人。</div>
+            </div>
+            <div class="verse-line">
+                <div class="verse-original">古人今人若流水，共看明月皆如此</div>
+                <div class="verse-translation">古人今人都像流水般匆匆流逝；但大家共同仰望的明月，始终都是这般模样。</div>
+            </div>
+            <div class="verse-line">
+                <div class="verse-original">唯愿当歌对酒时，月光长照金樽里</div>
+                <div class="verse-translation">我只希望，对酒当歌的时候，皎洁的月光能长久地照在我的金杯里。</div>
+            </div>
+        </div>
+
+        <a href="把酒问月.html" class="back-btn">← 返回歌谱弹唱</a>
+
+    </div>
+
+</body>
+</html>
