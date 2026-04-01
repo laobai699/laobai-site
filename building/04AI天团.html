@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>什么是AI？主要都有哪些？ - 与AI共建</title>
+    <style>
+        :root { 
+            --page-bg: #111111; --module-bg: #141210; --content-bg: #151311;
+            --border-color: #2a2826; --text-main: #f5f1eb; --text-sub: #ddd5cc;
+            --text-dim: #99938d; --accent-color: #c87e4f; --hover-bg: #1a1816;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 18px; letter-spacing: 2px; flex: 1; text-align: center; color: var(--text-dim); }
+        .article { max-width: 580px; margin: 0 auto; padding: 36px 24px 80px; }
+        .article-num { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 12px; }
+        .article-title { font-size: 22px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
+        .article-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color); }
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2; }
+        .article-body p { margin: 0 0 22px; }
+        .article-body h3 { font-size: 15px; font-weight: 500; color: var(--accent-color); margin: 36px 0 16px; letter-spacing: 1px; }
+        .article-body blockquote { border-left: 2px solid var(--accent-color); margin: 28px 0; padding: 4px 0 4px 18px; color: var(--text-main); font-size: 15px; line-height: 2; }
+
+        .ai-card { background: var(--content-bg); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px 22px; margin-bottom: 12px; transition: border-color 0.2s; }
+        .ai-card:hover { border-color: #44403c; }
+        .ai-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+        .ai-name { font-size: 16px; font-weight: 500; color: var(--text-main); }
+        .ai-family { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+        .ai-model { font-size: 12px; color: var(--accent-color); border: 1px solid var(--border-color); border-radius: 20px; padding: 3px 10px; flex-shrink: 0; }
+        .ai-desc { font-size: 14px; color: var(--text-sub); line-height: 1.8; }
+        .ai-tag { display: inline-block; font-size: 11px; color: var(--text-dim); background: var(--module-bg); border-radius: 4px; padding: 2px 8px; margin-top: 8px; margin-right: 4px; }
+
+        .section-divider { border: none; border-top: 1px solid var(--border-color); margin: 32px 0; }
+
+        .article-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+        .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+        .footer-btn.disabled { opacity: 0.3; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="../building.html" class="btn-nav">返回目录</a>
+        <div class="nav-title">与AI共建</div>
+        <div style="width: 80px;"></div>
+    </div>
+
+    <div class="article">
+        <div class="article-num">NO. 04</div>
+        <div class="article-title">AI集团</div>
+        <div class="article-sub">什么是AI?都有哪些AI?我用到了哪些AI?</div>
+
+        <div class="article-body">
+            <p>AI 是 Artificial Intelligence 的缩写，中文叫人工智能。简单说，就是能理解你说的话、看懂图片、写代码、聊天、帮你干活的软件系统。</p>
+            <p>过去几年，AI 的能力突飞猛进。现在你和它对话，它不只是搜索引擎那种"关键词匹配"，而是真的能理解你的意思，甚至能感知你话里没说出来的部分。</p>
+            <p>本着学习的目的，本网站到目前为止，我用到了硅谷四大天王以及国内的豆包，总共五位大侠，DeepSeek将是下一个目标。它们各自的特点有一部分摘抄自网络，我目前还体会不到那么深刻。</p>
+            <h3>国外篇 · 硅谷的四大天王</h3>
+            <p>这几个模型代表了目前 AI 能力的上限，也是"用 AI 建站"这件事的底层动力。</p>
+        </div>
+
+        <div class="ai-card">
+            <div class="ai-card-header">
+                <div><div class="ai-name">ChatGPT</div><div class="ai-family">OpenAI · 美国</div></div>
+                <div class="ai-model">GPT-4 / o1</div>
+            </div>
+            <div class="ai-desc">行业标杆，入门首选。像个博学的老教授，逻辑四平八稳，生态最丰富，周边工具最多。我建站初期的"启蒙老师"，帮我搭起了最基础的骨架。</div>
+            <div><span class="ai-tag">逻辑强</span><span class="ai-tag">生态丰富</span><span class="ai-tag">入门友好</span></div>
+        </div>
+
+        <div class="ai-card">
+            <div class="ai-card-header">
+                <div><div class="ai-name">Claude</div><div class="ai-family">Anthropic · 美国</div></div>
+                <div class="ai-model">Claude 3.5 / 3.7</div>
+            </div>
+            <div class="ai-desc">我的最爱，也是这个网站现在的主力搭档。文笔优雅，写出来的代码极其干净，是"极简主义"的最佳拍档。你现在读到的这篇文章，就是和它一起整理出来的。</div>
+            <div><span class="ai-tag">代码干净</span><span class="ai-tag">文笔好</span><span class="ai-tag">理解力强</span></div>
+        </div>
+
+        <div class="ai-card">
+            <div class="ai-card-header">
+                <div><div class="ai-name">Gemini</div><div class="ai-family">Google · 美国</div></div>
+                <div class="ai-model">Gemini 2.0</div>
+            </div>
+            <div class="ai-desc">自带搜索基因，反应速度惊人。不仅能看图、听音频、读视频，还能实时联网获取最新信息。建站中期遇到一些卡壳的问题，是它帮我找到了突破口。</div>
+            <div><span class="ai-tag">多模态</span><span class="ai-tag">实时搜索</span><span class="ai-tag">速度快</span></div>
+        </div>
+
+        <div class="ai-card">
+            <div class="ai-card-header">
+                <div><div class="ai-name">Grok</div><div class="ai-family">xAI · 马斯克</div></div>
+                <div class="ai-model">Grok 3</div>
+            </div>
+            <div class="ai-desc">马斯克的"逆子"。能读取 X（推特）实时数据，性格叛逆，回答直接不绕弯子，是捕捉前沿资讯的高手。想知道 AI 圈最新发生了什么，问它最快。</div>
+            <div><span class="ai-tag">实时数据</span><span class="ai-tag">风格直接</span><span class="ai-tag">前沿资讯</span></div>
+        </div>
+
+        <hr class="section-divider">
+
+        <div class="article-body">
+            <h3>国内篇 · 百花齐放的中坚力量</h3>
+            <p>国内 AI 已经过了"PPT 阶段"。现在每一个都是能实打实帮你干活的好伙计，而且很多场景下，它们比国外的更懂中文语境。</p>
+        </div>
+
+        <div class="ai-card">
+            <div class="ai-card-header">
+                <div><div class="ai-name">DeepSeek</div><div class="ai-family">深度求索 · 中国</div></div>
+                <div class="ai-model">R1 / V3</div>
+            </div>
+            <div class="ai-desc">国产 AI 的排头兵。不拼财力拼脑子，用极低成本实现了超强推理能力，一度让硅谷震惊。遇到死磕不出来的复杂代码或逻辑问题，找它往往能找到意想不到的解法。</div>
+            <div><span class="ai-tag">推理强</span><span class="ai-tag">代码能力强</span><span class="ai-tag">性价比高</span></div>
+        </div>
+
+        <div class="ai-card">
+            <div class="ai-card-header">
+                <div><div class="ai-name">豆包</div><div class="ai-family">字节跳动 · 中国</div></div>
+                <div class="ai-model">豆包大模型</div>
+            </div>
+            <div class="ai-desc">国内下载量最高的 AI，流量与交互的王者。语音对话最像真人，背靠抖音生态，非常适合整理社交媒体文案。在院子里忙活的时候，用语音快速记录灵感，它是首选。</div>
+            <div><span class="ai-tag">语音对话</span><span class="ai-tag">交互自然</span><span class="ai-tag">社媒文案</span></div>
+        </div>
+
+        <div class="ai-card">
+            <div class="ai-card-header">
+                <div><div class="ai-name">Kimi</div><div class="ai-family">月之暗面 · 中国</div></div>
+                <div class="ai-model">Moonshot</div>
+            </div>
+            <div class="ai-desc">处理长文本的神器。整理厚厚的财务报表或几十万字的手稿，它能一口气读完，记性极好，细节不丢。需要消化大量资料的时候，它是最省心的。</div>
+            <div><span class="ai-tag">长文本</span><span class="ai-tag">记忆力强</span><span class="ai-tag">文档处理</span></div>
+        </div>
+
+        <div class="ai-card">
+            <div class="ai-card-header">
+                <div><div class="ai-name">文心一言</div><div class="ai-family">百度 · 中国</div></div>
+                <div class="ai-model">ERNIE 4.0</div>
+            </div>
+            <div class="ai-desc">国内入局最早的"老字号"。理解中国文化、政策环境和国内办公逻辑有着天然的本土优势。碰到需要符合国内语境的内容，它最懂。</div>
+            <div><span class="ai-tag">本土优势</span><span class="ai-tag">中文理解</span><span class="ai-tag">政策敏感</span></div>
+        </div>
+
+        <div class="ai-card">
+            <div class="ai-card-header">
+                <div><div class="ai-name">通义千问</div><div class="ai-family">阿里巴巴 · 中国</div></div>
+                <div class="ai-model">Qwen 系列</div>
+            </div>
+            <div class="ai-desc">不仅自己强，还把"图纸"公开给全球开发者。无数第三方工具都套用了它的引擎，是国内开源生态的顶梁柱。你用过的很多 AI 工具，背后可能就是它在驱动。</div>
+            <div><span class="ai-tag">开源</span><span class="ai-tag">生态广</span><span class="ai-tag">开发者友好</span></div>
+        </div>
+
+        <div class="article-body" style="margin-top: 32px;">
+            <blockquote>
+                这些 AI，每一个都有自己的脾气和擅长的事。<br>
+                用好它们，就像带一支各有所长的小团队。
+            </blockquote>
+        </div>
+
+        <div class="article-footer">
+            <a href="03AI让一台旧笔记本重新上岗.html" class="footer-btn"><span>⇠</span> 上一篇</a>
+            <a href="#" class="footer-btn disabled">下一篇 <span>⇢</span></a>
+        </div>
+    </div>
+
+</body>
+</html>

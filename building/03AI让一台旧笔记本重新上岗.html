@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI让一台旧笔记本重新上岗 - 与AI共建</title>
+    <style>
+        :root { 
+            --page-bg: #111111;
+            --module-bg: #141210;
+            --content-bg: #151311;
+            --border-color: #2a2826;
+            --text-main: #f5f1eb;
+            --text-sub: #ddd5cc;
+            --text-dim: #99938d;
+            --accent-color: #c87e4f;
+            --hover-bg: #1a1816;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 18px; letter-spacing: 2px; flex: 1; text-align: center; color: var(--text-dim); }
+
+        .article { max-width: 580px; margin: 0 auto; padding: 36px 24px 80px; }
+        .article-num { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 12px; }
+        .article-title { font-size: 22px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
+        .article-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color); }
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2; }
+        .article-body p { margin: 0 0 22px; }
+        .article-body p:last-child { margin-bottom: 0; }
+        .article-body h3 { font-size: 15px; font-weight: 500; color: var(--accent-color); margin: 32px 0 12px; letter-spacing: 1px; }
+        .article-body blockquote { border-left: 2px solid var(--accent-color); margin: 28px 0; padding: 4px 0 4px 18px; color: var(--text-main); font-size: 15px; line-height: 2; }
+
+        /* 工具列表卡片 */
+        .tools-card {
+            background: var(--content-bg); border: 1px solid var(--border-color);
+            border-radius: 12px; overflow: hidden; margin: 24px 0;
+        }
+        .tool-item {
+            display: flex; gap: 16px; padding: 14px 20px;
+            border-bottom: 1px solid var(--border-color); align-items: flex-start;
+        }
+        .tool-item:last-child { border-bottom: none; }
+        .tool-name { color: var(--accent-color); font-weight: 500; font-size: 14px; flex-shrink: 0; width: 120px; }
+        .tool-desc { color: var(--text-sub); font-size: 14px; line-height: 1.7; }
+        .tool-note { color: var(--text-dim); font-size: 13px; margin-top: 2px; }
+
+        .article-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+        .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+        .footer-btn.disabled { opacity: 0.3; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="../building.html" class="btn-nav">返回目录</a>
+        <div class="nav-title">与AI共建</div>
+        <div style="width: 80px;"></div>
+    </div>
+
+    <div class="article">
+        <div class="article-num">NO. 03</div>
+        <div class="article-title">鸟枪换炮</div>
+        <div class="article-sub">AI指导我安装和使用软件</div>
+
+        <div class="article-body">
+
+            <p>建站初期，我是在手机上和 AI 聊天、搭建最基本的骨架的。很快就感觉到这也太低效了——光是复制粘贴，在手机上操作起来就无法精准定位。</p>
+
+            <p>我清楚地意识到：还需要一套顺手、稳定、能长期使用的工具。</p>
+
+            <h3>于是，这台老伙计重新上岗了</h3>
+
+            <p>机龄快10年，硬盘238G已经使用了237G，眨眼都困难的老电脑——就这样被重新翻了出来。</p>
+
+            <p>要重新安装操作系统，对已经十年不怎么碰电脑的我来说，如果没有 AI 的帮助，这已经是不可能完成的任务了。</p>
+
+            <h3>建站工具大师</h3>
+
+            <p>帮我安装和配置这台电脑的 AI，我给他起了个名字：<strong style="color: var(--text-main);">建站工具大师</strong>。他来自 ChatGPT。在之后的建站过程中，所有软硬件方面的问题，我都去请教他。</p>
+
+            <p>在与他的交流中，我慢慢了解到需要什么样的软件。他一件一件地引导我安装好了这套工具：</p>
+
+            <div class="tools-card">
+                <div class="tool-item">
+                    <div class="tool-name">Chrome</div>
+                    <div>
+                        <div class="tool-desc">主浏览器，用来查看网页效果</div>
+                        <div class="tool-note">这个我知道，打开网站用的</div>
+                    </div>
+                </div>
+                <div class="tool-item">
+                    <div class="tool-name">VS Code</div>
+                    <div>
+                        <div class="tool-desc">主要代码编辑器</div>
+                        <div class="tool-note">闻所未闻</div>
+                    </div>
+                </div>
+                <div class="tool-item">
+                    <div class="tool-name">Live Server</div>
+                    <div>
+                        <div class="tool-desc">本地预览网页，手机平板同步查看效果</div>
+                        <div class="tool-note">闻所未闻</div>
+                    </div>
+                </div>
+                <div class="tool-item">
+                    <div class="tool-name">GitHub Desktop</div>
+                    <div>
+                        <div class="tool-desc">同步网站仓库，管理版本更新</div>
+                        <div class="tool-note">闻所未闻</div>
+                    </div>
+                </div>
+                <div class="tool-item">
+                    <div class="tool-name">FileZilla</div>
+                    <div>
+                        <div class="tool-desc">为以后连接传统服务器做准备</div>
+                        <div class="tool-note">闻所未闻</div>
+                    </div>
+                </div>
+            </div>
+
+           
+
+            <blockquote>
+                不懂没关系。<br>
+                AI 会告诉你装什么、怎么装。<br>
+                AI 还告诉你怎么用。<br>
+                AI 已将美味大餐奉上，我只需要张开嘴巴了。
+            </blockquote>
+
+            <p>边学边用，VS Code 成为了画板，千奇百怪的代码在这里编辑，植入到里面的Live Server成为了眼睛，实时观测着页面的变化。GitHub Desktop是邮递员，负责把我电脑端的网页转递到云端。</p>
+
+            <p>一台差点被淘汰的旧机器，就这样重新上岗了。</p>
+
+        </div>
+
+        <div class="article-footer">
+            <a href="02心流.html" class="footer-btn"><span>⇠</span> 上一篇</a>
+            <a href="04AI天团.html" class="footer-btn">下一篇 <span>⇢</span></a>
+        </div>
+    </div>
+
+</body>
+</html>

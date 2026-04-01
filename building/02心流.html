@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>心流 - 与AI共建</title>
+    <style>
+        :root { 
+            --page-bg: #111111; --module-bg: #141210; --content-bg: #151311;
+            --border-color: #2a2826; --text-main: #f5f1eb; --text-sub: #ddd5cc;
+            --text-dim: #99938d; --accent-color: #c87e4f; --hover-bg: #1a1816;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 18px; letter-spacing: 2px; flex: 1; text-align: center; color: var(--text-dim); }
+        .article { max-width: 580px; margin: 0 auto; padding: 36px 24px 80px; }
+        .article-num { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 12px; }
+        .article-title { font-size: 22px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
+        .article-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color); }
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2; }
+        .article-body p { margin: 0 0 22px; }
+        .article-body p:last-child { margin-bottom: 0; }
+        .article-body h3 { font-size: 15px; font-weight: 500; color: var(--accent-color); margin: 36px 0 14px; letter-spacing: 1px; }
+        .article-body blockquote { border-left: 2px solid var(--accent-color); margin: 28px 0; padding: 4px 0 4px 18px; color: var(--text-main); font-size: 15px; line-height: 2; }
+        .image-grid { margin: 32px 0; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .image-grid img { width: 100%; border-radius: 10px; display: block; }
+        .image-caption { font-size: 12px; color: var(--text-dim); text-align: center; margin-top: 8px; letter-spacing: 1px; }
+        .article-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+        .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+        .footer-btn.disabled { opacity: 0.3; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="../building.html" class="btn-nav">返回目录</a>
+        <div class="nav-title">与AI共建</div>
+        <div style="width: 80px;"></div>
+    </div>
+
+    <div class="article">
+        <div class="article-num">NO. 02</div>
+        <div class="article-title">心流</div>
+        <div class="article-sub">从一张钓鱼的图开始，记忆的闸门突然就开了</div>
+
+        <div class="article-body">
+
+            <p>有一晚制作老拜美食板块，想写一道关于烤鱼的美食，具体内容还没整理好，准备先放一张封面图片占位。于是让 AI 生成了一张图——孩子们在河边钓鱼，暖底水彩画，乡村风格。</p>
+
+            <p>图出来的那一刻，有什么东西突然开了。</p>
+
+            <h3>记忆的闸门</h3>
+
+            <p>那不只是一张图，那是一种气息。黄河边、小伙伴、大树下、茅草屋——那些藏在记忆深处很久的东西，跟着这张图一起涌出来了。</p>
+
+            <p>于是我继续让AI生成了烤全羊，一碗茶，一只鸡，一锅汤，小凉菜，菜单封面等等等等，每一张都是同一个世界里发生的故事，同一个院子，同一条河，同一种光线同一群人...</p>
+
+            <p>特别值得一提的是烤全羊封面，爷爷身后的那个花架，是我在现实小院里亲手打造的，我把照片（就是我网站封面的照片）发给过AI，没想到被他移花接木引用到这张图中了，图片刚刚呈现出来时，那种虚实难辨，时空折叠的冲击感让人恍惚了。</p>
+
+            <p>随即又冲出一个念头——如果有一天老了，这个梦幻中的院子会是什么样子？</p>
+
+            <h3>想象中的春夏秋冬</h3>
+
+            <p>就这样，在我的提示词下，AI生成了这四张图。</p>
+
+        </div>
+
+        <div class="image-grid">
+            <div>
+                <img src="images/seasons/春.jpg" alt="春">
+                <div class="image-caption">春 · 种菜浇花</div>
+            </div>
+            <div>
+                <img src="images/seasons/夏.jpg" alt="夏">
+                <div class="image-caption">夏 · 篝火弹琴</div>
+            </div>
+            <div>
+                <img src="images/seasons/秋.jpg" alt="秋">
+                <div class="image-caption">秋 · 摘柿炒菜</div>
+            </div>
+            <div>
+                <img src="images/seasons/冬.jpg" alt="冬">
+                <div class="image-caption">冬 · 堆雪烤茶</div>
+            </div>
+        </div>
+
+        <div class="article-body">
+
+            <p>图里有未来的我和太太，可能有三个孙子，还有我现在的三只猫和一只狗。</p>
+
+            <blockquote>
+                那晚彻夜未眠。<br>
+                不是因为睡不着，<br>
+                而是舍不得停下来。
+            </blockquote>
+
+            <h3>关于心流这件事</h3>
+
+            <p>后来我想，那晚的状态，大概就是人们说的"心流"——完全沉浸进去，时间感消失，不觉得累，也不觉得饿，只是一张接一张，停不下来。这种时刻，是很难得的。不是每次坐下来都会有。有时候等了很久，它突然就来了，来自一张图，来自一段旋律，来自某个不经意的触发。</p>
+
+            <p>AI 生成的那张钓鱼图，就是那个触发。</p>
+
+            <p>它打开的，是我心里装了很久、却一直没有出口的东西。</p>
+
+        </div>
+
+        <!-- 画廊链接 -->
+        <a href="gallery.html" style="display:flex; align-items:center; justify-content:space-between; margin-top:32px; padding:18px 22px; background:var(--content-bg); border:1px solid var(--border-color); border-radius:14px; text-decoration:none; transition:0.3s;" onmouseover="this.style.borderColor='#44403c'" onmouseout="this.style.borderColor='var(--border-color)'">
+            <div>
+                <div style="font-size:15px; color:var(--text-main); font-weight:500; margin-bottom:4px;">心流图片</div>
+                <div style="font-size:13px; color:var(--text-dim);">那晚生成的图都在这里，点击可放大观赏</div>
+            </div>
+            <div style="color:var(--text-dim); font-size:20px;">›</div>
+        </a>
+
+        <div class="article-footer">
+            <a href="01.html" class="footer-btn"><span>⇠</span> 上一篇</a>
+            <a href="03AI让一台旧笔记本重新上岗.html" class="footer-btn">下一篇 <span>⇢</span></a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>老拜小筑 · 图集</title>
+    <style>
+        :root { 
+            --page-bg: #111111; --module-bg: #141210; --content-bg: #151311;
+            --border-color: #2a2826; --text-main: #f5f1eb; --text-sub: #ddd5cc;
+            --text-dim: #99938d; --accent-color: #c87e4f; --hover-bg: #1a1816;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 20px; letter-spacing: 2px; flex: 1; text-align: center; }
+        .main { max-width: 660px; margin: 0 auto; padding: 32px 20px 80px; }
+        .intro { margin-bottom: 32px; }
+        .intro-title { font-size: 13px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 10px; }
+        .intro-text { font-size: 15px; color: var(--text-dim); line-height: 1.8; }
+        .section-title { font-size: 13px; color: var(--text-dim); letter-spacing: 2px; margin: 32px 0 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        .img-item img { width: 100%; border-radius: 10px; display: block; cursor: zoom-in; transition: opacity 0.2s; }
+        .img-item img:hover { opacity: 0.82; }
+        .img-item .cap { font-size: 11px; color: var(--text-dim); text-align: center; margin-top: 6px; letter-spacing: 1px; }
+
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.93); z-index: 9999; align-items: center; justify-content: center; padding: 20px; box-sizing: border-box; }
+        .lightbox.active { display: flex; }
+        .lightbox-img-wrap { display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
+        .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 8px; object-fit: contain; user-select: none; }
+        .lightbox-cap { position: fixed; bottom: 24px; left: 0; right: 0; text-align: center; font-size: 13px; color: rgba(255,255,255,0.45); letter-spacing: 1px; pointer-events: none; }
+        .lightbox-close { position: fixed; top: 18px; right: 18px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.12); color: white; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; border: none; z-index: 10; }
+        .lightbox-close:hover { background: rgba(255,255,255,0.25); }
+
+        /* 左右箭头 */
+        .lightbox-prev, .lightbox-next {
+            position: fixed; top: 50%; transform: translateY(-50%);
+            width: 44px; height: 44px; border-radius: 50%;
+            background: rgba(255,255,255,0.12); color: white;
+            font-size: 20px; cursor: pointer; border: none;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10; transition: background 0.2s;
+        }
+        .lightbox-prev { left: 16px; }
+        .lightbox-next { right: 16px; }
+        .lightbox-prev:hover, .lightbox-next:hover { background: rgba(255,255,255,0.25); }
+
+        /* 计数器 */
+        .lightbox-counter { position: fixed; top: 22px; left: 0; right: 0; text-align: center; font-size: 12px; color: rgba(255,255,255,0.35); pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="09.html" class="btn-nav">返回文章</a>
+        <div class="nav-title">图 集</div>
+        <div style="width: 80px;"></div>
+    </div>
+
+    <div class="main">
+        <div class="intro">
+            <div class="intro-title">那个晚上生成的图</div>
+            <div class="intro-text">从一张钓鱼的封面开始，停不下来，彻夜未眠。这里收录了那晚生成的所有图。</div>
+        </div>
+
+        <div class="section-title">心流</div>
+        <div class="grid-3">
+            <div class="img-item"><img src="images/gallery/一条鱼.jpg" alt="一条鱼" onclick="openLightbox(this)"><div class="cap">一条鱼</div></div>
+            <div class="img-item"><img src="images/gallery/烤全羊.jpg" alt="烤全羊" onclick="openLightbox(this)"><div class="cap">烤全羊</div></div>
+            <div class="img-item"><img src="images/gallery/一碗茶.jpg" alt="一碗茶" onclick="openLightbox(this)"><div class="cap">一碗茶</div></div>
+        </div>
+        <div class="grid-3">
+            <div class="img-item"><img src="images/gallery/一只鸡.jpg" alt="一只鸡" onclick="openLightbox(this)"><div class="cap">一只鸡</div></div>
+            <div class="img-item"><img src="images/gallery/一锅汤.jpg" alt="一锅汤" onclick="openLightbox(this)"><div class="cap">一锅汤</div></div>
+            <div class="img-item"><img src="images/gallery/小凉菜.jpg" alt="小凉菜" onclick="openLightbox(this)"><div class="cap">小凉菜</div></div>
+        </div>
+        <div class="grid-3">
+            <div class="img-item"><img src="images/gallery/雨天屋檐下.jpg" alt="雨天屋檐下" onclick="openLightbox(this)"><div class="cap">雨天屋檐下</div></div>
+            <div class="img-item"><img src="images/gallery/秋日烤全羊.jpg" alt="秋日烤全羊" onclick="openLightbox(this)"><div class="cap">秋日烤全羊</div></div>
+            <div class="img-item"><img src="images/gallery/河边唱歌.jpg" alt="河边唱歌" onclick="openLightbox(this)"><div class="cap">河边唱歌</div></div>
+        </div>
+        <div class="grid-3">
+            <div class="img-item"><img src="images/gallery/和爷爷.jpg" alt="和爷爷" onclick="openLightbox(this)"><div class="cap">和爷爷</div></div>
+            <div class="img-item"><img src="images/gallery/和奶奶.jpg" alt="和奶奶" onclick="openLightbox(this)"><div class="cap">和奶奶</div></div>
+            <div class="img-item"><img src="images/gallery/和爷爷奶奶.jpg" alt="和爷爷奶奶" onclick="openLightbox(this)"><div class="cap">和爷爷奶奶</div></div>
+        </div>
+        <div class="grid-2">
+            <div class="img-item"><img src="images/gallery/划船.jpg" alt="划船" onclick="openLightbox(this)"><div class="cap">划船</div></div>
+            <div class="img-item"><img src="images/gallery/上岸.jpg" alt="上岸" onclick="openLightbox(this)"><div class="cap">上岸</div></div>
+        </div>
+        <div class="grid-2">
+            <div class="img-item"><img src="images/gallery/美食封面.jpg" alt="美食封面" onclick="openLightbox(this)"><div class="cap">美食封面</div></div>
+            <div class="img-item"><img src="images/gallery/跨界.jpg" alt="跨界" onclick="openLightbox(this)"><div class="cap">跨界</div></div>
+        </div>
+
+        <div class="section-title">想象中的春夏秋冬</div>
+        <div class="grid-2">
+            <div class="img-item"><img src="images/seasons/春.jpg" alt="春" onclick="openLightbox(this)"><div class="cap">春 · 种菜浇花</div></div>
+            <div class="img-item"><img src="images/seasons/夏.jpg" alt="夏" onclick="openLightbox(this)"><div class="cap">夏 · 篝火弹琴</div></div>
+            <div class="img-item"><img src="images/seasons/秋.jpg" alt="秋" onclick="openLightbox(this)"><div class="cap">秋 · 摘柿炒菜</div></div>
+            <div class="img-item"><img src="images/seasons/冬.jpg" alt="冬" onclick="openLightbox(this)"><div class="cap">冬 · 堆雪烤茶</div></div>
+        </div>
+
+    </div>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">×</button>
+        <button class="lightbox-prev" onclick="navigate(-1)">‹</button>
+        <div class="lightbox-img-wrap" onclick="closeLightbox()">
+            <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()">
+        </div>
+        <button class="lightbox-next" onclick="navigate(1)">›</button>
+        <div class="lightbox-counter" id="lightbox-counter"></div>
+        <div class="lightbox-cap" id="lightbox-cap"></div>
+    </div>
+
+<script>
+    // 收集所有图片
+    const allImgs = Array.from(document.querySelectorAll('.img-item img'));
+    let currentIndex = 0;
+    let touchStartX = 0;
+
+    function openLightbox(img) {
+        currentIndex = allImgs.indexOf(img);
+        showImage(currentIndex);
+        document.getElementById('lightbox').classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function showImage(index) {
+        const img = allImgs[index];
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox-cap').textContent = img.alt;
+        document.getElementById('lightbox-counter').textContent = (index + 1) + ' / ' + allImgs.length;
+    }
+
+    function navigate(dir) {
+        currentIndex = (currentIndex + dir + allImgs.length) % allImgs.length;
+        showImage(currentIndex);
+    }
+
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // 键盘
+    document.addEventListener('keydown', e => {
+        if (!document.getElementById('lightbox').classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigate(-1);
+        if (e.key === 'ArrowRight') navigate(1);
+    });
+
+    // 手机滑动
+    document.getElementById('lightbox').addEventListener('touchstart', e => {
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    document.getElementById('lightbox').addEventListener('touchend', e => {
+        const diff = touchStartX - e.changedTouches[0].clientX;
+        if (Math.abs(diff) > 50) {
+            navigate(diff > 0 ? 1 : -1);
+        } else if (Math.abs(diff) < 10) {
+            closeLightbox();
+        }
+    });
+</script>
+</body>
+</html>
