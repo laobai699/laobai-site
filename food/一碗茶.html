@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPL3Y3DXJE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SPL3Y3DXJE');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一碗茶 - 老拜美食</title>
+    <style>
+        :root { 
+            --page-bg: #111111;
+            --module-bg: #141210;
+            --content-bg: #151311;
+            --border-color: #2a2826;
+            --text-main: #f5f1eb;
+            --text-sub: #ddd5cc;
+            --text-dim: #99938d;
+            --accent-color: #c87e4f;
+            --hover-bg: #1a1816;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 20px; letter-spacing: 2px; flex: 1; text-align: center; }
+
+        .article { max-width: 600px; margin: 0 auto; padding: 40px 24px 80px; }
+
+        /* 题图 */
+        .hero-img { width: 100%; border-radius: 16px; display: block; margin-bottom: 12px; }
+        .img-caption { font-size: 12px; color: var(--text-dim); text-align: center; margin-bottom: 36px; letter-spacing: 1px; }
+
+        /* 标题 */
+        .article-title { font-size: 28px; font-weight: 500; letter-spacing: 3px; margin-bottom: 8px; }
+        .article-sub { font-size: 13px; color: var(--text-dim); margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border-color); letter-spacing: 1px; }
+
+        /* 正文 */
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2.1; }
+        .article-body p { margin: 0 0 24px; text-indent: 2em; }
+
+        /* 分隔线 */
+        .divider { border: none; border-top: 1px solid var(--border-color); margin: 36px 0; }
+
+        /* 配方标题 */
+        .recipe-title {
+            font-size: 13px; color: var(--accent-color); letter-spacing: 3px;
+            margin: 32px 0 16px;
+        }
+
+        /* 原料卡片 */
+        .ingredient-card {
+            background: var(--content-bg); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 16px 20px; margin-bottom: 20px;
+            font-size: 15px; color: var(--text-sub); line-height: 1.9;
+        }
+        .ingredient-card .note {
+            font-size: 13px; color: var(--text-dim); margin-top: 8px;
+            padding-top: 8px; border-top: 1px solid var(--border-color);
+            line-height: 1.8;
+        }
+
+        /* 步骤 */
+        .step { display: flex; gap: 16px; margin-bottom: 20px; align-items: flex-start; }
+        .step-num {
+            width: 28px; height: 28px; border-radius: 50%;
+            border: 1px solid var(--accent-color); color: var(--accent-color);
+            font-size: 13px; font-weight: 500; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            margin-top: 2px;
+        }
+        .step-text { font-size: 15px; color: var(--text-sub); line-height: 1.9; flex: 1; }
+
+        /* 图片 */
+        .img-wrap { margin: 24px 0; }
+        .img-wrap img { width: 100%; border-radius: 12px; display: block; }
+        .img-wrap .img-caption { margin-top: 8px; margin-bottom: 0; }
+
+        /* 结尾引用 */
+        .closing {
+            font-size: 15px; color: var(--text-sub); line-height: 2.2;
+            font-style: italic; margin: 32px 0 0;
+            padding: 20px 24px;
+            background: var(--content-bg); border: 1px solid var(--border-color);
+            border-radius: 12px;
+        }
+
+        .article-footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border-color); text-align: center; }
+        .footer-back { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 12px 28px; border-radius: 25px; background: var(--module-bg); transition: 0.3s; display: inline-block; }
+        .footer-back:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="../food.html" class="btn-nav">返回美食</a>
+        <div class="nav-title">老拜美食</div>
+        <div style="width: 80px;"></div>
+    </div>
+
+    <div class="article">
+
+        <img class="hero-img" src="../food/images/tea.png" alt="一碗茶">
+        <div class="img-caption">那个戴草帽的孩子，和奶奶对坐，河边，一壶茶</div>
+
+        <div class="article-title">一 碗 茶</div>
+        <div class="article-sub">兰州风味长寿奶茶 · 爷爷奶奶的每一个清晨</div>
+
+        <div class="article-body">
+
+            <p>童年的我生活在兰州市中心的一个穆斯林居住区，一条弯曲回转的小巷居住着几百户人家，那座落在小巷中心的清真寺便将这几百户人家紧密地联系在了一起。</p>
+
+            <p>每天下午，一个精神矍铄的白胡子老头都会坐在小院门口的石条台阶上，等待着他的孩子们回家。过往的行人则都亲切地和他打招呼，大声称呼着："拜爷"。而他往往只是微笑着点一下头以示回答，然后把目光又轻轻地转向了巷口。</p>
+
+            <p>没错，那就是我的爷爷。一个虔诚的穆斯林，一个清真饭店的厨师长，一个德高望重的长寿的老人。</p>
+
+            <p>爷爷是97年去世的，那一年他九十二岁。</p>
+
+            <div class="divider"></div>
+
+            <p>爷爷起床的第一件事就是喝奶茶。每天的清晨，奶奶用雕花的黑色托盘将两大碗滚烫的奶茶端到床边，他们一人一碗。这奶茶散发着清香，伴着爷爷吧嗒嘴的喝茶声唤醒着我，我会争抢着去喝那剩下的 1/3 碗，经常如此。这样的奶茶，他们每天早中晚各一碗。</p>
+
+            <p>每当家里来了客人，爷爷也都是一边招呼一边大声地喊着："老婆子，赶紧把奶茶沏上。"</p>
+
+            <p>2017年春节回国，发现奶奶的身体大不如从前，眼花了，耳背了，虽然步履蹒跚但依然思维敏捷逻辑清晰。还有，在每天的早晨，依然要捧起那碗清香的奶茶。</p>
+
+            <p>我猜，这碗奶茶一定充满着回忆……</p>
+
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- 食谱部分 -->
+        <div class="recipe-title">食 谱</div>
+
+        <div class="article-body">
+            <p>下面，就让老拜为您展示这一碗兰州风味的长寿奶茶。</p>
+        </div>
+
+        <div class="img-wrap">
+            <img src="images/茶-原料.jpg" alt="原料">
+            <div class="img-caption">原料：牛奶、茯砖茶、盐</div>
+        </div>
+
+        <div class="ingredient-card">
+            <strong style="color: var(--text-main);">原料</strong><br>
+            牛奶 · 茯砖茶（约 40g）· 盐（适量）· 水（约 1500ml）
+            <div class="note">
+                必须是茯茶，也叫茯砖茶。图中这块是湖南白沙溪1939年出品的特制茯砖，净重1.5kg，是我们每次返回温哥华的必带物品之一。温哥华暂时没有发现有卖茯茶的，感兴趣的朋友可以联系我，我可以免费给你一点。
+            </div>
+        </div>
+
+        <div class="img-wrap">
+            <img src="images/茶-煮奶.jpg" alt="煮牛奶">
+            <div class="img-caption">牛奶入锅，小火慢热——角落里那位黑色的监工是我家的狗</div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-text">牛奶倒入锅中烧开。冒热气快开的时候一定要用小火，因为泡沫升得非常快，稍不留意就会溢出来。要将锅立刻端离火炉，而不是关火。</div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-text">牛奶静置约 2 小时后，漂浮在上层的脂肪就慢慢冷却凝固了，我们称之为<strong style="color: var(--text-main);">奶皮</strong>。</div>
+        </div>
+
+        <div class="img-wrap">
+            <img src="images/茶-煮茶.jpg" alt="煮茯茶">
+            <div class="img-caption">茯砖茶入壶，煮至沸腾再小火续煮 2-3 分钟</div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-text">凉水约 1500ml，茯茶约 40g，开火煮至沸腾，然后关小火再继续煮 2 到 3 分钟。关火。</div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-text">依个人口味加入适量的盐。</div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-text">倒入 1/2 碗煮过的牛奶（用筷子轻轻将奶皮拨开，只倒入牛奶而不要奶皮）。</div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-text">将刚煮好的热茶水通过细目滤网倒入碗中，充分搅拌。</div>
+        </div>
+
+        <div class="step">
+            <div class="step-num">7</div>
+            <div class="step-text">用筷子将牛奶锅内的奶皮夹出一元硬币略大的一块，轻轻地放到奶茶上。</div>
+        </div>
+
+        <div class="img-wrap">
+            <img src="images/茶-完成.jpg" alt="完成">
+            <div class="img-caption">两碗。一人一碗。</div>
+        </div>
+
+        <div class="closing">
+            这就是那延年益寿的清香的奶茶。那一小片奶皮如蝴蝶在风中轻舞，如鱼儿在水中游荡，不经意间就飞出了你的视野，融入了你的生活，带给你无限的期望和深深的回忆……
+        </div>
+
+        <div class="article-footer">
+            <a href="../food.html" class="footer-back">返回老拜美食</a>
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPL3Y3DXJE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SPL3Y3DXJE');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨界 - 老拜美食</title>
+    <style>
+        :root { 
+            --page-bg: #111111;
+            --module-bg: #141210;
+            --content-bg: #151311;
+            --border-color: #2a2826;
+            --text-main: #f5f1eb;
+            --text-sub: #ddd5cc;
+            --text-dim: #99938d;
+            --accent-color: #c87e4f;
+            --hover-bg: #1a1816;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 20px; letter-spacing: 2px; flex: 1; text-align: center; }
+
+        .article { max-width: 600px; margin: 0 auto; padding: 40px 24px 80px; }
+
+        /* 题图 */
+        .hero-img {
+            width: 100%; border-radius: 16px; display: block;
+            margin-bottom: 36px;
+        }
+        .hero-caption {
+            font-size: 12px; color: var(--text-dim); text-align: center;
+            margin-top: -28px; margin-bottom: 36px; letter-spacing: 1px;
+        }
+
+        /* 标题区 */
+        .article-title { font-size: 28px; font-weight: 500; letter-spacing: 3px; margin-bottom: 8px; }
+        .article-date { font-size: 13px; color: var(--text-dim); margin-bottom: 36px; padding-bottom: 28px; border-bottom: 1px solid var(--border-color); letter-spacing: 1px; }
+
+        /* 正文 */
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2.1; }
+        .article-body p { margin: 0 0 24px; text-indent: 2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+
+        /* 括号注释稍微淡一点 */
+        .note { color: var(--text-dim); font-size: 15px; }
+
+        /* 分隔 */
+        .divider { border: none; border-top: 1px solid var(--border-color); margin: 36px 0; }
+
+        /* 结尾三句 */
+        .closing {
+            font-size: 15px; color: var(--text-dim);
+            line-height: 2.4; margin: 32px 0;
+            padding-left: 20px; border-left: 2px solid var(--border-color);
+        }
+
+        /* 幻想段落 */
+        .vision {
+            background: var(--content-bg); border: 1px solid var(--border-color);
+            border-radius: 14px; padding: 24px 28px; margin: 32px 0;
+            font-size: 15px; color: var(--text-sub); line-height: 2.2;
+            font-style: italic;
+        }
+
+        .article-footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border-color); text-align: center; }
+        .footer-back { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 12px 28px; border-radius: 25px; background: var(--module-bg); transition: 0.3s; display: inline-block; }
+        .footer-back:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="../food.html" class="btn-nav">返回美食</a>
+        <div class="nav-title">老拜美食</div>
+        <div style="width: 80px;"></div>
+    </div>
+
+    <div class="article">
+
+        <img class="hero-img" src="../images/grandfather.jpg" alt="跨界">
+        <div class="hero-caption">幻想着三十年后，在午后的暖阳下悠闲地喝着茶</div>
+
+        <div class="article-title">跨 界</div>
+        <div class="article-date">写于十年前，刚开始做烤全羊的时候</div>
+
+        <div class="article-body">
+
+            <p>爷爷奶奶没有上过学，他们是虔诚的穆斯林，是眼界辽阔的智者，是容纳百川的大海。</p>
+
+            <p>爷爷是穆斯林餐厅的厨师长，奶奶一生没有工作，照顾家庭就是她的职业。凭着爷爷微薄的收入和业余时间带领全家打土坯卖钱，他们硬是鼓励着让三个叔叔两个姑姑全部念书到高中——这在当时是绝无仅有的——还把我的父亲培养成为穆斯林居住区的第一个大学生。<span class="note">（兰州大学现代物理系66届。老爸老妈是大学同班同学，我和我爱人也是大学同学，向你们致敬。老妈和老婆都是汉族，再一次体会到了爷爷奶奶的宽容和博大。）</span></p>
+
+            <p>爷爷的杀手锏是装聋。每当遇到他不喜欢的人想和他聊天，他就指指自己的耳朵，对方也就知趣地走开了。相反遇到喜欢的人——比如我和我爱人——他马上就变成了一个耳聪目明的老小孩。</p>
+
+            <p>奶奶和稀泥的水平堪称世界一流。邻里间或儿女间的矛盾到了她这，在她化骨棉掌的打击下不几天就烟消云散了。在她的影响下，父辈们也都相敬如宾和睦相处，即使有矛盾也能很好地处理，没有争吵，没有暴力，没有极端。</p>
+
+            <p>爷爷最大的爱好是下象棋，最喜欢的是和我下棋，最开心的是下棋输给了我。我知道，这里面承载着太多……</p>
+
+            <p>爷爷是因为那天看电视时间过久，引发脑溢血，眼睛闭上就再也没有睁开，前后六小时，享年九十二岁。</p>
+
+            <p>他走的坦荡，无怨，无憾。</p>
+
+            <hr class="divider">
+
+            <div class="closing">
+                回忆才知来途，<br>
+                放下才能拿起，<br>
+                纪念是为了超越。
+            </div>
+
+            <p>老爸老妈没有机会成为邓稼先，我也决不可能成为贝聿铭。既然这样，不妨就放下一切，随心而动，随意而为，随缘而至，随势而发，让那流淌在血液中的天赋尽情地挥洒吧。</p>
+
+            <p>本来以为只是个职业，冥冥之中却是使命。</p>
+
+            <div class="vision">
+                幻想着三十年后，有一个白胡子老头，在午后的暖阳下悠闲地喝着茶，而不远处他的徒孙们正忙活着，金色的烤羊缓慢地转动着，炉内炭火正旺……
+            </div>
+
+        </div>
+
+        <div class="article-footer">
+            <a href="../food.html" class="footer-back">返回老拜美食</a>
+        </div>
+
+    </div>
+
+</body>
+</html>
