@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPL3Y3DXJE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SPL3Y3DXJE');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人和AI是怎么一起写代码的 - 与AI共建</title>
+    <style>
+        :root { 
+            --page-bg: #111111; --module-bg: #141210; --content-bg: #151311;
+            --border-color: #2a2826; --text-main: #f5f1eb; --text-sub: #ddd5cc;
+            --text-dim: #99938d; --accent-color: #c87e4f; --hover-bg: #1a1816;
+        }
+        html[data-theme="light"] {
+            --page-bg: #f0ebe3; --module-bg: #faf6f0; --content-bg: #faf6f0;
+            --border-color: #ddd5c8; --text-main: #2a2218; --text-sub: #4a4238;
+            --text-dim: #7a7268; --accent-color: #b86e3f; --hover-bg: #e8e0d8;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 18px; letter-spacing: 2px; flex: 1; text-align: center; color: var(--text-dim); }
+        .article { max-width: 580px; margin: 0 auto; padding: 36px 24px 80px; }
+        .article-num { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 12px; }
+        .article-title { font-size: 22px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
+        .article-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color); }
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2; }
+        .article-body p { margin: 0 0 22px; text-indent: 2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+        .article-body h3 { font-size: 15px; font-weight: 500; color: var(--accent-color); margin: 36px 0 14px; letter-spacing: 1px; }
+        .article-body blockquote { border-left: 2px solid var(--accent-color); margin: 28px 0; padding: 4px 0 4px 18px; color: var(--text-main); font-size: 15px; line-height: 2; }
+
+        .analogy-card { background: var(--content-bg); border: 1px solid var(--border-color); border-radius: 14px; padding: 20px 24px; margin: 28px 0; }
+        .analogy-row { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 14px; color: var(--text-sub); line-height: 1.8; align-items: flex-start; }
+        .analogy-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .analogy-label { color: var(--accent-color); font-weight: 500; flex-shrink: 0; width: 60px; font-size: 13px; margin-top: 2px; }
+
+        .article-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+        .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+        .footer-btn.disabled { opacity: 0.3; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="../building.html" class="btn-nav">返回目录</a>
+        <div class="nav-title">与AI共建</div>
+        <button class="btn-nav" id="theme-toggle" onclick="toggleTheme()">浅色</button>
+    </div>
+
+    <div class="article">
+        <div class="article-num">NO. 06</div>
+        <div class="article-title">人和AI是怎么一起写代码的</div>
+        <div class="article-sub">看懂这个比喻，也就基本了解了AI建网的过程</div>
+
+        <div class="article-body">
+
+            <h3>网站是一栋房子</h3>
+
+            <p>如果把网站比成一栋三室一厅的房子，那么主页就是客厅，其它不同的网页就是不同功能的屋子。</p>
+
+            <p>那代码是什么？</p>
+
+        </div>
+
+        <div class="analogy-card">
+            <div class="analogy-row">
+                <div class="analogy-label">代码是</div>
+                <div>砖头、水泥、石子等建筑材料</div>
+            </div>
+            <div class="analogy-row">
+                <div class="analogy-label">代码是</div>
+                <div>壁纸、油漆、灯具等装饰材料</div>
+            </div>
+            <div class="analogy-row">
+                <div class="analogy-label">代码是</div>
+                <div>水、电、暖、电视电话等配套设施</div>
+            </div>
+        </div>
+
+        <div class="article-body">
+
+            <h3>以前怎么建</h3>
+
+            <p>以前建造一栋房子，需要规划、设计、绘图、建筑、装修、水电暖施工，整个过程中还需要工程监理。每一个环节都需要专业的人来完成，普通人想自己建，几乎不可能。</p>
+
+            <h3>现在怎么建</h3>
+
+            <p>现在你只需要提出规划，告诉 AI：我需要一个三室一厅的房子，欧式装修，水晶灯具，水电暖齐全，要有电视电话，要拎包入住。</p>
+
+            <p>具体的工作——也就是写代码——就都由 AI 来完成了。</p>
+
+            <p>你还要做的一件事，就是工程监理：随时和 AI 沟通交流，验证它的施工，发现问题及时提出。</p>
+
+            <blockquote>
+                规划是你的，<br>
+                施工是 AI 的，<br>
+                监理还是你的。
+            </blockquote>
+
+            <h3>那"拎包入住"的包是什么？</h3>
+
+            <p>包，就是内容——文字、图片、故事。这些是你独有的东西，AI 替代不了。</p>
+
+            <p>而且 AI 还很贴心，会帮你把包里的内容整理好、清洁好，放到合适的位置。</p>
+
+            <p>房子是 AI 建的，但住进去的，是你自己的生活。</p>
+
+        </div>
+
+        <div class="article-footer">
+            <a href="05从糊涂到明白.html" class="footer-btn"><span>⇠</span> 上一篇</a>
+            <a href="#" class="footer-btn disabled">下一篇 <span>⇢</span></a>
+        </div>
+    </div>
+
+<script>
+function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('theme-toggle').textContent = isDark ? '深色' : '浅色';
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+(function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('theme-toggle');
+            if (btn) btn.textContent = '深色';
+        });
+    }
+})();
+</script>
+</body>
+</html>
