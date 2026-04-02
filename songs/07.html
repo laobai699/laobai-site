@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPL3Y3DXJE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SPL3Y3DXJE');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我是怎么和AI说"这里不对"的 - 与AI共建</title>
+    <style>
+        :root { 
+            --page-bg: #111111;
+            --module-bg: #141210;
+            --content-bg: #151311;
+            --border-color: #2a2826;
+            --text-main: #f5f1eb;
+            --text-sub: #ddd5cc;
+            --text-dim: #99938d;
+            --accent-color: #c87e4f;
+            --hover-bg: #1a1816;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 18px; letter-spacing: 2px; flex: 1; text-align: center; color: var(--text-dim); }
+
+        .article { max-width: 580px; margin: 0 auto; padding: 36px 24px 80px; }
+        .article-num { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 12px; }
+        .article-title { font-size: 22px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
+        .article-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color); }
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2; }
+        .article-body p { margin: 0 0 22px; }
+        .article-body h3 { font-size: 15px; font-weight: 500; color: var(--accent-color); margin: 32px 0 12px; letter-spacing: 1px; }
+        .article-body blockquote { border-left: 2px solid var(--accent-color); margin: 28px 0; padding: 4px 0 4px 18px; color: var(--text-main); font-size: 15px; line-height: 2; }
+
+        /* 问答气泡 */
+        .qa-block { margin: 24px 0; }
+        .q-row { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+        .q-bubble { background: #1e1510; border: 1px solid var(--accent-color); border-radius: 16px 16px 4px 16px; padding: 12px 18px; max-width: 85%; font-size: 15px; color: var(--text-main); line-height: 1.8; }
+        .a-row { display: flex; justify-content: flex-start; margin-bottom: 10px; }
+        .a-bubble { background: var(--content-bg); border: 1px solid var(--border-color); border-radius: 16px 16px 16px 4px; padding: 12px 18px; max-width: 92%; font-size: 15px; color: var(--text-sub); line-height: 1.8; }
+        .a-bubble .highlight { color: var(--accent-color); font-weight: 500; }
+
+        /* 代码指令卡片 */
+        .cmd-card {
+            background: #0d0c0b; border: 1px solid var(--border-color);
+            border-radius: 10px; padding: 14px 18px; margin: 12px 0;
+            font-family: "Courier New", monospace; font-size: 13px;
+            color: #a0c880; line-height: 1.8;
+        }
+        .cmd-label { font-family: "Helvetica Neue", sans-serif; font-size: 11px; color: var(--text-dim); margin-bottom: 8px; letter-spacing: 1px; }
+
+        /* 结果卡片 */
+        .result-card {
+            background: var(--content-bg); border: 1px solid var(--border-color);
+            border-radius: 10px; padding: 14px 18px; margin: 12px 0;
+            font-size: 14px; color: var(--text-sub); line-height: 1.8;
+        }
+        .result-card .result-label { font-size: 11px; color: var(--text-dim); margin-bottom: 8px; letter-spacing: 1px; }
+
+        .article-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+        .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+        .footer-btn.disabled { opacity: 0.3; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="../building.html" class="btn-nav">返回目录</a>
+        <div class="nav-title">与AI共建</div>
+        <div style="width: 80px;"></div>
+    </div>
+
+    <div class="article">
+        <div class="article-num">NO. 07</div>
+        <div class="article-title">我是怎么和AI说"这里不对"的</div>
+        <div class="article-sub">一个真实的修bug过程，从发现问题到解决问题</div>
+
+        <div class="article-body">
+
+            <p>很多人会问：和 AI 一起改代码，具体是怎么操作的？说"帮我改一下"就行了吗？</p>
+
+            <p>不完全是。更准确的说法是：你要能描述"哪里不对"，AI 才能给你"怎么改"。下面这个例子，是某天我发现歌谱页面有两个问题之后，和 Claude 的真实对话过程。</p>
+
+            <h3>发现问题</h3>
+
+            <p>歌谱页面有个"级数模式"的功能，可以把和弦显示成 1、2、3、4、5、6、7 这样的级数。我在用的时候发现，换了调之后，级数也跟着变了。</p>
+
+            <p>另一个问题是自动滚动——速度调到最慢，还是觉得太快。</p>
+
+            <p>这两个问题我说得很简单，但说清楚了：</p>
+
+            <div class="qa-block">
+                <div class="q-row">
+                    <div class="q-bubble">发现新问题，歌谱上，和弦的级数应该是固定的，不会随调的改变而改变。现在的逻辑关系不对，和弦级数随着调的改变而改变，这是不对的，需要改。另外滚屏的速度调节，希望还能调节的再慢一些，目前速度放到最慢时，我觉得还是滚动的有点快。</div>
+                </div>
+                <div class="a-row">
+                    <div class="a-bubble">
+                        你说得对！两个问题都很清楚：<br><br>
+                        <span class="highlight">问题一：级数模式</span><br>
+                        级数应该反映的是和弦在原调里的功能（1级、4级、5级…），不管你选什么调来弹，级数关系不变。现在的逻辑跟着变调走了，是错的。<br><br>
+                        <span class="highlight">问题二：滚动速度</span><br>
+                        最慢还是太快，把最慢档再调低一些。
+                    </div>
+                </div>
+            </div>
+
+            <h3>AI 给出修改指令</h3>
+
+            <p>确认了问题之后，Claude 没有直接去改文件，而是先把修改方案整理成一段清晰的指令，让我复制给 Claude Code 去执行：</p>
+
+            <div class="result-card">
+                <div class="result-label">CLAUDE 给出的指令（发给 Claude Code 执行）</div>
+                修复级数模式逻辑：级数应该基于原调固定计算，不随变调改变。把 processChord 函数里的逻辑拆开——级数模式只看原调，变调模式才跟着调号走。<br><br>
+                降低自动滚动最慢速度：把滚动计算从 speed × 0.4 改为 speed × 0.15，同时把滑块默认值从 3 改为 5，这样默认速度体感差不多，但最慢端更慢。
+            </div>
+
+            <h3>Claude Code 去执行</h3>
+
+            <p>我把这段指令复制给 VS Code 里的 Claude Code，它读取了所有歌谱文件，逐一修改，完成后给出了执行报告：</p>
+
+            <div class="cmd-card">
+                <div class="cmd-label">CLAUDE CODE 执行结果</div>
+                Agent (Update all 14 song HTML files)<br>
+                ⎿ Done (60 tool uses · 103.6k tokens · 5m 41s)
+            </div>
+
+            <p>14个文件，60次操作，5分41秒，全部改完。</p>
+
+            <h3>这个过程说明了什么</h3>
+
+            <p>整件事里，我做的只有两件事：发现问题、描述问题。剩下的——分析原因、给出方案、写修改指令、批量执行——全是 AI 完成的。</p>
+
+            <blockquote>
+                你不需要懂代码，<br>
+                但你需要能说清楚"哪里不对"。
+            </blockquote>
+
+            <p>这其实是一种很实用的能力。不是技术能力，而是表达能力——把你感受到的问题，说得足够准确，让 AI 能理解并处理。</p>
+
+            <p>说清楚了，它就能帮你搞定。说不清楚，来回折腾，还费 token。😄</p>
+
+        </div>
+
+        <div class="article-footer">
+            <a href="06.html" class="footer-btn"><span>⇠</span> 上一篇</a>
+            <a href="#" class="footer-btn disabled">下一篇 <span>⇢</span></a>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPL3Y3DXJE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SPL3Y3DXJE');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>怎样和AI交流修改代码 - 与AI共建</title>
+    <style>
+        :root { 
+            --page-bg: #111111;
+            --module-bg: #141210;
+            --content-bg: #151311;
+            --border-color: #2a2826;
+            --text-main: #f5f1eb;
+            --text-sub: #ddd5cc;
+            --text-dim: #99938d;
+            --accent-color: #c87e4f;
+            --hover-bg: #1a1816;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 18px; letter-spacing: 2px; flex: 1; text-align: center; color: var(--text-dim); }
+
+        .article { max-width: 580px; margin: 0 auto; padding: 36px 24px 80px; }
+        .article-num { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 12px; }
+        .article-title { font-size: 22px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
+        .article-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color); }
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2; }
+        .article-body p { margin: 0 0 22px; }
+        .article-body p:last-child { margin-bottom: 0; }
+        .article-body h3 { font-size: 15px; font-weight: 500; color: var(--accent-color); margin: 32px 0 12px; letter-spacing: 1px; }
+        .article-body blockquote { border-left: 2px solid var(--accent-color); margin: 28px 0; padding: 4px 0 4px 18px; color: var(--text-main); font-size: 15px; line-height: 2; }
+
+        /* 问答气泡 */
+        .qa-block { margin: 24px 0; }
+        .q-row { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+        .q-bubble { background: #1e1510; border: 1px solid var(--accent-color); border-radius: 16px 16px 4px 16px; padding: 12px 18px; max-width: 85%; font-size: 15px; color: var(--text-main); line-height: 1.8; }
+        .a-row { display: flex; justify-content: flex-start; margin-bottom: 10px; }
+        .a-bubble { background: var(--content-bg); border: 1px solid var(--border-color); border-radius: 16px 16px 16px 4px; padding: 12px 18px; max-width: 92%; font-size: 15px; color: var(--text-sub); line-height: 1.8; }
+        .a-bubble .highlight { color: var(--accent-color); font-weight: 500; }
+
+        /* 代码块 */
+        .code-block {
+            background: #0d0c0b; border: 1px solid var(--border-color);
+            border-radius: 10px; padding: 14px 18px; margin: 12px 0;
+            font-family: "Courier New", monospace; font-size: 12px;
+            color: #a8c4a2; line-height: 1.8; overflow-x: auto;
+        }
+
+        /* 流程标签 */
+        .flow {
+            display: flex; gap: 8px; flex-wrap: wrap; margin: 20px 0;
+        }
+        .flow-step {
+            background: var(--content-bg); border: 1px solid var(--border-color);
+            border-radius: 20px; padding: 5px 14px;
+            font-size: 13px; color: var(--text-dim);
+        }
+        .flow-step.done { border-color: var(--accent-color); color: var(--accent-color); }
+        .flow-arrow { color: var(--border-color); font-size: 16px; display: flex; align-items: center; }
+
+        .article-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+        .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="../building.html" class="btn-nav">返回目录</a>
+        <div class="nav-title">与AI共建</div>
+        <div style="width: 80px;"></div>
+    </div>
+
+    <div class="article">
+        <div class="article-num">NO. 05</div>
+        <div class="article-title">怎样和AI交流修改代码</div>
+        <div class="article-sub">一个真实的例子，从发现问题到解决问题</div>
+
+        <div class="article-body">
+
+            <p>很多人会问：和 AI 一起改代码，具体是怎么交流的？</p>
+
+            <p>与其解释，不如直接看一个真实的例子。下面是某天我和 Claude 的一段对话，完整还原了从发现问题到解决问题的过程。</p>
+
+            <p>那天我注意到歌谱页面有两个问题。</p>
+
+            <h3>第一个问题：级数模式不对</h3>
+
+            <div class="qa-block">
+                <div class="q-row">
+                    <div class="q-bubble">歌谱上，和弦的级数应该是固定的，不会随调的改变而改变。现在的逻辑关系不对，和弦级数随着调的改变而改变，这是不对的，需要改。</div>
+                </div>
+                <div class="a-row">
+                    <div class="a-bubble">
+                        你说得对！级数应该反映的是和弦在<span class="highlight">原调里的功能</span>（1级、4级、5级…），不管你选什么调来弹，级数关系不变。现在的逻辑跟着变调走了，是错的。<br><br>
+                        需要把 processChord 函数的逻辑拆开：级数模式时，固定用原调计算；变调模式时，才跟着调号走。
+                    </div>
+                </div>
+            </div>
+
+            <p>注意这里的交流方式：我不需要懂代码，只需要描述"哪里的效果不对"。AI 来判断是什么原因，然后给出解决方案。</p>
+
+            <h3>第二个问题：滚动太快</h3>
+
+            <div class="qa-block">
+                <div class="q-row">
+                    <div class="q-bubble">另外滚屏的速度调节，希望还能调节的再慢一些，目前速度放到最慢时，我觉得还是滚动的有点快。</div>
+                </div>
+                <div class="a-row">
+                    <div class="a-bubble">
+                        明白了！把滚动计算的系数从 0.4 调小到 0.15，同时把默认值从最小调到中间，这样最慢端会慢很多，但默认速度体感和之前差不多。
+                    </div>
+                </div>
+            </div>
+
+            <h3>然后呢？</h3>
+
+            <p>两个问题说清楚之后，Claude 给出了一段完整的 Claude Code 指令，大概长这样：</p>
+
+            <div class="code-block">请修改 songs 文件夹里所有歌谱文件，修复以下两个问题：
+
+1. 修复级数模式逻辑
+   把 processChord 函数改为：级数模式时固定
+   用原调计算，变调模式时才跟调号走。
+
+2. 降低自动滚动最慢速度
+   把滚动系数从 0.4 改为 0.15，
+   默认值从 3 改为 5。</div>
+
+            <p>我把这段指令复制粘贴到 VS Code 的终端里，发给 Claude Code，它自动读取了全部14个歌谱文件，逐一修改，几分钟就全部完成了。</p>
+
+            <h3>整个流程是这样的</h3>
+
+            <div class="flow">
+                <div class="flow-step done">发现问题</div>
+                <div class="flow-arrow">›</div>
+                <div class="flow-step done">用自己的话描述</div>
+                <div class="flow-arrow">›</div>
+                <div class="flow-step done">AI分析原因</div>
+                <div class="flow-arrow">›</div>
+                <div class="flow-step done">AI给出指令</div>
+                <div class="flow-arrow">›</div>
+                <div class="flow-step done">复制给Claude Code执行</div>
+                <div class="flow-arrow">›</div>
+                <div class="flow-step done">验证效果</div>
+            </div>
+
+            <blockquote>
+                不需要懂代码，<br>
+                只需要能描述"哪里不对"。
+            </blockquote>
+
+            <p>这就是人和 AI 协同修改代码的真实样子。说清楚问题，剩下的交给它。</p>
+
+        </div>
+
+        <div class="article-footer">
+            <a href="04.html" class="footer-btn"><span>⇠</span> 上一篇</a>
+            <a href="06.html" class="footer-btn">下一篇 <span>⇢</span></a>
+        </div>
+    </div>
+
+</body>
+</html>

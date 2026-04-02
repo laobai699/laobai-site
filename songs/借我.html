@@ -2,6 +2,14 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPL3Y3DXJE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SPL3Y3DXJE');
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>借我 - 老拜有谱</title>
     <style>
@@ -157,7 +165,7 @@
             btn.classList.add('active'); btn.innerText = '停止';
             scrollJob = setInterval(() => {
                 const speed = parseInt(document.getElementById('scrollSpeed').value);
-                window.scrollBy(0, speed * 0.4);
+                window.scrollBy(0, speed * 0.3 + 0.3);
             }, 30);
         }
     }
@@ -210,11 +218,18 @@
     function processChord(chord, targetKeyIndex) {
         if (!chord) return "";
         const baseKeyIndex = notes.indexOf(baseKey);
-        const offset = (targetKeyIndex - baseKeyIndex + 12) % 12;
-        return chord.replace(/[A-G]#?/g, (match) => {
-            let i = notes.indexOf(match);
-            return isDegreeMode ? degrees[(i - baseKeyIndex - offset + 24) % 12] : notes[(i + offset) % 12];
-        });
+        if (isDegreeMode) {
+            return chord.replace(/[A-G]#?/g, (match) => {
+                let i = notes.indexOf(match);
+                return degrees[(i - baseKeyIndex + 12) % 12];
+            });
+        } else {
+            const offset = (targetKeyIndex - baseKeyIndex + 12) % 12;
+            return chord.replace(/[A-G]#?/g, (match) => {
+                let i = notes.indexOf(match);
+                return notes[(i + offset) % 12];
+            });
+        }
     }
 
     function updateView() {

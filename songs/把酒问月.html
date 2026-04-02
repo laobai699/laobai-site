@@ -2,6 +2,14 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPL3Y3DXJE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SPL3Y3DXJE');
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>把酒问月 - 老拜有谱</title>
     <style>
@@ -79,7 +87,7 @@
         <div class="ctrl-group">
             <button id="scrollBtn" class="btn-tool" onclick="toggleScroll()">滚动</button>
             <span class="ctrl-label">速度</span>
-            <input type="range" id="scrollSpeed" class="ctrl-slider" min="1" max="10" value="5">
+            <input type="range" id="scrollSpeed" class="ctrl-slider" min="1" max="10" value="3">
         </div>
 
         <div class="ctrl-divider"></div>
@@ -135,7 +143,7 @@
             btn.classList.add('active'); btn.innerText = '停止';
             scrollJob = setInterval(() => {
                 const speed = parseInt(document.getElementById('scrollSpeed').value);
-                window.scrollBy(0, speed * 0.15);
+                window.scrollBy(0, speed * 0.3 + 0.3);
             }, 30);
         }
     }
