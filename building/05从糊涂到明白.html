@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPL3Y3DXJE"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-SPL3Y3DXJE');
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>从糊涂到明白 - 与AI共建</title>
+    <style>
+        :root { 
+            --page-bg: #111111; --module-bg: #141210; --content-bg: #151311;
+            --border-color: #2a2826; --text-main: #f5f1eb; --text-sub: #ddd5cc;
+            --text-dim: #99938d; --accent-color: #c87e4f; --hover-bg: #1a1816;
+        }
+        html[data-theme="light"] {
+            --page-bg: #f0ebe3;
+            --module-bg: #faf6f0;
+            --content-bg: #faf6f0;
+            --border-color: #ddd5c8;
+            --text-main: #2a2218;
+            --text-sub: #4a4238;
+            --text-dim: #7a7268;
+            --accent-color: #b86e3f;
+            --hover-bg: #e8e0d8;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 18px; letter-spacing: 2px; flex: 1; text-align: center; color: var(--text-dim); }
+        .article { max-width: 580px; margin: 0 auto; padding: 36px 24px 80px; }
+        .article-num { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 12px; }
+        .article-title { font-size: 22px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
+        .article-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color); }
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2; }
+        .article-body p { margin: 0 0 22px; text-indent: 2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+        .article-body h3 { font-size: 15px; font-weight: 500; color: var(--accent-color); margin: 36px 0 14px; letter-spacing: 1px; }
+        .article-body blockquote { border-left: 2px solid var(--accent-color); margin: 28px 0; padding: 4px 0 4px 18px; color: var(--text-main); font-size: 15px; line-height: 2; }
+
+        /* 问答气泡 */
+        .qa-block { margin: 24px 0; }
+        .q-row { display: flex; justify-content: flex-end; margin-bottom: 10px; }
+        .q-bubble { background: var(--hover-bg); border: 1px solid var(--accent-color); border-radius: 16px 16px 4px 16px; padding: 12px 18px; max-width: 85%; font-size: 15px; color: var(--text-main); line-height: 1.8; }
+        .a-row { display: flex; justify-content: flex-start; margin-bottom: 10px; }
+        .a-bubble { background: var(--content-bg); border: 1px solid var(--border-color); border-radius: 16px 16px 16px 4px; padding: 12px 18px; max-width: 92%; font-size: 15px; color: var(--text-sub); line-height: 1.8; }
+        .a-bubble .hl { color: var(--accent-color); font-weight: 500; }
+
+        /* 概念卡片 */
+        .concept-card { background: var(--content-bg); border: 1px solid var(--border-color); border-radius: 14px; padding: 18px 22px; margin: 16px 0; }
+        .concept-title { font-size: 15px; font-weight: 500; color: var(--text-main); margin-bottom: 8px; }
+        .concept-desc { font-size: 14px; color: var(--text-sub); line-height: 1.8; }
+        .concept-tag { display: inline-block; font-size: 11px; color: var(--accent-color); border: 1px solid var(--border-color); border-radius: 20px; padding: 2px 10px; margin-top: 8px; }
+
+        .divider { border: none; border-top: 1px solid var(--border-color); margin: 32px 0; }
+
+        .article-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+        .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+        .footer-btn.disabled { opacity: 0.3; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="../building.html" class="btn-nav">返回目录</a>
+        <div class="nav-title">与AI共建</div>
+        <button class="btn-nav" id="theme-toggle" onclick="toggleTheme()">浅色</button>
+    </div>
+
+    <div class="article">
+        <div class="article-num">NO. 05</div>
+        <div class="article-title">从糊涂到明白</div>
+        <div class="article-sub">AI 那些名字和关系，一次说清楚</div>
+
+        <div class="article-body">
+
+            <p>用了一段时间 AI 之后，我发现自己被各种名字搞得晕头转向。Claude、Claude Code、Open Claude、API、Cline、OpenClaw……它们到底是什么关系？哪个是 AI，哪个只是工具？</p>
+
+            <p>后来和 Claude 聊了一次，终于搞清楚了。</p>
+
+            <h3>第一个问题：什么是 API？</h3>
+
+        </div>
+
+        <div class="qa-block">
+            <div class="q-row"><div class="q-bubble">API 全称是啥？</div></div>
+            <div class="a-row"><div class="a-bubble">
+                <span class="hl">API = Application Programming Interface</span>，应用程序编程接口。<br><br>
+                就是一个标准化的对话窗口，让程序和程序之间能互相说话。打个比方：餐厅里服务员拿着菜单来问你要什么，这个"菜单+点餐流程"就是 API。厨房不需要直接跟你说话，你也不需要进厨房，通过这个标准流程，双方都能完成交互。（这是Claude给的例子，我觉得拿餐厅、配送公司和用餐者来举例更容易理解，配送公司就是API）
+            </div></div>
+        </div>
+
+        <div class="article-body">
+            <h3>第二个问题：Claude 有几种用法？</h3>
+        </div>
+
+        <div class="qa-block">
+            <div class="q-row"><div class="q-bubble">官方 claude、open claude、还有 claude code，你现在是属于哪一个？</div></div>
+            <div class="a-row"><div class="a-bubble">
+                我现在是<span class="hl">官方 Claude</span>——就是通过 claude.ai 网页或桌面应用直接使用的版本。<br><br>
+                三种方式本质上是同一个 Claude，只是工作的地方不同：
+            </div></div>
+        </div>
+
+        <div class="concept-card">
+            <div class="concept-title">官方 Claude（claude.ai）</div>
+            <div class="concept-desc">网页或桌面应用，适合对话、分析、写作、规划。看不到你电脑上的文件。</div>
+            <div class="concept-tag">就是现在</div>
+        </div>
+        <div class="concept-card">
+            <div class="concept-title">Claude Code</div>
+            <div class="concept-desc">运行在 VS Code 终端里，可以直接读取和修改你电脑上的项目文件。批量改代码、更新文件，用这个。</div>
+            <div class="concept-tag">在 VS Code 干活</div>
+        </div>
+        <div class="concept-card">
+            <div class="concept-title">API 版（Open Claude）</div>
+            <div class="concept-desc">通过程序接口调用，给开发者用的，可以嵌入到自己的应用里。按 token 单独计费，不走订阅额度。</div>
+            <div class="concept-tag">开发者专用</div>
+        </div>
+
+        <div class="article-body">
+            <blockquote>
+                就像同一个人，在会议室开会是一种状态，<br>
+                在工地干活是另一种状态。
+            </blockquote>
+
+            <h3>第三个问题：Cline 是什么？</h3>
+        </div>
+
+        <div class="qa-block">
+            <div class="q-row"><div class="q-bubble">如果用 Cline 把你接入到 VS Code 里面，你就是 open Claude 了对吗？</div></div>
+            <div class="a-row"><div class="a-bubble">
+                对！Cline 是一个 VS Code 插件，它通过 API 调用 Claude，所以那种情况下用的就是 API 版的 Claude。<br><br>
+                区别在于：<span class="hl">Claude Code 直接用你的订阅额度，不需要另外付费；Cline 通过 API 调用，按 token 单独计费。</span>
+            </div></div>
+        </div>
+
+        <div class="qa-block">
+            <div class="q-row"><div class="q-bubble">中间人还收传话费对吗？</div></div>
+            <div class="a-row"><div class="a-bubble">
+                哈哈对！Cline 是中间人，每传一句话（token）都要收钱，按字数算。<br><br>
+                而直接登门拜访（claude.ai）和官方授权上门服务（Claude Code）——交了月租就能畅聊，中间没有人抽成。
+            </div></div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="article-body">
+            <h3>第四个问题：OpenClaw 是什么？</h3>
+        </div>
+
+        <div class="qa-block">
+            <div class="q-row"><div class="q-bubble">最近中国国内流行 OpenClaw，是个啥？</div></div>
+            <div class="a-row"><div class="a-bubble">
+                OpenClaw 其实不是中国的！是一个奥地利退休程序员的"周末小项目"，但在中国爆红了。<br><br>
+                它的核心能力：让 AI 获得你整台电脑的操作权限，自主帮你发邮件、排日程、写代码、整理文件。因为 logo 是一只红色龙虾，中国网友叫它<span class="hl">"养龙虾"</span>。
+            </div></div>
+        </div>
+
+        <div class="qa-block">
+            <div class="q-row"><div class="q-bubble">也就是说，OpenClaw 是来控制你们这些 AI 的对吗？它本身不是 AI，只是个控制软件？</div></div>
+            <div class="a-row"><div class="a-bubble">
+                说得很准！它是一个<span class="hl">调度员</span>，本身不是 AI。它接收你的指令，调用 AI 来思考和规划，然后把 AI 的决定转化成实际操作——点击、打字、发邮件、开程序……<br><br>
+                AI 是大脑，负责思考；OpenClaw 是手脚，负责执行；你是老板，发出指令。
+            </div></div>
+        </div>
+
+        <div class="qa-block">
+            <div class="q-row"><div class="q-bubble">它实际上就是个大号的中间人？从本质上说，它也是个 API 对吗？</div></div>
+            <div class="a-row"><div class="a-bubble">
+                完全对！它同时在调用两种 API：<span class="hl">AI 的 API</span>（让 Claude、DeepSeek 等来思考）和<span class="hl">操作系统的 API</span>（让电脑执行具体操作）。<br><br>
+                它本质上就是一个 API 的编排者，自己不产生智能，只是把各种 API 串联起来协同工作。
+            </div></div>
+        </div>
+
+        <hr class="divider">
+
+        <div class="article-body">
+            <h3>捋清楚了</h3>
+
+            <p>从这次对话里，其实就搞清楚了几件事：</p>
+
+            <p>AI 本身（Claude、ChatGPT、DeepSeek……）是有思维的大脑，通过官方网页/APP 直接用，或通过 API 让别人调用。</p>
+
+            <p>Claude Code、Gemini CLI 这类官方工具，是 AI 官方做的"手脚延伸"，让 AI 能直接操作你的文件，包含在月租里，不另收费。</p>
+
+            <p>Cline 这类第三方插件，是中间人，通过 API 调用 AI，方便是方便，但要额外收传话费。</p>
+
+            <p>OpenClaw 是更大的中间人，同时调用 AI 的 API 和操作系统的 API，能接管整台电脑——权限越大，风险越大。</p>
+
+            <blockquote>
+                小号中间人（Cline等）：传话，收传话费。<br>
+                大号中间人（OpenClaw）：传话 + 帮你操作整台电脑，<br>
+                收的"传话费"是你的数据安全风险。
+            </blockquote>
+
+            <p>说白了，这些工具本身都不是 AI，都是在调用 AI。搞清楚这一点，以后再出现什么新名字，也不会糊涂了 😄</p>
+
+        </div>
+
+        <div class="article-footer">
+            <a href="04AI天团.html" class="footer-btn"><span>⇠</span> 上一篇</a>
+            <a href="#" class="footer-btn disabled">下一篇 <span>⇢</span></a>
+        </div>
+    </div>
+
+<script>
+function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('theme-toggle').textContent = isDark ? '深色' : '浅色';
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+(function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('theme-toggle');
+            if (btn) btn.textContent = '深色';
+        });
+    }
+})();
+</script>
+</body>
+</html>
