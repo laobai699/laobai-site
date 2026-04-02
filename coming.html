@@ -218,5 +218,23 @@ p{
 
 </div>
 
+<script>
+function toggleTheme() {
+    const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+    document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    document.getElementById('theme-toggle').textContent = isDark ? '深色' : '浅色';
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+}
+(function() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.addEventListener('DOMContentLoaded', function() {
+            const btn = document.getElementById('theme-toggle');
+            if (btn) btn.textContent = '深色';
+        });
+    }
+})();
+</script>
 </body>
 </html>

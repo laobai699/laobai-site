@@ -15,6 +15,17 @@
             --accent-color: #c87e4f;
             --hover-bg: #1a1816;
         }
+        html[data-theme="light"] {
+            --page-bg: #f0ebe3;
+            --module-bg: #faf6f0;
+            --content-bg: #faf6f0;
+            --border-color: #ddd5c8;
+            --text-main: #2a2218;
+            --text-sub: #4a4238;
+            --text-dim: #7a7268;
+            --accent-color: #b86e3f;
+            --hover-bg: #e8e0d8;
+        }
 
         body { font-family: "Helvetica Neue", "PingFang SC", sans-serif; background: var(--page-bg); color: var(--text-main); margin: 0; }
 
@@ -66,7 +77,7 @@
     <div class="navbar">
         <a href="songs.html" class="btn-back">⬅ 目录</a>
         <div class="nav-title">实用工具</div>
-        <div style="width: 50px;"></div>
+        <button class="btn-nav" id="theme-toggle" onclick="toggleTheme()">浅色</button>
     </div>
 
     <div class="tabs">
@@ -200,6 +211,22 @@
             if (isPlaying) { nextTickTime = audioCtx.currentTime; scheduler(); document.getElementById('playBtn').innerText = "停止节拍"; }
             else { clearTimeout(timerID); document.getElementById('playBtn').innerText = "开始节拍"; }
         }
-    </script>
+        function toggleTheme() {
+        const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+        document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+        document.getElementById('theme-toggle').textContent = isDark ? '深色' : '浅色';
+        localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+    (function() {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.addEventListener('DOMContentLoaded', function() {
+                const btn = document.getElementById('theme-toggle');
+                if (btn) btn.textContent = '深色';
+            });
+        }
+    })();
+</script>
 </body>
 </html>

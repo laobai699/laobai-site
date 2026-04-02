@@ -17,6 +17,17 @@
             --hover-bg: #1a1816;
             --lyric-size: 17px;
         }
+        html[data-theme="light"] {
+            --page-bg: #f0ebe3;
+            --module-bg: #faf6f0;
+            --content-bg: #faf6f0;
+            --border-color: #ddd5c8;
+            --text-main: #2a2218;
+            --text-sub: #4a4238;
+            --text-dim: #7a7268;
+            --accent-color: #b86e3f;
+            --hover-bg: #e8e0d8;
+        }
         body { font-family: "Helvetica Neue", "PingFang SC", "Microsoft YaHei", Arial, sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
         .navbar { background: var(--module-bg) !important; padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1002; border-bottom: 1px solid var(--border-color); }
         .btn-nav { flex-shrink: 0; background: transparent; border: 1px solid var(--border-color); color: var(--text-main); padding: 6px 14px; border-radius: 25px; font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; }
@@ -46,7 +57,7 @@
     <div class="navbar">
         <button class="btn-nav" onclick="window.location.href='../songs.html'">返回目录</button>
         <div class="nav-title">老拜有谱</div>
-        <div style="width: 70px; flex-shrink: 0;"></div>
+        <button class="btn-nav" id="theme-toggle" onclick="toggleTheme()">浅色</button>
     </div>
 
     <div class="controls-wrapper">
@@ -223,6 +234,22 @@
     function toggleDegree() { isDegreeMode = !isDegreeMode; document.getElementById('degreeBtn').classList.toggle('active'); updateView(); }
 
     updateView();
+    function toggleTheme() {
+        const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+        document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+        document.getElementById('theme-toggle').textContent = isDark ? '深色' : '浅色';
+        localStorage.setItem('theme', isDark ? 'light' : 'dark');
+    }
+    (function() {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            document.addEventListener('DOMContentLoaded', function() {
+                const btn = document.getElementById('theme-toggle');
+                if (btn) btn.textContent = '深色';
+            });
+        }
+    })();
 </script>
 </body>
 </html>
