@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP32 & ESPHome 学习笔记</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f7f6;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffecb5;
+            padding: 15px;
+            border-radius: 4px;
+            font-style: italic;
+        }
+        .highlight {
+            color: #e67e22;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🛠️ ESP32 & ESPHome 学习笔记</h1>
+    <p>从零基础到自动化控制系统的进阶指南</p>
+</header>
+
+<div class="card">
+    <h2>一、 核心概念：硬件与灵魂</h2>
+    <ul>
+        <li><strong>ESP32 芯片：</strong> 核心大脑，自带 Wi-Fi 和蓝牙。</li>
+        <li><strong>DevKit (开发板)：</strong> 适合 DIY 的成品板，带 USB 接口，插线即用。</li>
+        <li><strong>固件 (Firmware)：</strong> 芯片内部的程序。<strong>刷入固件 = 给芯片安装大脑。</strong></li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>二、 软件生产线：ESPHome</h2>
+    <p>ESPHome 是运行在电脑上的<strong>固件加工厂</strong>，通过 Python 驱动。</p>
+    <table>
+        <tr>
+            <th>组件</th>
+            <th>角色</th>
+            <th>类比</th>
+        </tr>
+        <tr>
+            <td><strong>YAML</strong></td>
+            <td>配置文件</td>
+            <td><strong>设计图纸</strong>：用文字描述需求。</td>
+        </tr>
+        <tr>
+            <td><strong>Python</strong></td>
+            <td>核心引擎</td>
+            <td><strong>工头</strong>：负责看懂图纸并指挥编译。</td>
+        </tr>
+        <tr>
+            <td><strong>C++</strong></td>
+            <td>底层语言</td>
+            <td><strong>建筑材料</strong>：保证芯片运行极速。</td>
+        </tr>
+    </table>
+</div>
+
+<div class="card">
+    <h2>三、 写入（刷机）流程</h2>
+    <ol>
+        <li><strong>连接：</strong> 用 USB 线将 ESP32 连上电脑。</li>
+        <li><strong>编写：</strong> 在 ESPHome 中写好 YAML（包含 Wi-Fi 信息和引脚定义）。</li>
+        <li><strong>编译：</strong> 点击 Install，软件自动调用 Python 生成 <span class="highlight">.bin</span> 固件。</li>
+        <li><strong>烧录：</strong> 软件通过串口将固件“存入”芯片闪存。</li>
+    </ol>
+</div>
+
+<div class="card">
+    <h2>四、 远程控制逻辑</h2>
+    <ul>
+        <li><strong>局域网：</strong> 芯片连接家里 <strong>2.4GHz Wi-Fi</strong>，获取内网 IP。</li>
+        <li><strong>异地控制：</strong> 需要一个“中间人”（如 <strong>Home Assistant</strong> 或云平台）。</li>
+        <li><strong>安全建议：</strong> 严禁映射端口，推荐使用加密隧道（如 Tailscale）。</li>
+    </ul>
+</div>
+
+<div class="card">
+    <h2>五、 ⚠️ 避坑指南</h2>
+    <div class="warning">
+        <p>1. <strong>电压：</strong> 芯片核心为 3.3V，严禁直接接高压！</p>
+        <p>2. <strong>Wi-Fi：</strong> 不支持 5GHz，必须确保路由器开启 2.4GHz 频段。</p>
+        <p>3. <strong>更新：</strong> 第一次刷机用 USB，之后修改只需点击 <strong>OTA 无线更新</strong>。</p>
+    </div>
+</div>
+
+<footer>
+    <p>加油！从第一个点亮 LED 灯的项目开始吧。 —— 你的 AI 助手 2026</p>
+</footer>
+
+</body>
+</html>

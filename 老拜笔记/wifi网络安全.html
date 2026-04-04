@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家庭网络安全小贴士 - 给尊贵客人的建议</title>
+    <style>
+        :root {
+            --primary-color: #c0392b; /* 热情红色，契合餐饮服务 */
+            --secondary-color: #2c3e50;
+            --bg-color: #f9f9f9;
+        }
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--bg-color);
+        }
+        .header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 15px 15px 0 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .content {
+            background: white;
+            padding: 25px;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: var(--secondary-color);
+            border-left: 5px solid var(--primary-color);
+            padding-left: 15px;
+            margin-top: 30px;
+            font-size: 1.2em;
+        }
+        .box {
+            background-color: #f0f4f8;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border: 1px solid #dce4ec;
+        }
+        .danger {
+            color: #d35400;
+            font-weight: bold;
+        }
+        .success {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 10px; }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.85em;
+            color: #95a5a6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🏠 家庭网络安全“防身术”</h1>
+    <p>享受智能生活，更要守护数字家园</p>
+</div>
+
+<div class="content">
+    <p>两个让您家里网络更安全的小秘密。简单几步，就能防止“隔墙有耳”。</p>
+
+    <h2>1. 您知道家里有两个“门卫”吗？</h2>
+    <div class="box">
+        <p>大多数人只改了第一个，却忘了第二个：</p>
+        <ul>
+            <li><strong>Wi-Fi 密码：</strong> 决定谁能连上网络（像家门钥匙）。</li>
+            <li><strong>管理员密码：</strong> 决定谁能更改路由器设置（像保险箱钥匙）。</li>
+        </ul>
+        <p class="danger">⚠️ 警告：如果管理员密码保持初始（如 admin/password），任何连上 Wi-Fi 的人都能控制您的路由器！</p>
+    </div>
+
+    
+
+    <h2>2. 为什么要改“管理员密码”？</h2>
+    <p>如果坏人进了您的路由器后台，他们可以：</p>
+    <ul>
+        <li>改掉 Wi-Fi 密码，让您全家断网。</li>
+        <li>偷看您家里连接了哪些设备（如监控、电脑）。</li>
+        <li>甚至植入后门，长期监控您的上网记录。</li>
+    </ul>
+
+    <h2>3. 神器：开启“访客网络” (Guest Wi-Fi)</h2>
+    <div class="box">
+        <p>当有客人（包括像我这样来服务的）需要联网时，请给他们专用的 <span class="success">Guest Wi-Fi</span>：</p>
+        <ul>
+            <li><strong>物理隔离：</strong> 客人只能上网，看不见您家里的私密电脑和监控。</li>
+            <li><strong>保护后台：</strong> 连访客网络的人无法打开路由器管理页面。</li>
+            <li><strong>自动限速：</strong> 不会因为客人在看视频而影响您的办公速度。</li>
+        </ul>
+    </div>
+
+    
+
+    <h2>4. 简单三步走：</h2>
+    <ol>
+        <li>浏览器输入 <span class="highlight">10.0.0.1</span> (Rogers) 或 <span class="highlight">192.168.1.254</span> (Telus)。</li>
+        <li>找到 <strong>Security</strong> 或 <strong>Admin</strong>，修改初始管理员密码。</li>
+        <li>开启 <strong>Guest Network</strong> 功能，设置一个独立的访客名字。</li>
+    </ol>
+
+    <div class="footer">
+        <p></p>
+    </div>
+</div>
+
+</body>
+</html>

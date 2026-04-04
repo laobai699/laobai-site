@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>老拜笔记</title>
+    <style>
+        :root {
+            --page-bg: #111111; --module-bg: #141210; --content-bg: #151311;
+            --border-color: #2a2826; --text-main: #f5f1eb; --text-sub: #ddd5cc;
+            --text-dim: #99938d; --accent-color: #c87e4f; --hover-bg: #1a1816;
+        }
+        * { box-sizing: border-box; }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; min-height: 100vh; }
+
+        /* 密码锁屏 */
+        .lock-screen {
+            position: fixed; inset: 0;
+            background: var(--page-bg);
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            z-index: 9999; padding: 24px;
+        }
+        .lock-icon { font-size: 36px; margin-bottom: 20px; opacity: 0.6; }
+        .lock-title { font-size: 18px; font-weight: 500; letter-spacing: 2px; margin-bottom: 6px; }
+        .lock-sub { font-size: 13px; color: var(--text-dim); margin-bottom: 32px; }
+        .lock-input-wrap { display: flex; gap: 10px; width: 100%; max-width: 320px; }
+        .lock-input {
+            flex: 1; background: var(--content-bg); border: 1px solid var(--border-color);
+            color: var(--text-main); font-size: 15px; padding: 12px 16px;
+            border-radius: 12px; outline: none; letter-spacing: 2px;
+            transition: border-color 0.2s;
+        }
+        .lock-input:focus { border-color: var(--accent-color); }
+        .lock-input.error { border-color: #c0392b; animation: shake 0.3s; }
+        .lock-btn {
+            background: var(--accent-color); color: white; border: none;
+            padding: 12px 20px; border-radius: 12px; font-size: 14px;
+            cursor: pointer; white-space: nowrap; transition: opacity 0.2s;
+        }
+        .lock-btn:hover { opacity: 0.85; }
+        .lock-hint { font-size: 12px; color: var(--text-dim); margin-top: 16px; }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        /* 内容区 */
+        .content-wrap { display: none; }
+        .content-wrap.unlocked { display: block; }
+
+        /* 导航 */
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .nav-title { font-weight: 600; font-size: 18px; letter-spacing: 2px; flex: 1; text-align: center; color: var(--text-dim); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); }
+
+        /* 笔记内容 */
+        .notes { max-width: 680px; margin: 0 auto; padding: 32px 24px 80px; }
+
+        /* 笔记章节 */
+        .note-section { margin-bottom: 32px; }
+        .note-section-title {
+            font-size: 13px; color: var(--accent-color); letter-spacing: 3px;
+            margin-bottom: 14px; padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* 笔记卡片 */
+        .note-card {
+            background: var(--content-bg); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 18px 20px; margin-bottom: 12px;
+        }
+        .note-card h3 { font-size: 15px; font-weight: 500; color: var(--text-main); margin: 0 0 10px; }
+        .note-card p { font-size: 14px; color: var(--text-sub); line-height: 1.9; margin: 0 0 10px; }
+        .note-card p:last-child { margin-bottom: 0; }
+        .note-card code {
+            display: block; background: var(--module-bg); border: 1px solid var(--border-color);
+            border-radius: 8px; padding: 12px 16px; font-family: "Courier New", monospace;
+            font-size: 13px; color: #a0c880; line-height: 1.8; margin-top: 10px;
+            overflow-x: auto; white-space: pre;
+        }
+
+        /* 标签 */
+        .tag { display: inline-block; font-size: 11px; color: var(--text-dim); background: var(--module-bg); border-radius: 4px; padding: 2px 8px; margin-right: 6px; margin-bottom: 8px; }
+    </style>
+</head>
+<body>
+
+    <!-- 密码锁屏 -->
+    <div class="lock-screen" id="lockScreen">
+        <div class="lock-icon">🔒</div>
+        <div class="lock-title">老拜笔记</div>
+        <div class="lock-sub">私人记录，请输入密码</div>
+        <div class="lock-input-wrap">
+            <input type="password" class="lock-input" id="pwdInput"
+                placeholder="输入密码" onkeydown="if(event.key==='Enter') unlock()">
+            <button class="lock-btn" onclick="unlock()">进入</button>
+        </div>
+        <div class="lock-hint" id="lockHint"></div>
+    </div>
+
+    <!-- 笔记内容（解锁后显示） -->
+    <div class="content-wrap" id="contentWrap">
+
+        <div class="navbar">
+            <div style="width: 80px;"></div>
+            <div class="nav-title">老拜笔记</div>
+            <button class="btn-nav" onclick="lockAgain()">🔒 锁定</button>
+        </div>
+
+        <div class="notes">
+
+            <!-- 章节一：示例 G-code 笔记 -->
+            <div class="note-section">
+                <div class="note-section-title">G-CODE 基础</div>
+
+                <div class="note-card">
+                    <div class="tag">常用指令</div>
+                    <h3>基本移动指令</h3>
+                    <p>G00 快速定位（不切削），G01 直线插补（切削），G02/G03 圆弧插补（顺/逆时针）。</p>
+                    <code>G00 X0 Y0 Z5      ; 快速移到安全高度
+G01 Z-2 F100     ; 以进给速度下刀2mm
+G01 X50 F200     ; 直线切削到X=50</code>
+                </div>
+
+                <div class="note-card">
+                    <div class="tag">坐标系</div>
+                    <h3>工件坐标系设定</h3>
+                    <p>G54-G59 是工件坐标系，G92 可临时设定当前位置为原点。实际使用中建议用 G54。</p>
+                </div>
+
+            </div>
+
+            <!-- 章节二：示例其他笔记 -->
+            <div class="note-section">
+                <div class="note-section-title">其他笔记</div>
+
+                <div class="note-card">
+                    <h3>在这里写你的笔记标题</h3>
+                    <p>在这里写笔记内容，可以是文字说明、操作步骤、心得体会……</p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+<script>
+    // ⚠️ 在这里设置你的密码
+    const PASSWORD = '0000';
+
+    // 检查是否已经解锁过（session 期间不用重复输入）
+    if (sessionStorage.getItem('notes_unlocked') === 'yes') {
+        document.getElementById('lockScreen').style.display = 'none';
+        document.getElementById('contentWrap').classList.add('unlocked');
+    }
+
+    function unlock() {
+        const input = document.getElementById('pwdInput');
+        const hint = document.getElementById('lockHint');
+        if (input.value === PASSWORD) {
+            sessionStorage.setItem('notes_unlocked', 'yes');
+            document.getElementById('lockScreen').style.display = 'none';
+            document.getElementById('contentWrap').classList.add('unlocked');
+        } else {
+            input.classList.add('error');
+            hint.textContent = '密码不对，再试试';
+            hint.style.color = '#c0392b';
+            setTimeout(() => { input.classList.remove('error'); input.value = ''; }, 500);
+        }
+    }
+
+    function lockAgain() {
+        sessionStorage.removeItem('notes_unlocked');
+        document.getElementById('lockScreen').style.display = 'flex';
+        document.getElementById('contentWrap').classList.remove('unlocked');
+        document.getElementById('pwdInput').value = '';
+        document.getElementById('lockHint').textContent = '';
+    }
+</script>
+</body>
+</html>
