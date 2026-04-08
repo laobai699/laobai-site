@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPL3Y3DXJE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SPL3Y3DXJE');
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            document.getElementById('theme-toggle').textContent = isDark ? '深色' : '浅色';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        }
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.addEventListener('DOMContentLoaded', function() {
+                    const btn = document.getElementById('theme-toggle');
+                    if (btn) btn.textContent = '深色';
+                });
+            }
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>老拜狩猎 - 老拜工坊</title>
+    <style>
+        :root {
+            --page-bg: #111111; --module-bg: #141210; --content-bg: #151311;
+            --border-color: #2a2826; --text-main: #f5f1eb; --text-sub: #ddd5cc;
+            --text-dim: #99938d; --accent-color: #c87e4f; --hover-bg: #1a1816;
+        }
+        html[data-theme="light"] {
+            --page-bg: #f0ebe3; --module-bg: #faf6f0; --content-bg: #faf6f0;
+            --border-color: #ddd5c8; --text-main: #2a2218; --text-sub: #4a4238;
+            --text-dim: #7a7268; --accent-color: #b86e3f; --hover-bg: #e8e0d8;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+
+        /* 导航 */
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 18px; letter-spacing: 2px; flex: 1; text-align: center; color: var(--text-dim); }
+
+        /* 文章容器 */
+        .article { max-width: 580px; margin: 0 auto; padding: 36px 24px 80px; }
+        .article-num { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 12px; }
+        .article-title { font-size: 22px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
+        .article-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color); }
+
+        /* 正文 */
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2; }
+        .article-body p { margin: 0 0 22px; text-indent: 2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+        .article-body h3 { font-size: 15px; font-weight: 500; color: var(--accent-color); margin: 36px 0 14px; letter-spacing: 1px; }
+        .article-body blockquote { border-left: 2px solid var(--accent-color); margin: 28px 0; padding: 4px 0 4px 18px; color: var(--text-main); font-size: 15px; line-height: 2; }
+
+        /* 图片 */
+        .image-single { margin: 28px 0; }
+        .image-single img { width: 100%; border-radius: 10px; display: block; cursor: zoom-in; }
+        .image-caption { font-size: 12px; color: var(--text-dim); text-align: center; margin-top: 8px; letter-spacing: 1px; }
+
+        /* 总结卡片 */
+        .info-card { margin: 32px 0; padding: 20px 22px; background: var(--content-bg); border: 1px solid var(--border-color); border-radius: 14px; }
+        .info-card .card-title { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 14px; }
+        .info-card p { font-size: 14px; color: var(--text-sub); line-height: 1.9; margin: 0 0 10px; padding-left: 12px; border-left: 2px solid var(--border-color); }
+        .info-card p:last-child { margin-bottom: 0; }
+
+        /* 页脚 */
+        .article-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+        .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+        .footer-btn.disabled { opacity: 0.3; pointer-events: none; }
+
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; padding: 16px; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 8px; object-fit: contain; }
+        .lightbox-close { position: fixed; top: 18px; right: 22px; color: #fff; font-size: 32px; cursor: pointer; opacity: 0.75; line-height: 1; z-index: 1000; }
+        .lightbox-close:hover { opacity: 1; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="../老拜工坊.html" class="btn-nav">返回目录</a>
+    <div class="nav-title">老拜工坊</div>
+    <button class="btn-nav" id="theme-toggle" onclick="toggleTheme()">浅色</button>
+</div>
+
+<div class="article">
+
+    <div class="article-num">NO. 01 · CNC</div>
+    <div class="article-title">狩猎</div>
+    <div class="article-sub">用自制的3D数控机床，在木板上猎兔、猎鹿、打鸟、扑蝶</div>
+
+    <div class="article-body">
+
+        <h3>从一个想法开始</h3>
+
+        <p>想把家里这面墙上的照片全部移到走廊，然后在空白的整面墙上用自制的3D雕刻机雕刻切割一个木板画，或者叫背景墙。材料准备选择半寸厚的实木。</p>
+
+        <p>经过一段时间的思考和设计，终于有了这个方案——小兔子、小鹿还有蝴蝶都好像在张望着什么，右上角的小鸟不断衔来音符，组成的五线谱就是这副画的主题：望春风。</p>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt01.webp" alt="整体设计效果图">
+        <div class="image-caption">整体设计效果图——兔、鹿、蝴蝶、五线谱，主题是「望春风」</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt02.webp" alt="设计图2">
+        <div class="image-caption">设计细节</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt03.webp" alt="设计图3">
+        <div class="image-caption">设计细节</div>
+    </div>
+
+    <div class="article-body">
+
+        <h3>CAD 排版与 G-code 生成</h3>
+
+        <p>对设计进行微调，避开墙上的开关和插座。依据现有材料对需要切割的零件进行排版，图纸上的线条全部转换成 pline——图形编辑阶段使用的是 AutoCAD，为下一步用 CAM 软件生成 G-code 做好了准备。</p>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt04.webp" alt="AutoCAD排版图">
+        <div class="image-caption">AutoCAD 排版图，所有零件按材料尺寸摆放</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt05.webp" alt="CAD排版图2">
+        <div class="image-caption">排版细节</div>
+    </div>
+
+    <div class="article-body">
+
+        <p>G-code 是最广泛使用的数控编程语言，主要在计算机辅助制造中用于控制自动机床。简单的几何图形可以手写，复杂的现在可以用软件自动生成。数控机床、激光雕刻机、3D打印机……用的都是 G-code，原理相同，不同的只是"刀具"——3D打印机与其他数控设备最大的区别是：其他设备以切除为目的，3D打印机是为了添加，是逆向的。</p>
+
+        <p>下面图一（蓝色线条）是狩猎兔子的刀具路径，图二是根据刀具路径计算生成的 G-code，一共4000多行。</p>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt06.webp" alt="刀具路径图">
+        <div class="image-caption">蓝色线条是兔子的刀具路径</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt07.webp" alt="G-code截图">
+        <div class="image-caption">自动生成的 G-code，共4000多行</div>
+    </div>
+
+    <div class="article-body">
+
+        <h3>猎兔</h3>
+
+        <p>G-code 输入第三个软件，由它来实时控制机器切割。自制的3D数控机床、控制软件界面、切割过程，一步一步来。</p>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt08.webp" alt="自制3D数控机床">
+        <div class="image-caption">老拜自制的 3D 数控机床</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt09.webp" alt="控制软件界面">
+        <div class="image-caption">第三个软件——实时控制和显示刀尖的3D坐标</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt10.webp" alt="切割中">
+        <div class="image-caption">切割进行中</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt11.webp" alt="你在哪">
+        <div class="image-caption">你在哪？</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt12.webp" alt="我在这">
+        <div class="image-caption">我在这！</div>
+    </div>
+
+    <div class="article-body">
+
+        <h3>猎鹿、打鸟、扑蝶、伐木</h3>
+
+        <p>用同样的方法，把设计图里其余的角色一一切割出来。</p>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt13.webp" alt="猎鹿">
+        <div class="image-caption">猎鹿</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt14.webp" alt="打鸟">
+        <div class="image-caption">打鸟</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt15.webp" alt="扑蝶">
+        <div class="image-caption">扑蝶</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt16.webp" alt="伐木">
+        <div class="image-caption">伐木</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt17.webp" alt="切割过程17">
+        <div class="image-caption">切割中</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt18.webp" alt="切割过程18">
+        <div class="image-caption">切割中</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt19.webp" alt="切割过程19">
+        <div class="image-caption">切割中</div>
+    </div>
+
+    <div class="article-body">
+
+        <h3>拼装上墙</h3>
+
+        <p>最后一道工序是将所有散件按照设计图纸拼装固定到墙上。最后又添加了两只蝴蝶，让它们成双成对。Done！</p>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt20.webp" alt="拼装上墙">
+        <div class="image-caption">拼装固定到墙上</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt21.webp" alt="完工成品1">
+        <div class="image-caption">完工</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt22.webp" alt="完工成品2">
+        <div class="image-caption">完工</div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/hunt23.webp" alt="完工成品3">
+        <div class="image-caption">完工</div>
+    </div>
+
+    <div class="article-body">
+
+        <blockquote>
+            完工于 2017年12月19日。<br>
+        </blockquote>
+
+    </div>
+
+    <div class="info-card">
+        <div class="card-title">TOOLS · 用到的工具</div>
+        <p>AutoCAD — 图形设计与排版</p>
+        <p>CAM 软件 — 生成刀具路径与 G-code</p>
+        <p>自制 3D 数控机床 — 执行切割</p>
+        <p>G-code 控制软件 — 实时控制机床运动</p>
+    </div>
+
+    <div class="article-footer">
+        <a class="footer-btn disabled"><span>⇠</span> 上一篇</a>
+        <a href="../老拜工坊.html" class="footer-btn">返回目录</a>
+        <a class="footer-btn disabled">下一篇 <span>⇢</span></a>
+    </div>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">×</span>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+    document.querySelectorAll('.image-single img').forEach(img => {
+        img.addEventListener('click', function() {
+            document.getElementById('lightbox-img').src = this.src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+</script>
+
+</body>
+</html>

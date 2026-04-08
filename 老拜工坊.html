@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>老拜工坊 | WORKSHOP</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SPL3Y3DXJE"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date()); gtag('config', 'G-SPL3Y3DXJE');
+</script>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+[data-theme="dark"] {
+  --bg:#111111; --bg-soft:#141210; --text-main:#f5f1eb; --text-soft:#ddd5cc;
+  --text-muted:rgba(221,213,204,0.50); --text-dim:#99938d;
+  --line:rgba(214,185,145,0.16); --line-h:rgba(214,185,145,0.32);
+  --accent:rgba(205,160,106,0.90); --tag-bg:rgba(205,160,106,0.10); --tag-border:rgba(205,160,106,0.22);
+  --nav-bg:rgba(17,17,17,0.88);
+}
+[data-theme="light"] {
+  --bg:#f0ebe3; --bg-soft:#e8e1d8; --text-main:#2c2520; --text-soft:#5a4e45;
+  --text-muted:rgba(90,78,69,0.50); --text-dim:#7a7268;
+  --line:rgba(160,130,100,0.20); --line-h:rgba(160,130,100,0.42);
+  --accent:#a0724a; --tag-bg:rgba(160,114,74,0.10); --tag-border:rgba(160,114,74,0.26);
+  --nav-bg:rgba(240,235,227,0.90);
+}
+html { scroll-behavior:smooth; }
+body { margin:0; font-family:"Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background:var(--bg); color:var(--text-main); -webkit-font-smoothing:antialiased; transition:background 0.4s ease, color 0.4s ease; }
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 16px; height:52px;
+  background:var(--nav-bg); backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line); transition:background 0.4s ease, border-color 0.4s ease;
+}
+.nav-home {
+  text-decoration:none; color:var(--text-main); font-size:14px; font-weight:500;
+  border:1px solid var(--line); padding:6px 14px; border-radius:25px; transition:all 0.3s;
+}
+.nav-home:hover { background:var(--bg-soft); border-color:var(--line-h); }
+.nav-title { position:absolute; left:50%; transform:translateX(-50%); font-size:13px; letter-spacing:3px; color:var(--text-soft); pointer-events:none; }
+.theme-btn { background:none; border:1px solid var(--line); border-radius:20px; padding:4px 14px; font-size:12px; color:var(--text-soft); cursor:pointer; letter-spacing:1px; transition:all 0.25s ease; }
+.theme-btn:hover { border-color:var(--line-h); color:var(--text-main); }
+.hero { padding:88px 24px 32px; text-align:center; }
+.hero-inner { max-width:600px; margin:0 auto; }
+.hero-tag { display:inline-block; font-size:10px; letter-spacing:3.5px; color:var(--accent); border:1px solid var(--tag-border); background:var(--tag-bg); border-radius:20px; padding:4px 14px; margin-bottom:14px; opacity:0; animation:fadeUp 0.8s ease 0.1s forwards; }
+.hero h1 { margin:0 0 8px; font-size:26px; font-weight:600; letter-spacing:5px; color:var(--text-main); opacity:0; animation:fadeUp 0.8s ease 0.3s forwards; }
+.hero-en { font-size:10px; letter-spacing:4px; color:var(--text-muted); opacity:0; animation:fadeUp 0.8s ease 0.5s forwards; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+.list-wrap { max-width:780px; margin:0 auto; padding:0 24px 120px; }
+.cat-label { font-size:11px; letter-spacing:3px; color:var(--text-muted); margin:32px 0 0; padding-bottom:8px; border-bottom:1px solid var(--line); }
+.article-row { display:flex; align-items:center; gap:18px; padding:18px 4px; border-bottom:1px solid var(--line); text-decoration:none; color:var(--text-main); transition:padding-left 0.22s ease, opacity 0.22s ease; }
+.article-row:not(.coming):hover { padding-left:10px; }
+.article-row:not(.coming):hover .row-title { color:var(--accent); }
+.article-row.coming { cursor:default; opacity:0.46; }
+.row-icon { font-size:24px; flex-shrink:0; width:34px; text-align:center; }
+.row-body { flex:1; }
+.row-cat { font-size:10px; letter-spacing:3px; color:var(--accent); margin-bottom:3px; }
+.row-title { font-size:15px; letter-spacing:1px; font-weight:500; margin-bottom:3px; transition:color 0.2s; }
+.row-desc { font-size:13px; color:var(--text-dim); line-height:1.7; }
+.row-right { flex-shrink:0; }
+.coming-tag { font-size:10px; letter-spacing:1.5px; color:var(--text-muted); border:1px solid var(--line); border-radius:10px; padding:3px 10px; }
+.growing-item { position:fixed; bottom:0; left:0; right:0; background:var(--bg-soft); border-top:1px solid var(--line); color:var(--text-muted); display:flex; justify-content:center; align-items:center; font-size:14px; letter-spacing:2px; padding:16px 24px; z-index:99; }
+@media (max-width:600px) { .list-wrap { padding:0 16px 120px; } .row-right { display:none; } }
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-home" href="index.html">← 回首页</a>
+  <span class="nav-title">老拜工坊</span>
+  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">浅色</button>
+</nav>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">CNC · LASER · 3D PRINT</div>
+    <h1>老拜工坊</h1>
+    <div class="hero-en">HANDMADE WITH MACHINES · VANCOUVER</div>
+  </div>
+</section>
+<div class="list-wrap">
+  <div class="cat-label">CNC · 数控加工</div>
+  <a class="article-row" href="老拜工坊/狩猎.html">
+    <div class="row-icon">🪵</div>
+    <div class="row-body">
+      <div class="row-cat">CNC</div>
+      <div class="row-title">狩猎</div>
+      <div class="row-desc">用自制的3D数控机床，在木板上猎兔、猎鹿、打鸟、扑蝶</div>
+    </div>
+  </a>
+  <div class="article-row coming">
+    <div class="row-icon">🪵</div>
+    <div class="row-body">
+      <div class="row-cat">CNC</div>
+      <div class="row-title">更多 CNC 作品</div>
+      <div class="row-desc">陆续更新</div>
+    </div>
+    <div class="row-right"><span class="coming-tag">即将发布</span></div>
+  </div>
+  <div class="cat-label">LASER · 激光雕刻</div>
+  <div class="article-row coming">
+    <div class="row-icon">✨</div>
+    <div class="row-body">
+      <div class="row-cat">激光雕刻</div>
+      <div class="row-title">激光雕刻作品</div>
+      <div class="row-desc">陆续更新</div>
+    </div>
+    <div class="row-right"><span class="coming-tag">即将发布</span></div>
+  </div>
+  <div class="cat-label">3D PRINT · 三维打印</div>
+  <div class="article-row coming">
+    <div class="row-icon">🖨️</div>
+    <div class="row-body">
+      <div class="row-cat">3D打印</div>
+      <div class="row-title">3D打印作品</div>
+      <div class="row-desc">陆续更新</div>
+    </div>
+    <div class="row-right"><span class="coming-tag">即将发布</span></div>
+  </div>
+  <div class="cat-label">LETTERPRESS · 凸版印刷</div>
+  <div class="article-row coming">
+    <div class="row-icon">🖋️</div>
+    <div class="row-body">
+      <div class="row-cat">凸版印刷</div>
+      <div class="row-title">凸版印刷作品</div>
+      <div class="row-desc">陆续更新</div>
+    </div>
+    <div class="row-right"><span class="coming-tag">即将发布</span></div>
+  </div>
+</div>
+<div class="growing-item">🌱 🌱 🌱 正在慢慢生长 ... 🌱 🌱 🌱</div>
+<script>
+(function(){
+  const saved = localStorage.getItem('laobai-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  updateBtn(saved);
+})();
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('laobai-theme', next);
+  updateBtn(next);
+}
+function updateBtn(theme){
+  const btn = document.getElementById('themeBtn');
+  if(btn) btn.textContent = theme === 'dark' ? '浅色' : '深色';
+}
+</script>
+</body>
+</html>

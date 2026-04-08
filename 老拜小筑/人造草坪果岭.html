@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPL3Y3DXJE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SPL3Y3DXJE');
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            document.getElementById('theme-toggle').textContent = isDark ? '深色' : '浅色';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        }
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.addEventListener('DOMContentLoaded', function() {
+                    const btn = document.getElementById('theme-toggle');
+                    if (btn) btn.textContent = '深色';
+                });
+            }
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人造草坪果岭 - 老拜小筑</title>
+    <style>
+        :root {
+            --page-bg: #111111; --module-bg: #141210; --content-bg: #151311;
+            --border-color: #2a2826; --text-main: #f5f1eb; --text-sub: #ddd5cc;
+            --text-dim: #99938d; --accent-color: #c87e4f; --hover-bg: #1a1816;
+        }
+        html[data-theme="light"] {
+            --page-bg: #f0ebe3; --module-bg: #faf6f0; --content-bg: #faf6f0;
+            --border-color: #ddd5c8; --text-main: #2a2218; --text-sub: #4a4238;
+            --text-dim: #7a7268; --accent-color: #b86e3f; --hover-bg: #e8e0d8;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+
+        /* 导航 */
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 18px; letter-spacing: 2px; flex: 1; text-align: center; color: var(--text-dim); }
+
+        /* 文章容器 */
+        .article { max-width: 580px; margin: 0 auto; padding: 36px 24px 80px; }
+        .article-num { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 12px; }
+        .article-title { font-size: 22px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
+        .article-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color); }
+
+        /* 正文 */
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2; }
+        .article-body p { margin: 0 0 22px; text-indent: 2em; }
+        .article-body p:last-child { margin-bottom: 0; }
+        .article-body h3 { font-size: 15px; font-weight: 500; color: var(--accent-color); margin: 36px 0 14px; letter-spacing: 1px; }
+        .article-body blockquote { border-left: 2px solid var(--accent-color); margin: 28px 0; padding: 4px 0 4px 18px; color: var(--text-main); font-size: 15px; line-height: 2; }
+
+        /* 单张图片 */
+        .image-single { margin: 28px 0; }
+        .image-single img { width: 100%; border-radius: 10px; display: block; }
+        .image-caption { font-size: 12px; color: var(--text-dim); text-align: center; margin-top: 8px; letter-spacing: 1px; }
+
+        /* 图片改单列 */
+        .image-grid { margin: 28px 0; display: flex; flex-direction: column; gap: 16px; }
+        .image-grid img { width: 100%; border-radius: 10px; display: block; }
+
+        /* 点击放大提示 */
+        .image-single img, .image-grid img { cursor: zoom-in; }
+
+        /* Lightbox */
+        .lightbox { display: none; position: fixed; inset: 0; z-index: 999; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; padding: 16px; }
+        .lightbox.active { display: flex; }
+        .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 8px; object-fit: contain; }
+        .lightbox-close { position: fixed; top: 18px; right: 22px; color: #fff; font-size: 32px; cursor: pointer; opacity: 0.75; line-height: 1; z-index: 1000; }
+        .lightbox-close:hover { opacity: 1; }
+
+        /* 步骤列表 */
+        .step-list { margin: 8px 0 22px; padding: 0; list-style: none; }
+        .step-list li { display: flex; gap: 14px; margin-bottom: 16px; font-size: 15px; color: var(--text-sub); line-height: 1.85; }
+        .step-list li .num { flex-shrink: 0; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--accent-color); color: var(--accent-color); font-size: 12px; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+
+        /* 总结卡片 */
+        .summary-card { margin: 32px 0; padding: 20px 22px; background: var(--content-bg); border: 1px solid var(--border-color); border-radius: 14px; }
+        .summary-card .card-title { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 14px; }
+        .summary-card p { font-size: 14px; color: var(--text-sub); line-height: 1.9; margin: 0 0 12px; padding-left: 12px; border-left: 2px solid var(--border-color); }
+        .summary-card p:last-child { margin-bottom: 0; }
+
+        /* 页脚导航 */
+        .article-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+        .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+        .footer-btn.disabled { opacity: 0.3; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="../老拜小筑.html" class="btn-nav">返回目录</a>
+    <div class="nav-title">老拜小筑</div>
+    <button class="btn-nav" id="theme-toggle" onclick="toggleTheme()">浅色</button>
+</div>
+
+<div class="article">
+
+    <div class="article-num">NO. 01</div>
+    <div class="article-title">人造草坪果岭 DIY</div>
+    <div class="article-sub">后院的活是干不完的，这次整了个高尔夫推杆果岭</div>
+
+    <div class="article-body">
+
+        <h3>从图纸开始</h3>
+
+        <p>后院的活是干不完的。这次准备自己动手做一个高尔夫推杆练习果岭，材料用人造草坪。动工之前，先把后院的平面布局在CAD里整理了一遍——随着这几年不断改造，图上的内容越来越丰富了。</p>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/green01.jpg" alt="后院CAD平面布局图">
+        <div class="image-caption">后院平面布局图，中区标注为 Putting Green</div>
+    </div>
+
+    <div class="article-body">
+
+        <p>果岭的形状设计了三个方案：苹果形、枫叶形、三叶草（四叶草）形。为了尽可能利用有限的面积，最终选定了三叶草形。</p>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/green02.jpg" alt="三种果岭形状设计图">
+        <div class="image-caption">三种设计方案：CLOVER / APPLE / MAPLE LEAFE，最终选三叶草形</div>
+    </div>
+
+    <div class="article-body">
+
+        <p>枫叶形的方案还专门让AI来参谋了一下，看它能不能给出更好的设计——结果比较令人失望，几个方案实用性和空间利用率都不理想。</p>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/green03.jpg" alt="AI生成的枫叶形果岭效果图">
+        <div class="image-caption">AI生成的枫叶形效果图，四个版本，都不太理想</div>
+    </div>
+
+    <div class="article-body">
+
+        <h3>第一步：铲掉旧草坪</h3>
+
+        <p>方案定了，开始动工。第一步是把原来的草坪全部铲掉，清出干净的地基。铲完之后从 deck 往外看，院子里一片泥土，空旷得有点陌生。坐下来泡杯茶，看着这片空地，心里反而有种踏实的期待。</p>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/green04.jpg" alt="铲除旧草坪后的后院">
+        <div class="image-caption">旧草坪铲除后的样子，从 deck 看出去，喝茶等它慢慢变</div>
+    </div>
+
+    <div class="article-body">
+
+        <h3>打基础：最重要也最累的部分</h3>
+
+        <p>安装人造草坪果岭，工序比想象中多，提前做了不少功课。好在不用赶工期，有空就做一点。</p>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/green05.jpg" alt="Landscape Centre送来的碎石袋">
+        <div class="image-caption">Landscape Centre 送来的碎石，几大吨袋停在门口</div>
+    </div>
+
+    <div class="article-body">
+
+        <p>泥土上先铺隔草布，再铺路基碎石找平后夯实，然后铺碎石粉，最后用草坪滚碾压。每一步都不能省。</p>
+
+    </div>
+
+    <div class="image-grid">
+        <div>
+            <img src="images/green06.jpg" alt="铺碎石后用夯实机夯实">
+            <div class="image-caption">租来的夯实机，很重，请邻居帮忙装卸</div>
+        </div>
+        <div>
+            <img src="images/green07.jpg" alt="手推车运碎石粉">
+            <div class="image-caption">碎石粉用手推车一车一车运进来</div>
+        </div>
+    </div>
+
+    <div class="image-single">
+        <img src="images/green08.jpg" alt="草坪滚滚压找平">
+        <div class="image-caption">草坪滚注水后碾压，基础最终找平</div>
+    </div>
+
+    <div class="article-body">
+
+        <h3>铺草坪、裁剪、固定</h3>
+
+        <p>基础处理好之后，开始铺人造草坪。先用粗绳在草坪上摆出果岭的大概形状，确认位置和比例，再动刀裁剪。</p>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/green09.jpg" alt="白绳摆出果岭形状">
+        <div class="image-caption">白绳摆出三叶草果岭的轮廓，确认无误后再裁</div>
+    </div>
+
+    <div class="article-body">
+
+        <p>形状确认后，对两层草坪分别裁剪，在洞杯位置挖坑埋入洞杯，再在果岭草坪上挖出对应的洞。接缝处用专用胶带从背面粘接，周边和果岭环上均匀楔入4寸长的专用固定钉，前后大概用了390根。</p>
+
+    </div>
+
+    <div class="image-grid">
+        <div>
+            <img src="images/green10.jpg" alt="草坪裁剪中，处理洞杯位置">
+            <div class="image-caption">草坪裁剪进行中，处理洞杯位置</div>
+        </div>
+        <div>
+            <img src="images/green11.jpg" alt="固定钉密集楔入，旗杆就位">
+            <div class="image-caption">固定钉沿边缘楔入，约390根</div>
+        </div>
+    </div>
+
+    <div class="article-body">
+
+        <h3>最后一步：铺沙</h3>
+
+        <p>最后在整个果岭上均匀铺约400磅重的特细沙。沙子的重量能再次固定草坪，同时可以通过沙量来调节果岭的速度（9.5到11之间）。</p>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/green12.jpg" alt="铺沙过程，果岭已基本成形">
+        <div class="image-caption">50磅装的特细沙，前后用了约400磅</div>
+    </div>
+
+    <div class="article-body">
+
+        <blockquote>
+            享受设计制作的过程，<br>
+            也期待着看到结果。
+        </blockquote>
+
+    </div>
+
+    <div class="image-single">
+        <img src="images/green13.jpg" alt="果岭完工成品">
+        <div class="image-caption">完工。推杆和球就位，两面旗迎风，2023年3月</div>
+    </div>
+
+    <div class="article-body">
+
+        <h3>几点总结</h3>
+
+    </div>
+
+    <div class="summary-card">
+        <div class="card-title">NOTES · 经验分享</div>
+        <p>这个16×16英尺的果岭，估计是三个熟练工人最少三天的工作量。夯实机和草坪滚都是从homedepot租用的专用工具，最小的夯实机也非常重，一个人无法从车上装卸，我是请邻居帮忙的。</p>
+        <p>挖出的草坪、泥土，以及回填的基础材料，比想象中多得多。填挖是体力活，基础找平和草坪的裁切、连接、固定则是细活。</p>
+        <p>工程量不小，工序较多，自己施工需要有足够的耐心。如果你也有兴趣DIY，可以私信，我能分享更多细节。</p>
+    </div>
+
+    <div class="article-footer">
+        <a class="footer-btn disabled"><span>⇠</span> 上一篇</a>
+        <a href="../老拜小筑.html" class="footer-btn">返回目录</a>
+        <a class="footer-btn disabled">下一篇 <span>⇢</span></a>
+    </div>
+
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">×</span>
+    <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+    document.querySelectorAll('.image-single img, .image-grid img').forEach(img => {
+        img.addEventListener('click', function() {
+            document.getElementById('lightbox-img').src = this.src;
+            document.getElementById('lightbox').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeLightbox(); });
+</script>
+
+</body>
+</html>
