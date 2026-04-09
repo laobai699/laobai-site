@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>老拜小筑 | 院子 · 茶 · 鸟</title>
+<title>植物管理笔记 | 老拜小筑</title>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPL3Y3DXJE"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -36,7 +36,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .hero { padding:88px 24px 32px; text-align:center; }
 .hero-inner { max-width:600px; margin:0 auto; }
 .hero-tag { display:inline-block; font-size:10px; letter-spacing:3.5px; color:var(--accent); border:1px solid var(--tag-border); background:var(--tag-bg); border-radius:20px; padding:4px 14px; margin-bottom:14px; opacity:0; animation:fadeUp 0.8s ease 0.1s forwards; }
-.hero h1 { margin:0 0 8px; font-size:26px; font-weight:600; letter-spacing:5px; color:var(--text-main); opacity:0; animation:fadeUp 0.8s ease 0.3s forwards; }
+.hero h1 { margin:0 0 8px; font-size:26px; font-weight:600; letter-spacing:4px; color:var(--text-main); opacity:0; animation:fadeUp 0.8s ease 0.3s forwards; }
 .hero-en { font-size:10px; letter-spacing:4px; color:var(--text-muted); opacity:0; animation:fadeUp 0.8s ease 0.5s forwards; }
 @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
 .list-wrap { max-width:780px; margin:0 auto; padding:0 24px 120px; }
@@ -56,106 +56,77 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .reveal.show { opacity:1; transform:translateY(0); transition:opacity 0.65s ease, transform 0.65s ease; }
 .reveal.coming.show { opacity:0.46; }
 .growing-item { position:fixed; bottom:0; left:0; right:0; background:var(--bg-soft); border-top:1px solid var(--line); color:var(--text-muted); display:flex; justify-content:center; align-items:center; font-size:14px; letter-spacing:2px; padding:16px 24px; z-index:99; }
-@media (max-width:600px) { .hero h1 { font-size:34px; } .list-wrap { padding:0 16px 120px; } .row-right { display:none; } }
+@media (max-width:600px) { .hero h1 { font-size:22px; } .list-wrap { padding:0 16px 120px; } .row-right { display:none; } }
 </style>
 </head>
 <body>
+
 <nav>
-  <a class="nav-home" href="index.html">← 回首页</a>
-  <span class="nav-title">老拜小筑</span>
+  <a class="nav-home" href="/老拜小筑.html">← 返回</a>
+  <span class="nav-title">植物管理笔记</span>
   <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">浅色</button>
 </nav>
 
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-tag">GARDEN · TEA · BIRDS</div>
-    <h1>老拜小筑</h1>
-    <div class="hero-en">A SLOW LITTLE WORLD IN VANCOUVER</div>
+    <div class="hero-tag">GARDEN · PLANTS</div>
+    <h1>植物管理笔记</h1>
+    <div class="hero-en">NOTES ON GROWING THINGS · VANCOUVER</div>
   </div>
 </section>
 
 <div class="list-wrap">
-  <div class="list-label">ARTICLES · 文章</div>
+  <div class="list-label">NOTES · 笔记</div>
 
-  <a class="article-row reveal" href="老拜小筑/人造草坪果岭.html">
-    <div class="row-icon">⛳</div>
+  <a class="article-row reveal" href="笔记/猕猴桃.html">
+    <div class="row-icon">🥝</div>
     <div class="row-body">
-      <div class="row-label">GARDEN · 院子改造</div>
-      <div class="row-title">人造草坪果岭</div>
-      <div class="row-desc">后院最大的一块改造。从量尺寸、选材料，到铺设、收边，一步一步来。</div>
-    </div>
-    <div class="row-right"></div>
-  </a>
-
-  <div class="article-row coming reveal">
-    <div class="row-icon">💧</div>
-    <div class="row-body">
-      <div class="row-label">GARDEN · 院子改造</div>
-      <div class="row-title">小池塘</div>
-      <div class="row-desc">在角落里挖出来的一小片水，种了睡莲，养了小金鱼，也是我家小狗最喜欢停留注视的地方。</div>
-    </div>
-    <div class="row-right"><span class="coming-tag">即将发布</span></div>
-  </div>
-
-  <div class="article-row coming reveal">
-    <div class="row-icon">🪑</div>
-    <div class="row-body">
-      <div class="row-label">GARDEN · 院子改造</div>
-      <div class="row-title">院落小客厅</div>
-      <div class="row-desc">户外的客厅，夏天待在这里比室内还舒服。</div>
-    </div>
-    <div class="row-right"><span class="coming-tag">即将发布</span></div>
-  </div>
-
-  <div class="article-row coming reveal">
-    <div class="row-icon">🛖</div>
-    <div class="row-body">
-      <div class="row-label">GARDEN · 院子改造</div>
-      <div class="row-title">茅草屋</div>
-      <div class="row-desc">搭了很久，也改了很多。坐在里面，有点世外的感觉。</div>
-    </div>
-    <div class="row-right"><span class="coming-tag">即将发布</span></div>
-  </div>
-
-  <div class="article-row coming reveal">
-    <div class="row-icon">🧘</div>
-    <div class="row-body">
-      <div class="row-label">GARDEN · 院子改造</div>
-      <div class="row-title">瑜伽小平台</div>
-      <div class="row-desc">夏天的早上铺开垫子，躺在上面看着上面的枝叶和果实，可以乘凉，可以冥想。</div>
-    </div>
-    <div class="row-right"><span class="coming-tag">即将发布</span></div>
-  </div>
-
-  <div class="article-row coming reveal">
-    <div class="row-icon">🍵</div>
-    <div class="row-body">
-      <div class="row-label">TEA · 茶</div>
-      <div class="row-title">茶屋的那些事</div>
-      <div class="row-desc">小茶屋不大，可以坐下来喝茶抚琴。</div>
-    </div>
-    <div class="row-right"><span class="coming-tag">即将发布</span></div>
-  </div>
-
-  <div class="article-row coming reveal">
-    <div class="row-icon">🐦</div>
-    <div class="row-body">
-      <div class="row-label">BIRDS · 鸟园</div>
-      <div class="row-title">鸟园的四季</div>
-      <div class="row-desc">小鸟乐园的访客越来越多，有老朋友也有新面孔，观看它们的不只有我，还有邻居的猫。</div>
-    </div>
-    <div class="row-right"><span class="coming-tag">即将发布</span></div>
-  </div>
-
-  <a class="article-row reveal" href="老拜小筑/植物管理笔记.html" >
-    <div class="row-icon">🌿</div>
-    <div class="row-body">
-      <div class="row-label">GARDEN · 植物</div>
-      <div class="row-title">植物管理笔记</div>
-      <div class="row-desc">院子里的花草树木，各有各的脾气，慢慢摸索，慢慢记录。</div>
+      <div class="row-label">FRUIT · 果树</div>
+      <div class="row-title">猕猴桃 · 施肥与修剪</div>
+      <div class="row-desc">猕猴桃长得很猛，不修不行，肥料的时机也很讲究。</div>
     </div>
     <div class="row-right"><span class="coming-tag">即将发布</span></div>
   </a>
+
+  <div class="article-row coming reveal">
+    <div class="row-icon">🎃</div>
+    <div class="row-body">
+      <div class="row-label">VEGETABLE · 蔬菜</div>
+      <div class="row-title">葫芦 · 种植记录</div>
+      <div class="row-desc">从播种到爬架，葫芦的生长速度总是让人惊喜。</div>
+    </div>
+    <div class="row-right"><span class="coming-tag">即将发布</span></div>
+  </div>
+
+  <div class="article-row coming reveal">
+    <div class="row-icon">🍇</div>
+    <div class="row-body">
+      <div class="row-label">FRUIT · 果树</div>
+      <div class="row-title">葡萄树 · 种植与管理</div>
+      <div class="row-desc">院子里的葡萄树，每年都要好好打理，才能结出好果子。</div>
+    </div>
+    <div class="row-right"><span class="coming-tag">即将发布</span></div>
+  </div>
+
+  <div class="article-row coming reveal">
+    <div class="row-icon">🍎</div>
+    <div class="row-body">
+      <div class="row-label">FRUIT · 果树</div>
+      <div class="row-title">苹果树 · 种植与管理</div>
+      <div class="row-desc">种了好几年，终于摸出了一点规律。</div>
+    </div>
+    <div class="row-right"><span class="coming-tag">即将发布</span></div>
+  </div>
+
+  <div class="article-row coming reveal">
+    <div class="row-icon">🌸</div>
+    <div class="row-body">
+      <div class="row-label">FLOWER · 花卉</div>
+      <div class="row-title">鸢尾花 · 种植笔记</div>
+      <div class="row-desc">开花的时候很惊艳，平时打理起来倒也不麻烦。</div>
+    </div>
+    <div class="row-right"><span class="coming-tag">即将发布</span></div>
+  </div>
 
 </div>
 
