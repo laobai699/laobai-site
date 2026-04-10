@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPL3Y3DXJE"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-SPL3Y3DXJE');
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            document.getElementById('theme-toggle').textContent = isDark ? '深色' : '浅色';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        }
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.addEventListener('DOMContentLoaded', function() {
+                    const btn = document.getElementById('theme-toggle');
+                    if (btn) btn.textContent = '深色';
+                });
+            }
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>葫芦种植笔记 - 植物管理笔记</title>
+    <style>
+        :root {
+            --page-bg: #111111; --module-bg: #141210; --content-bg: #151311;
+            --border-color: #2a2826; --text-main: #f5f1eb; --text-sub: #ddd5cc;
+            --text-dim: #99938d; --accent-color: #c87e4f; --hover-bg: #1a1816;
+        }
+        html[data-theme="light"] {
+            --page-bg: #f0ebe3; --module-bg: #faf6f0; --content-bg: #faf6f0;
+            --border-color: #ddd5c8; --text-main: #2a2218; --text-sub: #4a4238;
+            --text-dim: #7a7268; --accent-color: #b86e3f; --hover-bg: #e8e0d8;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 16px; letter-spacing: 2px; flex: 1; text-align: center; color: var(--text-dim); }
+
+        .article { max-width: 580px; margin: 0 auto; padding: 36px 24px 80px; }
+        .article-num { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 12px; }
+        .article-title { font-size: 22px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
+        .article-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color); line-height: 1.8; }
+
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2; }
+        .article-body p { margin: 0 0 22px; text-indent: 2em; }
+        .article-body h3 { font-size: 15px; font-weight: 500; color: var(--accent-color); margin: 36px 0 14px; letter-spacing: 1px; }
+        .article-body ul { margin: 0 0 20px 0; padding-left: 1.5em; }
+        .article-body ul li { margin-bottom: 8px; color: var(--text-sub); font-size: 15px; line-height: 1.85; }
+        .article-body blockquote { border-left: 2px solid var(--accent-color); margin: 28px 0; padding: 4px 0 4px 18px; color: var(--text-main); font-size: 15px; line-height: 2; }
+
+        .section-title { font-size: 15px; font-weight: 500; color: var(--accent-color); margin: 48px 0 16px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color); letter-spacing: 1px; }
+
+        .tip-card { margin: 20px 0; padding: 16px 18px; border-radius: 12px; font-size: 14px; line-height: 1.85; color: var(--text-sub); }
+        .tip-card.green { background: rgba(100,150,80,0.08); border: 1px solid rgba(100,150,80,0.20); }
+        .tip-card.warm  { background: rgba(200,126,79,0.08); border: 1px solid rgba(200,126,79,0.20); }
+        .tip-card strong { color: var(--text-main); }
+
+        .timeline { margin: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border-color); }
+        .timeline-item:last-child { border-bottom: none; }
+        .timeline-season { flex-shrink: 0; width: 72px; font-size: 13px; color: var(--accent-color); letter-spacing: 1px; padding-top: 2px; }
+        .timeline-content { flex: 1; font-size: 14px; color: var(--text-sub); line-height: 1.85; }
+
+        .article-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+        .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+        .footer-btn.disabled { opacity: 0.3; pointer-events: none; }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="../植物管理笔记.html" class="btn-nav">返回目录</a>
+    <div class="nav-title">植物管理笔记</div>
+    <button class="btn-nav" id="theme-toggle" onclick="toggleTheme()">浅色</button>
+</div>
+
+<div class="article">
+
+    <div class="article-num">NO. 02 · 蔬菜</div>
+    <div class="article-title">葫芦 · 种植笔记</div>
+    <div class="article-sub">温哥华后院、棚架栽培，以观赏效果和稳定挂果为主。</div>
+
+    <div class="article-body">
+
+        <div class="tip-card green">
+            <strong>核心思路：</strong>宁晚一点，别早折腾；宁稳一点，别猛催苗。
+        </div>
+
+        <div class="section-title">时间安排</div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-season">4月下旬</div>
+                <div class="timeline-content">可少量室内育苗，但不要太早，不要把苗养老。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">5月25日后</div>
+                <div class="timeline-content">最适合定植或直播。春天偏冷就再晚一点，不要抢早。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">定植后</div>
+                <div class="timeline-content">前两周先别追肥，等真正缓过来、开始连续长新叶再说。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">跑藤后</div>
+                <div class="timeline-content">少量追一次颗粒肥，撒在离主茎稍远的位置，别贴根。</div>
+            </div>
+        </div>
+
+        <div class="section-title">配土与施肥</div>
+
+        <p>种植前把原土和腐熟堆肥按 2–3:1 混匀回填，不要直接让根扎进纯堆肥里。每个种植点加一小把温和颗粒肥（4-4-4 或 5-5-5）就够了。</p>
+
+        <p>木灰可以少量混入土里辅助，只要薄薄一点，不要贴种子或嫩根撒。</p>
+
+        <div class="tip-card warm">
+            <strong>不建议：</strong>前期高氮速效肥猛冲、浓水溶肥频繁浇、未腐熟粪肥直接下地。后期叶色已深绿、藤已很猛时，少补或不补。
+        </div>
+
+        <div class="section-title">搭架与修剪</div>
+
+        <p>棚架一定要结实，葫芦后期重量不小。前期重点是把主蔓引上棚，上棚后再让它横向铺开。</p>
+
+        <h3>修剪节奏</h3>
+        <ul>
+            <li><strong>上棚前：</strong>尽量少剪，棚下太低太乱的小侧枝可少量清理。</li>
+            <li><strong>上棚后：</strong>保留侧蔓形成棚面叶幕，太密太弱的去掉。</li>
+            <li><strong>坐果后：</strong>已坐果的蔓果后留几片叶，再轻摘心或回剪，别让它无限乱窜。</li>
+        </ul>
+
+        <div class="section-title">留果思路</div>
+
+        <p>主蔓上可以留葫芦，而且主蔓上的果形往往更好、更稳。不用死守"主蔓绝不能留果"这条。</p>
+
+        <ul>
+            <li>主蔓留 1–2 个位置好、果形正的好果</li>
+            <li>强侧蔓每条留 1 个果</li>
+            <li>别贪多，多余的小果早点舍弃</li>
+        </ul>
+
+        <div class="tip-card green">
+            追求的是<strong>棚架观赏效果 + 单果质量 + 果形好看</strong>，不是极限产量。
+        </div>
+
+        <blockquote>
+            等暖、稳种、轻肥、强棚架、少留好果。<br>
+            这是最适合温哥华后院的葫芦种法。
+        </blockquote>
+
+    </div>
+
+    <div class="article-footer">
+        <a href="猕猴桃.html" class="footer-btn"><span>⇠</span> 上一篇</a>
+        <a href="../植物管理笔记.html" class="footer-btn">返回目录</a>
+        <a href="葡萄树.html" class="footer-btn">下一篇 <span>⇢</span></a>
+    </div>
+
+</div>
+
+</body>
+</html>
