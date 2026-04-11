@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FDM 打印机操作指南 - 植物管理笔记</title>
+    <style>
+        :root {
+            --page-bg: #111111; --module-bg: #141210; --content-bg: #151311;
+            --border-color: #2a2826; --text-main: #f5f1eb; --text-sub: #ddd5cc;
+            --text-dim: #99938d; --accent-color: #c87e4f; --hover-bg: #1a1816;
+        }
+        html[data-theme="light"] {
+            --page-bg: #f0ebe3; --module-bg: #faf6f0; --content-bg: #faf6f0;
+            --border-color: #ddd5c8; --text-main: #2a2218; --text-sub: #4a4238;
+            --text-dim: #7a7268; --accent-color: #b86e3f; --hover-bg: #e8e0d8;
+        }
+        body { font-family: "Helvetica Neue","PingFang SC","Microsoft YaHei",Arial,sans-serif; background: var(--page-bg); margin: 0; padding: 0; color: var(--text-main); -webkit-font-smoothing: antialiased; }
+
+        .navbar { background: var(--module-bg); padding: 0 16px; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
+        .btn-nav { text-decoration: none; color: var(--text-main); font-size: 14px; font-weight: 500; border: 1px solid var(--border-color); padding: 6px 14px; border-radius: 25px; background: transparent; cursor: pointer; transition: all 0.3s; }
+        .btn-nav:hover { background: var(--hover-bg); border-color: #44403c; }
+        .nav-title { font-weight: 600; font-size: 16px; letter-spacing: 2px; flex: 1; text-align: center; color: var(--text-dim); }
+
+        .article { max-width: 580px; margin: 0 auto; padding: 36px 24px 80px; }
+        .article-num { font-size: 12px; color: var(--accent-color); letter-spacing: 3px; margin-bottom: 12px; }
+        .article-title { font-size: 22px; font-weight: 500; line-height: 1.5; margin-bottom: 8px; }
+        .article-sub { font-size: 14px; color: var(--text-dim); margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--border-color); line-height: 1.8; }
+
+        .article-body { font-size: 16px; color: var(--text-sub); line-height: 2; }
+        .article-body p { margin: 0 0 22px; text-indent: 2em; }
+        .article-body h3 { font-size: 15px; font-weight: 500; color: var(--accent-color); margin: 36px 0 14px; letter-spacing: 1px; }
+        .article-body ul { margin: 0 0 20px 0; padding-left: 1.5em; }
+        .article-body ul li { margin-bottom: 8px; color: var(--text-sub); font-size: 15px; line-height: 1.85; }
+        .article-body ol { margin: 0 0 20px 0; padding-left: 1.5em; }
+        .article-body ol li { margin-bottom: 8px; color: var(--text-sub); font-size: 15px; line-height: 1.85; }
+        .article-body blockquote { border-left: 2px solid var(--accent-color); margin: 28px 0; padding: 4px 0 4px 18px; color: var(--text-main); font-size: 15px; line-height: 2; }
+
+        .section-title {
+            font-size: 15px; font-weight: 500; color: var(--accent-color);
+            margin: 48px 0 16px; padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            letter-spacing: 1px;
+        }
+
+        .tip-card { margin: 20px 0; padding: 16px 18px; border-radius: 12px; font-size: 14px; line-height: 1.85; color: var(--text-sub); }
+        .tip-card.green { background: rgba(100,150,80,0.08); border: 1px solid rgba(100,150,80,0.20); }
+        .tip-card.warm  { background: rgba(200,126,79,0.08); border: 1px solid rgba(200,126,79,0.20); }
+        .tip-card.red   { background: rgba(180,60,60,0.08);  border: 1px solid rgba(180,60,60,0.20); }
+        .tip-card strong { color: var(--text-main); }
+
+        .timeline { margin: 20px 0; }
+        .timeline-item { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--border-color); }
+        .timeline-item:last-child { border-bottom: none; }
+        .timeline-season { flex-shrink: 0; width: 64px; font-size: 13px; color: var(--accent-color); letter-spacing: 1px; padding-top: 2px; }
+        .timeline-content { flex: 1; font-size: 14px; color: var(--text-sub); line-height: 1.85; }
+
+        .tags { margin-bottom: 16px; }
+        .tag { display: inline-block; font-size: 11px; letter-spacing: 1.5px; color: var(--accent-color); border: 1px solid var(--border-color); border-radius: 20px; padding: 3px 12px; margin: 0 6px 6px 0; }
+
+        /* 步骤编号样式 */
+        .step-list { margin: 0 0 20px 0; padding: 0; list-style: none; counter-reset: step-counter; }
+        .step-list li { counter-increment: step-counter; display: flex; gap: 14px; margin-bottom: 14px; font-size: 15px; color: var(--text-sub); line-height: 1.85; align-items: flex-start; }
+        .step-list li::before { content: counter(step-counter); flex-shrink: 0; width: 24px; height: 24px; min-width: 24px; background: var(--accent-color); color: #fff; font-size: 12px; font-weight: 600; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 3px; }
+        .step-list li span { display: block; flex: 1; min-width: 0; }
+
+        /* 参数表格 */
+        .param-table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 14px; }
+        .param-table th { text-align: left; padding: 10px 14px; color: var(--text-dim); font-weight: 500; font-size: 12px; letter-spacing: 1px; border-bottom: 1px solid var(--border-color); }
+        .param-table td { padding: 12px 14px; border-bottom: 1px solid var(--border-color); color: var(--text-sub); line-height: 1.7; vertical-align: top; }
+        .param-table tr:last-child td { border-bottom: none; }
+        .param-table td:first-child { color: var(--text-main); font-size: 13px; white-space: nowrap; }
+        .param-table td.val { color: var(--accent-color); font-weight: 500; }
+
+        .article-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border-color); }
+        .footer-btn { text-decoration: none; color: var(--text-sub); font-size: 14px; border: 1px solid var(--border-color); padding: 10px 18px; border-radius: 12px; background: var(--module-bg); display: flex; align-items: center; gap: 8px; transition: 0.3s; }
+        .footer-btn:hover { background: var(--hover-bg); border-color: #44403c; color: var(--text-main); }
+        .footer-btn.disabled { opacity: 0.3; pointer-events: none; }
+    </style>
+    <script>
+        function toggleTheme() {
+            const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+            document.documentElement.setAttribute('data-theme', isDark ? 'light' : 'dark');
+            document.getElementById('theme-toggle').textContent = isDark ? '深色' : '浅色';
+            localStorage.setItem('theme', isDark ? 'light' : 'dark');
+        }
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved === 'light') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                document.addEventListener('DOMContentLoaded', function() {
+                    const btn = document.getElementById('theme-toggle');
+                    if (btn) btn.textContent = '深色';
+                });
+            }
+        })();
+    </script>
+</head>
+<body>
+
+<div class="navbar">
+    <a href="../老拜工坊.html" class="btn-nav">返回目录</a>
+    <div class="nav-title">3D 打印笔记</div>
+    <button class="btn-nav" id="theme-toggle" onclick="toggleTheme()">浅色</button>
+</div>
+
+<div class="article">
+
+    <div class="article-num">NO. 01 · FDM 打印机</div>
+    <div class="article-title">Creality Ender 3 Pro · 操作指南</div>
+    <div class="article-sub">
+        从有模型文件到打印完成的完整流程。包括耗材更换、打印床调平、Cura 切片设置，以及常见问题处理。适合间隔较久重新上手时查阅。
+        <div class="tags" style="margin-top:14px;">
+            <span class="tag">PLA 耗材</span>
+            <span class="tag">手动调平</span>
+            <span class="tag">Cura 切片</span>
+            <span class="tag">PEI 磁吸板</span>
+        </div>
+    </div>
+
+    <div class="article-body">
+
+        <!-- 一 -->
+        <div class="section-title">一、开始前的检查</div>
+
+        <p>每次打印前花两分钟做基础检查，可以避免大多数失败。</p>
+
+        <ul>
+            <li>PEI 磁吸钢板是否清洁——用酒精擦拭，<strong>不要用手触摸表面</strong>，手上油脂会严重影响粘附。</li>
+            <li>耗材是否正常安装，料盘挂在机器右侧料架上，耗材穿过导料管。</li>
+            <li>耗材是否受潮——正常料有韧性，弯曲不断；受潮料硬邦邦，一弯即折，建议直接换新料。</li>
+            <li>SD 卡是否插入右侧插槽。</li>
+        </ul>
+
+        <div class="tip-card green">
+            <strong>PEI 板的清洁</strong>是第一层能否粘住的关键，每次打印前都要做。酒精擦完自然晾干再开始。
+        </div>
+
+        <!-- 二 -->
+        <div class="section-title">二、更换耗材</div>
+
+        <p>如果耗材已经装好且颜色合适，可以跳过这一步直接去第三步调平。</p>
+
+        <h3>退出旧料</h3>
+        <ol class="step-list">
+            <li><span>菜单操作：<strong>Control → Temperature → Nozzle</strong>，设置 200°C，等待加热完成。</span></li>
+            <li><span>菜单操作：<strong>Prepare → Move Axis → Move Extruder</strong>。</span></li>
+            <li><span>选择步进 <strong>10mm</strong>，向负方向转动旋钮退料，同时用手轻轻向上拉耗材。</span></li>
+            <li><span>持续操作直到耗材从进料口完全退出。</span></li>
+        </ol>
+
+        <h3>装入新料</h3>
+        <ol class="step-list">
+            <li><span>新料挂上右侧料架，用剪刀将料头剪成 <strong>45 度斜角</strong>，方便插入。</span></li>
+            <li><span>将耗材穿过导料管，推到进料齿轮处。</span></li>
+            <li><span>Move Extruder 向<strong>正方向</strong>转动旋钮送料。</span></li>
+            <li><span>持续送料，直到喷嘴挤出颜色均匀的新料（约 10–15cm），换料完成。</span></li>
+        </ol>
+
+        <div class="tip-card warm">
+            <strong>Move Extruder 10mm</strong> 指的是送入耗材 10mm，实际从喷嘴挤出长度会更长。
+        </div>
+
+        <!-- 三 -->
+        <div class="section-title">三、打印床调平</div>
+
+        <p>调平是 FDM 打印成功的核心。间隔较久重新使用，或者更换耗材后，都建议重新调平一次。</p>
+
+        <h3>准备工作</h3>
+        <ol class="step-list">
+            <li><span>预热：<strong>热床 60°C，喷嘴 200°C</strong>。必须在加热状态下调平，冷热会影响实际间距。</span></li>
+            <li><span>菜单：<strong>Prepare → Auto Home</strong>，等打印头归零停稳。</span></li>
+            <li><span>准备一张普通 A4 打印纸备用。</span></li>
+        </ol>
+
+        <h3>调节四个角 + 中心</h3>
+        <p>每次换角之前，先升高 Z 轴 10mm 再移动，避免喷嘴刮伤打印床。</p>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-season">左前角</div>
+                <div class="timeline-content">X=10，Y=10。降下 Z 轴，放入 A4 纸，调节左前蝴蝶螺母。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">右前角</div>
+                <div class="timeline-content">X=220，Y=10。升 Z → 移动 → 降 Z，调节右前蝴蝶螺母。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">左后角</div>
+                <div class="timeline-content">X=10，Y=220。升 Z → 移动 → 降 Z，调节左后蝴蝶螺母。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">右后角</div>
+                <div class="timeline-content">X=220，Y=220。升 Z → 移动 → 降 Z，调节右后蝴蝶螺母。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">中心</div>
+                <div class="timeline-content">X=110，Y=110。只做验证，无螺母可调。中间稍微松一点点是正常的。</div>
+            </div>
+        </div>
+
+        <h3>纸张手感判断</h3>
+        <ul>
+            <li><strong>纸能滑动，有轻微摩擦感</strong>——正确，继续下一个点。</li>
+            <li>纸完全卡住，抽不动——太近，顺时针拧螺母，让床面下降。</li>
+            <li>纸完全没有阻力——太远，逆时针拧螺母，让床面上升。</li>
+        </ul>
+
+        <div class="tip-card green">
+            <strong>移动安全原则：</strong>每次换到下一个角，先升高 Z 轴 10mm，再移动 X/Y，再降回去。这样喷嘴不会刮到床面。
+        </div>
+
+        <!-- 四 -->
+        <div class="section-title">四、Ultimaker Cura 切片</div>
+
+        <p>切片就是把 3D 模型文件转换成打印机能读懂的指令文件。Cura 是免费软件，Ender 3 Pro 有现成预设，开箱即用。</p>
+
+        <h3>初次安装配置（只做一次）</h3>
+        <ol class="step-list">
+            <li><span>下载地址：<strong>ultimaker.com/software/ultimaker-cura</strong>，安装时一路 Next。</span></li>
+            <li><span>启动后弹出登录页，直接点 <strong>Skip</strong> 跳过，无需账号。</span></li>
+            <li><span>添加打印机：<strong>Non UltiMaker Printer → Creality → Ender-3 Pro → Add</strong>。</span></li>
+            <li><span>Machine Settings 页面不需要修改任何参数，直接确认完成。</span></li>
+        </ol>
+
+        <h3>导入模型</h3>
+        <ol class="step-list">
+            <li><span>将 STL 文件直接<strong>拖入</strong> Cura 的打印床区域，或菜单 File → Open File(s)。</span></li>
+            <li><span>用<strong>鼠标中键拖动</strong>旋转视角，滚轮缩放，右键平移。</span></li>
+            <li><span>点击模型，左侧工具栏可以移动、旋转、缩放。</span></li>
+            <li><span>多个模型：右键空白处 → <strong>Arrange All Models</strong>，自动排列到合理位置。</span></li>
+        </ol>
+
+        <div class="tip-card warm">
+            <strong>关于模型方向：</strong>让最大的平面朝下放置，可以减少支撑用量，提高成功率。左侧旋转工具可以调整角度。
+        </div>
+
+        <h3>关键参数设置</h3>
+
+        <table class="param-table">
+            <tr>
+                <th>参数</th>
+                <th>推荐值</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td>Layer Height 层高</td>
+                <td class="val">0.2mm</td>
+                <td>标准质量，速度与细节的平衡点</td>
+            </tr>
+            <tr>
+                <td>Infill Density 填充率</td>
+                <td class="val">15–20%</td>
+                <td>摆件、雕像不需要高填充</td>
+            </tr>
+            <tr>
+                <td>Support 支撑</td>
+                <td class="val">按需开启</td>
+                <td>文件名含 "supported" 的模型务必关闭！</td>
+            </tr>
+            <tr>
+                <td>Support Structure</td>
+                <td class="val">Tree（树形）</td>
+                <td>异形复杂模型首选，打完后更容易去除</td>
+            </tr>
+            <tr>
+                <td>Adhesion 附着</td>
+                <td class="val">Brim（边沿）</td>
+                <td>在模型底部加一圈，提升第一层粘附力</td>
+            </tr>
+        </table>
+
+        <div class="tip-card red">
+            <strong>重要：</strong>如果下载的 STL 文件名含有 <strong>supported</strong>，说明模型已经内置了支撑结构。这时 Cura 里的 Support 必须<strong>关闭</strong>，否则双重支撑会让打印失败。
+        </div>
+
+        <h3>导出文件</h3>
+        <ol class="step-list">
+            <li><span>点击右下角 <strong>Slice</strong> 按钮，等待切片完成。</span></li>
+            <li><span>查看右下角显示的预计打印时间和耗材用量，判断是否合理。</span></li>
+            <li><span>点击 <strong>Save to Disk</strong>，将文件保存到 SD 卡根目录。</span></li>
+        </ol>
+
+        <!-- 五 -->
+        <div class="section-title">五、开始打印</div>
+
+        <ol class="step-list">
+            <li><span>将 SD 卡插入打印机右侧插槽。</span></li>
+            <li><span>菜单：<strong>Print from SD</strong> → 找到文件 → 确认开始。</span></li>
+            <li><span>打印开始后，<strong>全程观察前 5 分钟</strong>的第一层情况。</span></li>
+        </ol>
+
+        <h3>第一层判断</h3>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-season">✅ 正常</div>
+                <div class="timeline-content">耗材均匀、被轻微压扁，紧贴粘在床面上。继续观察即可。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">喷嘴太远</div>
+                <div class="timeline-content">耗材像面条一样堆在床面上，不粘。菜单找 Z Offset 或 Babystep Z，向<strong>负方向</strong>微调 -0.1mm，观察变化。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">喷嘴太近</div>
+                <div class="timeline-content">喷嘴刮着床面，出料困难，有摩擦声。向<strong>正方向</strong>微调 +0.1mm。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">不粘床</div>
+                <div class="timeline-content">耗材完全不粘，直接翘起来。暂停打印，重新酒精清洁 PEI 板，检查调平。</div>
+            </div>
+        </div>
+
+        <div class="tip-card green">
+            <strong>Z Offset 微调位置：</strong>打印过程中可以进入菜单 Control → Motion → Z Offset（部分固件显示为 Babystep Z），不需要停止打印就能实时调整。
+        </div>
+
+        <!-- 六 -->
+        <div class="section-title">六、打印后处理</div>
+
+        <ol class="step-list">
+            <li><span>打印完成后，<strong>等待打印床冷却</strong>。PEI 板冷却后模型会自然松动，不要趁热强掰。</span></li>
+            <li><span>取下磁吸 PEI 钢板，轻轻弯曲钢板，模型会自然脱落。</span></li>
+            <li><span>用剪钳或尖嘴钳小心去除支撑结构，从支撑根部剪断，不要硬拉。</span></li>
+            <li><span>用砂纸打磨支撑痕迹，从 400 目到 1000 目逐步细化，直到满意。</span></li>
+            <li><span>如需上色，丙烯酸颜料上手。想要效果好，可以先喷一层灰色底漆。</span></li>
+        </ol>
+
+        <!-- 七 -->
+        <div class="section-title">七、常见问题</div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-season">第一层不粘</div>
+                <div class="timeline-content">最常见。先酒精清洁 PEI 板，再检查调平，再用 Z Offset 微调喷嘴高度。三步按顺序来。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">中途脱落</div>
+                <div class="timeline-content">调平不准，或打印速度太快。下次打印前重新调平，Cura 里适当降低打印速度。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">耗材不出料</div>
+                <div class="timeline-content">堵头或耗材受潮。先加热到 200°C 后用 Move Extruder 尝试疏通，无效则换新料。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">层错位</div>
+                <div class="timeline-content">打印速度太快或皮带松动。Cura 里降低速度，或检查 X/Y 轴皮带张力。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">翘边</div>
+                <div class="timeline-content">热床温度不够或床面不够干净。确保热床达到 60°C，重新酒精清洁 PEI 板。</div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-season">表面拉丝</div>
+                <div class="timeline-content">移动过程中漏料。Cura 里调整 Retraction（回抽）参数，或将打印温度降低 5°C 试试。</div>
+            </div>
+        </div>
+
+        <blockquote>
+            专业人员天天用，越用越熟练。<br>
+            爱好者间隔久了自然会生疏——有这份笔记在，随时可以找回手感。
+        </blockquote>
+
+    </div>
+
+    <div class="article-footer">
+        <a class="footer-btn disabled"><span>⇠</span> 上一篇</a>
+        <a href="../老拜工坊.html" class="footer-btn">返回目录</a>
+        <a href="光固化打印机操作指南.html" class="footer-btn">下一篇 <span>⇢</span></a>
+    </div>
+
+</div>
+
+</body>
+</html>
